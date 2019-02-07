@@ -32,6 +32,9 @@ public abstract class Module : MonoBehaviour
 	private Text displayTextTitle;
 	private Text displayTextContent;
 
+    private Renderer renderer;
+    private Color startingColor;
+
     protected Dropdown[] AttackDropdowns;
 
     public bool HasFlow {
@@ -140,6 +143,8 @@ public abstract class Module : MonoBehaviour
     protected void Start()
     {
         this.gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        this.renderer = GetComponent<Renderer>();
+        this.startingColor = renderer.material.color;
     }
 
     /// <summary>
@@ -222,6 +227,7 @@ public abstract class Module : MonoBehaviour
     /// </summary>
     private void OnMouseOver()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             if (this.gameController && this.gameController.GameState == GameState.AttackerTurn)
@@ -243,6 +249,16 @@ public abstract class Module : MonoBehaviour
                 this.OpenInfoPopup(Input.mousePosition);
             }
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        renderer.material.color = Color.yellow;
+    }
+
+    private void OnMouseExit()
+    {
+        renderer.material.color = this.startingColor;
     }
 
     /// <summary>
