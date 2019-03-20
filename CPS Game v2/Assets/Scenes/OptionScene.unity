@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 175076610}
   - component: {fileID: 175076609}
   m_Layer: 5
-  m_Name: OwlsDecreaseButton
+  m_Name: OraclesDecreaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903544592}
-        m_MethodName: decOwls
+        m_MethodName: decOracles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 584740151}
   - component: {fileID: 584740150}
   m_Layer: 5
-  m_Name: OwlsIncreaseButton
+  m_Name: OraclesIncreaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903544592}
-        m_MethodName: incOwls
+        m_MethodName: incOracles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -625,8 +625,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: -400}
-  m_SizeDelta: {x: 250, y: 150}
+  m_AnchoredPosition: {x: -220, y: -400}
+  m_SizeDelta: {x: 350, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &616268719
 MonoBehaviour:
@@ -714,9 +714,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Back
-
-'
+  m_Text: Cancel
 --- !u!222 &616268721
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -768,8 +766,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9a061d110a3b442ad40b8ee25a5095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundText: {fileID: 1391370116}
-  OwlsText: {fileID: 1954674889}
+  rounds: 0
+  oracles: 0
+  attacks: 0
+  RoundsText: {fileID: 1391370116}
+  OraclesText: {fileID: 1954674889}
   AttacksText: {fileID: 1634282112}
 --- !u!1 &1239496241
 GameObject:
@@ -916,7 +917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -400}
+  m_AnchoredPosition: {x: 220, y: -400}
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1324478375
@@ -1159,7 +1160,7 @@ GameObject:
   - component: {fileID: 1391370117}
   - component: {fileID: 1391370116}
   m_Layer: 5
-  m_Name: RoundText
+  m_Name: RoundsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1598,7 +1599,7 @@ GameObject:
   - component: {fileID: 1954674890}
   - component: {fileID: 1954674889}
   m_Layer: 5
-  m_Name: OwlsText
+  m_Name: OraclesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1656,7 +1657,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Owls:\t \t\t\t\t\t\t\t\t\t \t\t\t1"
+  m_Text: "Oracles:\t \t\t\t\t\t\t\t\t \t\t\t2"
 --- !u!222 &1954674890
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -8,11 +8,11 @@ using UnityEngine.UI;
 /// </summary>
 public class OptionConfiguration : MonoBehaviour
 {
-    private int rounds;
-	private int owls;
-    private int attacks;
-    public Text RoundText;
-	public Text OwlsText;
+    public int rounds;
+	public int oracles;
+    public int attacks;
+    public Text RoundsText;
+	public Text OraclesText;
 	public Text AttacksText;
 	
 	private Module firstModule; 
@@ -20,15 +20,18 @@ public class OptionConfiguration : MonoBehaviour
 	private void Start()
     {
         this.rounds = 1;
-        this.owls = 1;
+        this.oracles = 2;
         this.attacks = 1;
     }
 	
 	private void Update()
 	{
-		RoundText.text = "Rounds:\t\t\t\t\t\t\t\t\t\t\t\t" + this.rounds.ToString();
-		OwlsText.text = "Owls:\t\t\t\t\t\t\t\t\t\t\t\t\t" + this.owls.ToString();
+		RoundsText.text = "Rounds:\t\t\t\t\t\t\t\t\t\t\t\t" + this.rounds.ToString();
+		OraclesText.text = "Oracles:\t\t\t\t\t\t\t\t\t\t\t\t" + this.oracles.ToString();
 		AttacksText.text = "Attacks: \t\t\t\t\t\t\t\t\t\t\t\t" + this.attacks.ToString();
+		PlayerPrefs.SetInt("Rounds",rounds);
+		PlayerPrefs.SetInt("Oracles",oracles);
+		PlayerPrefs.SetInt("Attacks",attacks);
 	}
 	
     public int getRounds()
@@ -36,10 +39,6 @@ public class OptionConfiguration : MonoBehaviour
 		return rounds;
 	}
 	
-	public void setRounds(int value)
-	{
-		rounds = value;
-	}
 	
 	public void incRounds()
 	{
@@ -51,16 +50,16 @@ public class OptionConfiguration : MonoBehaviour
 		rounds = rounds - 1;
 	}
 	
-	public void incOwls()
+	public void incOracles()
 	{
-		owls = owls + 1;
+		oracles = oracles + 1;
 	}
 	
-	public void decOwls()
+	public void decOracles()
 	{
-		owls = owls - 1;
+		oracles = oracles - 1;
 	}
-	
+		
 	public void incAttacks()
 	{
 		attacks = attacks + 1;
@@ -69,25 +68,5 @@ public class OptionConfiguration : MonoBehaviour
 	public void decAttacks()
 	{
 		attacks = attacks - 1;
-	}
-	
-	public int getOwls()
-	{
-		return owls;
-	}
-	
-	public void setOwls(int value)
-	{
-		owls = value;
-	}
-	
-	public int getAttacks()
-	{
-		return attacks;
-	}
-	
-	public void setAttacks(int value)
-	{
-		attacks = value;
 	}
 }
