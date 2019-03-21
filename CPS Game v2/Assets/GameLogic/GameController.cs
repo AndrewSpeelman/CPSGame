@@ -25,16 +25,15 @@ public class GameController : MonoBehaviour
     public Image ScreenCover;
     public GameObject GameUI;
     public GameObject GameBoard;
-	public GameObject OptionsObject;
     public Text TurnText;
 
     public int NumberOfAttacksPerTurn = 1;
     public int NumberOfOracles = 1;
     public int NumAvailableAttacks { get; set; }
 
-	private int Turn = 0;
+    private int Turn = 0;
     private int Round = 1;
-	private int RoundMax = 1;
+    private int RoundMax = 1;
 
     public int ReservoirLimit = 10;
     public int TurnLimit = 15;
@@ -52,9 +51,9 @@ public class GameController : MonoBehaviour
 
     protected void Awake()
     {
-		this.NumberOfAttacksPerTurn = PlayerPrefs.GetInt("Attacks",1);
-		this.RoundMax = PlayerPrefs.GetInt("Rounds",1);
-		this.NumberOfOracles = PlayerPrefs.GetInt("Oracles",2);
+        this.NumberOfAttacksPerTurn = PlayerPrefs.GetInt("Attacks",1);
+        this.RoundMax = PlayerPrefs.GetInt("Rounds",1);
+        this.NumberOfOracles = PlayerPrefs.GetInt("Oracles",2);
         Results.ReservoirLimit = ReservoirLimit;
         this.oracles = new List<Oracle>();
         TurnText.gameObject.SetActive(true);
@@ -64,7 +63,6 @@ public class GameController : MonoBehaviour
 
     protected void Start()
     {
-		
         for (int i = 0; i < this.NumberOfOracles; i++)
         {
             var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x + (i * 2), this.OracleSpawnPoint.y, this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);

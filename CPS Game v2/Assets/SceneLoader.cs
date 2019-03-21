@@ -12,10 +12,9 @@ using UnityEngine.SceneManagement;
 /// 2) GameScene 
 /// 3) VictoryScene
 /// </summary>
-public class SceneLoader : MonoBehaviour {
-
-	
-	public void LoadNextScene()
+public class SceneLoader : MonoBehaviour 
+{
+    public void LoadNextScene()
     {
         int current_scene_index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(current_scene_index + 1);
@@ -31,17 +30,17 @@ public class SceneLoader : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 	
-	public void LoadGameScene()
+    public void LoadGameScene()
     {
         SceneManager.LoadScene(2);
     }
-	
-	public void LoadVictoryScene()
+
+    public void LoadVictoryScene()
     {
         SceneManager.LoadScene(3);
     }
-	
-	public void LoadTutorialScene()
+
+    public void LoadTutorialScene()
     {
         SceneManager.LoadScene(4);
     }
