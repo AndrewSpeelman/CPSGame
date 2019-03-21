@@ -18,14 +18,14 @@ public class lookAt : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetMouseButton(2))
+        /*if (Input.GetMouseButton(2))
         {
             Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * RotationSpeed, Vector3.up);
             _cameraOffset = camTurnAngle * _cameraOffset;
             Vector3 newPos = mapTransform.position + _cameraOffset;
             transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
             transform.LookAt(mapTransform);
-        }
+        }*/
         
     }
 

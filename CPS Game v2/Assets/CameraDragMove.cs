@@ -15,7 +15,7 @@ public class CameraDragMove : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+        /*if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
         {
             Diference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - Camera.main.transform.position;
             if (Drag == false)
@@ -31,7 +31,7 @@ public class CameraDragMove : MonoBehaviour
         if (Drag == true)
         {
             Camera.main.transform.position = Origin - Diference;
-        }
+        }*/
         ////RESET CAMERA TO STARTING POSITION WITH RIGHT CLICK
         //if (Input.GetMouseButton(1))
         //{
