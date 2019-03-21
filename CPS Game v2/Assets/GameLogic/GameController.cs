@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
     public int NumAvailableAttacks { get; set; }
 
     private int Turn = 0;
+    private int Round = 1;
+    private int RoundMax = 1;
 
     public int ReservoirLimit = 10;
     public int TurnLimit = 15;
@@ -49,7 +51,9 @@ public class GameController : MonoBehaviour
 
     protected void Awake()
     {
-        this.NumAvailableAttacks = this.NumberOfAttacksPerTurn;
+        this.NumberOfAttacksPerTurn = PlayerPrefs.GetInt("Attacks",1);
+        this.RoundMax = PlayerPrefs.GetInt("Rounds",1);
+        this.NumberOfOracles = PlayerPrefs.GetInt("Oracles",2);
         Results.ReservoirLimit = ReservoirLimit;
         this.oracles = new List<Oracle>();
         TurnText.gameObject.SetActive(true);
@@ -105,7 +109,7 @@ public class GameController : MonoBehaviour
                 this.SceneLoader.LoadNextScene();
             }
             ReservoirCounter.text = Reservoir.WaterList.Count.ToString();
-            TurnCounter.text = "Turn: " + Turn + "/" + TurnLimit;
+            TurnCounter.text = "Round: " + Round + "/" + RoundMax + " Turn: " + Turn + "/" + TurnLimit;
             TurnText.text = "Attacker's Turn";
             TurnText.color = new Color(1F, 0, 0);
         }
@@ -122,7 +126,7 @@ public class GameController : MonoBehaviour
         {
             ActiveTurnTimer = DateTime.Now;
             int SecondsRemaining = (TurnDuration - (ActiveTurnTimer - StartTurnTimer).Seconds);
-            TurnTimer.text = "Time Remaining: " + SecondsRemaining.ToString();
+            TurnTimer.text = "Time Left: " + SecondsRemaining.ToString();
 
             if (SecondsRemaining > 5)
             {
