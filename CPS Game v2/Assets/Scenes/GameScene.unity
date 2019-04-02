@@ -1548,14 +1548,13 @@ MonoBehaviour:
   ScreenCover: {fileID: 952970046}
   GameUI: {fileID: 1868224648}
   GameBoard: {fileID: 945473463}
-  OptionsObject: {fileID: 0}
   TurnText: {fileID: 1311477495}
   NumberOfAttacksPerTurn: 1
   NumberOfOracles: 2
   ReservoirLimit: 5
-  TurnLimit: 15
+  TurnLimit: 5
   TurnTimer: {fileID: 1376493227}
-  TurnDuration: 500
+  TurnDuration: 120
   GameState: 1
 --- !u!4 &995454138
 Transform:
