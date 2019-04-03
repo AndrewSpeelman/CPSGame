@@ -16,13 +16,15 @@ public class Oracle : MonoBehaviour
 
     public GameObject OraclePopupPrefab;
 
-    private Valuation firstValuation, secondValuation;
-    
+    private Valuation firstValuation, secondValuation, thirdValuation;
+    private Button modeButton;
     private void Awake()
     {
         var vals = this.GetComponentsInChildren<Valuation>();
         this.firstValuation = vals[0];
         this.secondValuation = vals[1];
+		this.thirdValuation = vals[2];
+		this.thirdValuation.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -50,6 +52,7 @@ public class Oracle : MonoBehaviour
             //Update the lines that come from the valuations
             this.firstValuation.UpdateLine();
             this.secondValuation.UpdateLine();
+			this.thirdValuation.UpdateLine();
         }
     }
 
@@ -185,4 +188,20 @@ public class Oracle : MonoBehaviour
             return;
         }
     }
+	
+	public void SwapMode(bool mode)
+	{
+		if(mode)
+		{
+			this.firstValuation.gameObject.SetActive(true);
+			this.secondValuation.gameObject.SetActive(true);
+			this.thirdValuation.gameObject.SetActive(false);
+		}
+		else
+		{
+			this.firstValuation.gameObject.SetActive(false);
+			this.secondValuation.gameObject.SetActive(false);
+			this.thirdValuation.gameObject.SetActive(true);
+		}
+	}
   }
