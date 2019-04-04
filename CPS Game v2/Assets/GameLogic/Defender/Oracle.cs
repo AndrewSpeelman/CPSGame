@@ -84,14 +84,12 @@ public class Oracle : MonoBehaviour
             firstVal = true;
         }
 
-        firstValuation.RuleIndicator.text = "RULE BROKEN";
-        secondValuation.RuleIndicator.text = "RULE BROKEN";
 
         var currVal = firstVal ? secondValuation : firstValuation;
-        if (!this.ModuleMatchesExpected(firstModule, currVal))
+        if (firstModule.Attacked)
         {
             currVal.RuleIndicator.gameObject.SetActive(true);
-            this.FixAttackedModule(firstModule, secondModule, currVal);
+			firstModule.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
         }
         else
         {
@@ -99,10 +97,10 @@ public class Oracle : MonoBehaviour
         }
 
         currVal = firstVal ? firstValuation : secondValuation;
-        if (!this.ModuleMatchesExpected(secondModule, currVal))
+        if (secondModule.Attacked)
         {
             currVal.RuleIndicator.gameObject.SetActive(true);
-            this.FixAttackedModule(firstModule, secondModule, currVal);
+            secondModule.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
         }
         else
         {
@@ -167,23 +165,18 @@ public class Oracle : MonoBehaviour
     /// <summary>
     /// Fixes a module if rules have caught an error. Only fixes if in span of 3 modules.
     /// </summary>
-    private void FixAttackedModule(Module first, Module second, Valuation val)
+    public void FixRule()
     {
-        Module ToFix;
-
-        if (first == second)
+		if (this.fixer.CurrentSelection == null)
         {
             return;
         }
-        
-        ToFix = second.PreviousModule;
-        if(ToFix.PreviousModule != null && ToFix.PreviousModule == first)
+		
+		Module ToFix = this.fixer.CurrentSelection;
+		if(ToFix.Attacked)
         {
-            if(ToFix.Attacked)
-            {
-                val.RuleIndicator.text = "FIXED ATTACK";
-            }
-            ToFix.Fix();
+			ToFix.GetComponent<Renderer>().material.color = ToFix.getStartingColor();
+			ToFix.Fix();
         }
         else
         {

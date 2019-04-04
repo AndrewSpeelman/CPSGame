@@ -84,6 +84,12 @@ public class GameController : MonoBehaviour
             
             this.GameState = GameState.DefenderTurn;
             this.AttackerUI.SetActive(false);
+			List<Module> moduleList;
+			this.GameBoard.GetComponents<Module>();
+			foreach (Module m in moduleList)
+			{
+				m.CloseInfoPopup();
+			}
             TurnText.text = "Defender's Turn";
             TurnText.color = new Color(0, .5F, 1F);
         }
@@ -102,6 +108,7 @@ public class GameController : MonoBehaviour
             {
                 o.InputActive = false;
                 o.ApplyRule();
+				o.FixRule();
             }
 
             if (++Turn > TurnLimit)

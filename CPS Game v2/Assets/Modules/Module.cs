@@ -253,12 +253,14 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        renderer.material.color = Color.yellow;
+        if(renderer.material.color == this.startingColor)
+			renderer.material.color = Color.yellow;
     }
 
     private void OnMouseExit()
     {
-        renderer.material.color = this.startingColor;
+        if(renderer.material.color == Color.yellow)
+			renderer.material.color = this.startingColor;
     }
 
     /// <summary>
@@ -345,4 +347,9 @@ public abstract class Module : MonoBehaviour
     {
         return (!(lhs < rhs) && lhs != rhs);
     }
+	
+	public Color getStartingColor()
+	{
+		return startingColor;
+	}
 }

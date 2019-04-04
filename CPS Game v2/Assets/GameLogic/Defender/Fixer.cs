@@ -137,14 +137,14 @@ public class Fixer : MonoBehaviour
     {
         this.module = mod;
         this.DrawLine(this.transform.position, mod.transform.position);
-        this.popupInstance.SetActive(true);
-        this.popupInstance.transform.position = Camera.main.WorldToScreenPoint(this.module.transform.position);
+        //this.popupInstance.SetActive(true);
+        //this.popupInstance.transform.position = Camera.main.WorldToScreenPoint(this.module.transform.position);
     }
 
     private void Deselect()
     {
         this.module = null;
         this.lineRenderer.enabled = false;
-        this.popupInstance.SetActive(false);
+        //this.popupInstance.SetActive(false);
     }
 }
