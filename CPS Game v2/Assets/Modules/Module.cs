@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Assets.Interfaces.Modules;
 using Assets.Interfaces;
 using Assets.Modules.Menu;
+using Assets;
 
 public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, IDetectPurity
 {
@@ -101,6 +102,9 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <returns></returns>
     public virtual MenuToDisplay GetInformation(MenuBuilder builder)
     {
+        builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+        builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
         return builder.Build();
     }
 }

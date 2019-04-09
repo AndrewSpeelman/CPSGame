@@ -8,29 +8,8 @@ using UnityEngine;
 
 namespace Assets.Modules.Scripts
 {
-    public class Pipe : AttackableModule, ICanBeAttacked
+    public class Pipe : Module
     {
-        public bool Attack()
-        {
-            return true;
-        }
-
-        public bool Fix()
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// Get information about the pipe
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public override MenuToDisplay GetInformation(MenuBuilder builder)
-        {
-            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
-            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
-
-            return builder.Build();
-        }
+        
     }
 }

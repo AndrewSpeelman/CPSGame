@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Modules.Menu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,6 @@ namespace Assets.Interfaces.Modules
         bool Attack();
         bool Fix();
 
-        //Menu GetAttackMenu(MenuBuilder builder);
+        MenuToDisplay GetAttackMenu(MenuBuilder builder);
     }
 }
