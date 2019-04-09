@@ -1,42 +1,32 @@
-﻿using System.Collections;
+﻿using Assets.Interfaces.Modules;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
-public class Pump : Module
+namespace Assets.Modules.Scripts
 {
-    /// <summary>
-    /// Whether the pump is on or not.  If attacked, it is always off (broken)
-    /// </summary>
-    public bool On {
-        get {
-            if (!this.Attacked)
-            {
-                return this.on;
-            }
-            else if (this.AttackDropdowns[0].value == 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        set {
-            this.on = value;
-        }
-    }
-
-    private bool on = true;
-
-    private new void Start()
+    public class Pump: Module, IPumpWater
     {
-        this.displayFields.Add("On");
-        base.Start();
-    }
+        [SerializeField]
+        private bool _isPumping = true; 
+        public bool IsPumping { get { return _isPumping; } protected set { _isPumping = value; } }
 
-    public override bool IsPump()
-    {
-        return true;
+
+        public Pump()
+        {
+        }
+
+
+        public void Off()
+        {
+            this.IsPumping = false;
+        }
+
+        public void On()
+        {
+            this.IsPumping = true;
+        }
     }
 }

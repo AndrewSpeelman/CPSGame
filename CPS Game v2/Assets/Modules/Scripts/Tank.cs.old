@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tank : Module
 {
-    public Pump OutFlowingPump;
+    public PumpOld OutFlowingPump;
 
     public GameObject overFlowSprite;
 

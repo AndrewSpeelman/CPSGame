@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Modules.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -105,10 +106,10 @@ public class GameController : MonoBehaviour
 
             if (++Turn >= TurnLimit)
             {
-                Results.ReservoirFill = Reservoir.WaterList.Count;
+                //Results.ReservoirFill = Reservoir.WaterList.Count;
                 this.SceneLoader.LoadNextScene();
             }
-            ReservoirCounter.text = Reservoir.WaterList.Count.ToString();
+            //ReservoirCounter.text = Reservoir.WaterList.Count.ToString();
             TurnCounter.text = "Round: " + Round + "/" + RoundMax + " Turn: " + Turn + "/" + TurnLimit;
             TurnText.text = "Attacker's Turn";
             TurnText.color = new Color(1F, 0, 0);

@@ -1,20 +1,12 @@
-﻿using System.Collections;
+﻿using Assets.Interfaces.Modules;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using System.Text;
 
-public class Pipe : Module
+namespace Assets.Modules.Scripts
 {
-    //No special functionality in pipes (yet?)
-    private bool Flow;
-    private bool[] Purity;
-
-    public override void Attack()
+    public class Pipe : Module
     {
-        Purity = Water.purity;
-        Flow = AttackDropdowns[0];
-        Purity[0] = AttackDropdowns[1];
-        Purity[1] = AttackDropdowns[2];
-        Purity[2] = AttackDropdowns[3];
-        base.Attack();
     }
 }

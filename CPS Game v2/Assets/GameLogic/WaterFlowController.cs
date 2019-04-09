@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Modules.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +15,12 @@ public class WaterFlowController : MonoBehaviour
     private void Start()
     {
         Module currMod = Reservoir;
-        while (currMod.PreviousModule)
-        {
-            currMod = currMod.PreviousModule;
-        }
-        this.firstModule = currMod;
-        this.firstModule.Water = new WaterObject();
+        //while (currMod.PreviousModule)
+        //{
+         //   currMod = currMod.PreviousModule;
+        //}
+        //this.firstModule = currMod;
+        //this.firstModule.Water = new WaterObject();
     }
 
     /// <summary>
@@ -29,7 +30,7 @@ public class WaterFlowController : MonoBehaviour
     public void TickModules()
     {
         this.Reservoir.Tick();
-        this.firstModule.Water = new WaterObject();
+        //this.firstModule.Water = new WaterObject();
     }
 
     /// <summary>

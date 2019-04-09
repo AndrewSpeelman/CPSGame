@@ -1,28 +1,29 @@
-﻿public class Filter : Module
+﻿using Assets.Interfaces.Modules;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+
+namespace Assets.Modules.Scripts
 {
-    public int PurityIndex;
-    /// <summary>
-    /// This onflow override cleans water when passed through based on a specified purity index set on the filter object.
-    /// </summary>
-    protected override void OnFlow()
+    public class Filter : Module, IControlPurity
     {
-        if (!this.Attacked)
-        {
-            base.OnFlow();
-            if (this.Water != null) this.Water.purity[this.PurityIndex] = true;
-        }
-        else if (this.AttackDropdowns[0].value == 0) //CLOG
-        {
+        [SerializeField]
+        [Range(1, 3)]
+        private int _PurityControl; 
+        public int PurityIndexToControl { get { return _PurityControl; } set { _PurityControl = value; } }
 
-        }
-        else //Disable
+        
+        public Filter()
         {
-            base.OnFlow();
         }
-    }
 
-    public override bool IsFilter()
-    {
-        return true;
+
+        public WaterObject FilterWater(WaterObject water)
+        {
+            water.purity[this.PurityIndexToControl - 1] = true;
+            return water;
+        }
     }
 }
