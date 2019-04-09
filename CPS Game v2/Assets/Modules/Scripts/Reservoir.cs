@@ -1,4 +1,5 @@
 ﻿using Assets.Interfaces.Modules;
+using Assets.Modules.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +60,20 @@ namespace Assets.Modules.Scripts
             Water.Enqueue(inflow.Copy());
 
             return Water.Dequeue();
+        }
+
+        /// <summary>
+        /// Get information about the filter
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetInformation(MenuBuilder builder)
+        {
+            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+            builder.AddStringItem(Strings.Capacity, String.Format("{0}/{1}", CurrentCapacity, MaxCapacity));
+            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
+            return builder.Build();
         }
     }
 }

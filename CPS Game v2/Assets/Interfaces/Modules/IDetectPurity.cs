@@ -11,6 +11,6 @@ namespace Assets.Interfaces.Modules
         bool ExpectedPurity2 { get; set; }
         bool ExpectedPurity3 { get; set; }
 
-        bool IsPurityAsExpected();
+        bool IsPurityAsExpected { get; }
     }
 }

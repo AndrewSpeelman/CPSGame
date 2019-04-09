@@ -38,12 +38,11 @@ public class WaterFlowController : MonoBehaviour
             var currentModule = this.Reservoir.NextModule;
             while (currentModule != null)
             {
-                water = currentModule.OnFlow(water);
-                if (water == null)
-                {
-                    // Flow is blocked
+                if (!currentModule.HasFlow)
+                    break; // Stop the flow here
 
-                }
+                water = currentModule.OnFlow(water);
+               
                 currentModule = currentModule.NextModule;
             }
         }

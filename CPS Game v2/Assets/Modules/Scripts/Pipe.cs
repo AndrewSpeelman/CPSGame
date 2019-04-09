@@ -1,4 +1,5 @@
 ﻿using Assets.Interfaces.Modules;
+using Assets.Modules.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,8 @@ using UnityEngine;
 
 namespace Assets.Modules.Scripts
 {
-    public class Pipe : Module, ICanBeAttacked
+    public class Pipe : AttackableModule, ICanBeAttacked
     {
-        [SerializeField]
-        private bool _IsAttacked = false; 
-        public bool IsAttacked { get { return _IsAttacked; } set { _IsAttacked = value; } }
-
-
         public bool Attack()
         {
             return true;
@@ -22,6 +18,19 @@ namespace Assets.Modules.Scripts
         public bool Fix()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Get information about the pipe
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetInformation(MenuBuilder builder)
+        {
+            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
+            return builder.Build();
         }
     }
 }

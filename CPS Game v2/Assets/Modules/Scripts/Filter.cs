@@ -1,4 +1,5 @@
 ﻿using Assets.Interfaces.Modules;
+using Assets.Modules.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,20 @@ namespace Assets.Modules.Scripts
         {
             var water = base.OnFlow(inflow);
             return FilterWater(water);
+        }
+
+        /// <summary>
+        /// Get information about the filter
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetInformation(MenuBuilder builder)
+        {
+            builder.AddStringItem(Strings.PurityControl, this.PurityIndexToControl.ToString());
+            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
+            return builder.Build();
         }
     }
 }

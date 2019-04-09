@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Assets.Interfaces.Modules;
 using Assets.Interfaces;
-
+using Assets.Modules.Menu;
 
 public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, IDetectPurity
 {
@@ -25,9 +25,11 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     [SerializeField]
     private bool _ExpectedPurity1 = false;
     public bool ExpectedPurity1 { get { return _ExpectedPurity1; } set { _ExpectedPurity1 = value; } }
+
     [SerializeField]
     private bool _ExpectedPurity2 = false;
     public bool ExpectedPurity2 { get { return _ExpectedPurity2; } set { _ExpectedPurity2 = value; } }
+
     [SerializeField]
     private bool _ExpectedPurity3 = false;
     public bool ExpectedPurity3 { get { return _ExpectedPurity3; } set { _ExpectedPurity3 = value; } }
@@ -42,19 +44,22 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /**
      * Determines if the purity is as it should be 
      */
-    public bool IsPurityAsExpected()
+    public bool IsPurityAsExpected
     {
-        if (this.Water == null)
+        get
+        {
+            if (this.Water == null)
+                return true;
+
+            if (this.Water.Purity1 != ExpectedPurity1)
+                return false;
+            if (this.Water.Purity2 != ExpectedPurity2)
+                return false;
+            if (this.Water.Purity3 != ExpectedPurity3)
+                return false;
+
             return true;
-
-        if (this.Water.Purity1 != ExpectedPurity1)
-            return false;
-        if (this.Water.Purity2 != ExpectedPurity2)
-            return false;
-        if (this.Water.Purity3 != ExpectedPurity3)
-            return false;
-
-        return true;
+        }
     }
 
     /**
@@ -86,6 +91,17 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public virtual void Tick()
     {
 
+    }
+
+
+    /// <summary>
+    /// No default menu
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <returns></returns>
+    public virtual MenuToDisplay GetInformation(MenuBuilder builder)
+    {
+        return builder.Build();
     }
 }
 

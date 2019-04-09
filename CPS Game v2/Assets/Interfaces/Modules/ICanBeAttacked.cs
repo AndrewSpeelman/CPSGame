@@ -10,5 +10,7 @@ namespace Assets.Interfaces.Modules
         bool IsAttacked { get; set; }
         bool Attack();
         bool Fix();
+
+        //Menu GetAttackMenu(MenuBuilder builder);
     }
 }
