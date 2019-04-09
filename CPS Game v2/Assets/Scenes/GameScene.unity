@@ -1094,7 +1094,7 @@ PrefabInstance:
         type: 3}
       propertyPath: PreviousModule
       value: 
-      objectReference: {fileID: 1367751106}
+      objectReference: {fileID: 0}
     - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
         type: 3}
       propertyPath: InFlowingPump
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextModule: {fileID: 1367751106}
+  NextModule: {fileID: 0}
   PreviousModule: {fileID: 220058000}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
@@ -2214,18 +2214,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 650079317}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1367751106 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114698971064820580, guid: 2c0771878fa98c542813384f180890d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 2007097121}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813216393fec7684896edcfce3299490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1376493224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2980,6 +2968,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5549593
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.0152099
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 114299726853037410, guid: 6fb95b00634533e4aabdc54207e8830e,
         type: 3}
       propertyPath: PreviousModule
@@ -3016,38 +3036,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1078295789442830, guid: 1fd4d32da713a684ca2915bdd3df3842,
         type: 3}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.5549593
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.0152099
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268773108260238, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114299726853037410, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6fb95b00634533e4aabdc54207e8830e, type: 3}
@@ -3144,8 +3132,33 @@ PrefabInstance:
       propertyPath: NextModule
       value: 
       objectReference: {fileID: 2067816603}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114698971064820580, guid: 2c0771878fa98c542813384f180890d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2c0771878fa98c542813384f180890d5, type: 3}
+--- !u!1 &2007097122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1878364081491878, guid: 2c0771878fa98c542813384f180890d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2007097121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2007097123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007097122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813216393fec7684896edcfce3299490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextModule: {fileID: 2067816603}
+  PreviousModule: {fileID: 715248614}
+  _ExpectedPurity1: 1
+  _ExpectedPurity2: 1
+  _ExpectedPurity3: 0
+  _PurityControl: 3
 --- !u!1 &2054638017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3325,7 +3338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextModule: {fileID: 1655650001}
-  PreviousModule: {fileID: 1367751106}
+  PreviousModule: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 1

@@ -11,7 +11,7 @@ namespace Assets.Modules.Scripts
     {
         [SerializeField]
         [Range(1, 3)]
-        private int _PurityControl; 
+        private int _PurityControl = 1; 
         public int PurityIndexToControl { get { return _PurityControl; } set { _PurityControl = value; } }
 
         
@@ -22,6 +22,12 @@ namespace Assets.Modules.Scripts
 
         public WaterObject FilterWater(WaterObject water)
         {
+            if (this.PurityIndexToControl < 1)
+                this.PurityIndexToControl = 1;
+
+            if (this.PurityIndexToControl > 3)
+                this.PurityIndexToControl = 3;
+
             water.purity[this.PurityIndexToControl - 1] = true;
             return water;
         }
