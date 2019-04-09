@@ -7,6 +7,7 @@ namespace Assets.Interfaces.Modules
 {
     public interface ICanBeAttacked
     {
+        bool IsAttacked { get; set; }
         bool Attack();
         bool Fix();
     }

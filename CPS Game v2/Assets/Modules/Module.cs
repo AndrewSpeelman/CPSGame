@@ -8,9 +8,12 @@ using Assets.Interfaces;
 
 public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, IDetectPurity
 {
+    // These are used to control the order of the system
+    public Module NextModule;
+    public Module PreviousModule;
+
     public WaterObject Water { get; protected set; }
 
-    
     /// <summary>
     /// Represents if water is flowing through something
     /// </summary>
@@ -30,6 +33,12 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public bool ExpectedPurity3 { get { return _ExpectedPurity3; } set { _ExpectedPurity3 = value; } }
 
 
+    public Module()
+    {
+        this.Water = new WaterObject();
+    }
+    
+
     /**
      * Determines if the purity is as it should be 
      */
@@ -46,6 +55,14 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
             return false;
 
         return true;
+    }
+
+    /**
+     * Returns the water in the module 
+     */
+    public virtual WaterObject getWater()
+    {
+        return this.Water;
     }
 
     /**

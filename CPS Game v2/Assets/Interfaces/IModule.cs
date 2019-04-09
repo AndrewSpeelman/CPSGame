@@ -8,6 +8,8 @@ namespace Assets.Interfaces
 {
     public interface IModule
     {
+        WaterObject getWater();
+
         void Tick();
     }
 }

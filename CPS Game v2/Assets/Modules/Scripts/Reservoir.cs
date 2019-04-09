@@ -9,18 +9,30 @@ namespace Assets.Modules.Scripts
 {
     public class Reservoir : Module, IHaveCapacity
     {
+        public bool IsStartingReservoir = false; 
+
         [SerializeField]
         [Range(1, 3)]
         private int _MaxCapacity; 
         public int MaxCapacity { get { return _MaxCapacity; } set { _MaxCapacity = value; } }
 
-        [SerializeField]
-        [Range(0, 3)]
-        private int _CurrentCapacity; 
-        public int CurrentCapacity { get { return _CurrentCapacity; } set { _CurrentCapacity = value; } }
+        public int CurrentCapacity { get { return Water.Count; } }
 
-        public bool IsFull { get { return _CurrentCapacity == _MaxCapacity; } }
-        public bool IsEmpty { get { return _CurrentCapacity == 0; } }
+        public bool IsFull { get { return CurrentCapacity == _MaxCapacity; } }
+        public bool IsEmpty { get { return CurrentCapacity == 0; } }
+
+        public new Queue<WaterObject> Water = new Queue<WaterObject>();
+
+        public Reservoir()
+        {
+            if (this.IsStartingReservoir)
+            {
+                // Fill the reservoir
+                for (int i = 0; i <= _MaxCapacity; i++)
+                    Water.Enqueue(new WaterObject());
+            }
+        }
+
 
         public void OnOverfill()
         {
@@ -30,6 +42,23 @@ namespace Assets.Modules.Scripts
         public void OnEmpty()
         {
 
+        }
+
+        // Get water from reservoir
+        public override WaterObject getWater()
+        {
+            if (IsEmpty)
+                return null;
+
+            return Water.Dequeue();
+        }
+
+        // Fill the reservoir
+        public override WaterObject OnFlow(WaterObject inflow)
+        {
+            Water.Enqueue(inflow.Copy());
+
+            return Water.Dequeue();
         }
     }
 }

@@ -25,5 +25,17 @@ namespace Assets.Modules.Scripts
             water.purity[this.PurityIndexToControl - 1] = true;
             return water;
         }
+
+
+        /// <summary>
+        /// Apply filtration during flow
+        /// </summary>
+        /// <param name="inflow"></param>
+        /// <returns></returns>
+        public override WaterObject OnFlow(WaterObject inflow)
+        {
+            var water = base.OnFlow(inflow);
+            return FilterWater(water);
+        }
     }
 }

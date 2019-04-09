@@ -1,4 +1,5 @@
 ﻿using Assets.Modules.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,8 +30,27 @@ public class WaterFlowController : MonoBehaviour
     /// </summary>
     public void TickModules()
     {
-        this.Reservoir.Tick();
-        //this.firstModule.Water = new WaterObject();
+        // Flow water through the reservoir, to start flow through everything else
+        try
+        {
+            WaterObject water = this.Reservoir.OnFlow(new WaterObject());
+
+            var currentModule = this.Reservoir.NextModule;
+            while (currentModule != null)
+            {
+                water = currentModule.OnFlow(water);
+                if (water == null)
+                {
+                    // Flow is blocked
+
+                }
+                currentModule = currentModule.NextModule;
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 
     /// <summary>
