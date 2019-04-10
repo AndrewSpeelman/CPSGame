@@ -81,15 +81,8 @@ public class GameController : MonoBehaviour
 
         if (this.GameState == GameState.AttackerTurn)
         {
-            
             this.GameState = GameState.DefenderTurn;
             this.AttackerUI.SetActive(false);
-			List<Module> moduleList;
-			this.GameBoard.GetComponents<Module>();
-			foreach (Module m in moduleList)
-			{
-				m.CloseInfoPopup();
-			}
             TurnText.text = "Defender's Turn";
             TurnText.color = new Color(0, .5F, 1F);
         }
@@ -99,7 +92,7 @@ public class GameController : MonoBehaviour
             this.NumAvailableAttacks = this.NumberOfAttacksPerTurn;
 
             this.AttackerUI.SetActive(true);
-
+            
             for (int i = 0; i < 13; i++) {
                 this.WaterFlowController.TickModules();
             }
@@ -108,7 +101,7 @@ public class GameController : MonoBehaviour
             {
                 o.InputActive = false;
                 o.ApplyRule();
-				o.FixRule();
+                o.FixRule();
             }
 
             if (++Turn > TurnLimit)
@@ -118,12 +111,12 @@ public class GameController : MonoBehaviour
                 if(Round >= RoundLimit)
                 {
                     this.SceneLoader.LoadVictoryScene();
-				}
+                }
                 else
                 {
                     this.SceneLoader.LoadGameScene();
-			    }
-			}
+                }
+            }
             ReservoirCounter.text = Reservoir.WaterList.Count.ToString();
             TurnCounter.text = "Round: " + Round + "/" + RoundLimit + " Turn: " + Turn + "/" + TurnLimit;
             TurnText.text = "Attacker's Turn";

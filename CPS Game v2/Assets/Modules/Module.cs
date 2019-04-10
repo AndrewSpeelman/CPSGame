@@ -348,8 +348,8 @@ public abstract class Module : MonoBehaviour
         return (!(lhs < rhs) && lhs != rhs);
     }
 	
-	public Color getStartingColor()
-	{
-		return startingColor;
-	}
+    public Color getStartingColor()
+    {
+        return startingColor;
+    }
 }
