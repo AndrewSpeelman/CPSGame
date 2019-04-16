@@ -40,7 +40,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /**
      * Unity Things 
      */
-    protected Renderer renderer;
+    protected new Renderer renderer;
     protected Color startingColor;
     protected GameControllerWrapper gameController;
 
@@ -51,12 +51,69 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     }
 
 
-    protected void Start()
+    /// <summary>
+    /// Don't override this one
+    /// </summary>
+    public void Start()
     {
         this.gameController = new GameControllerWrapper();
         this.renderer = GetComponent<Renderer>();
         this.startingColor = renderer.material.color;
+
+        this.OnStart();
     }
+
+    /// <summary>
+    /// Override this method if you need it
+    /// </summary>
+    public virtual void OnStart()
+    {
+
+    }
+
+    /// <summary>
+    /// Don't override this
+    /// </summary>
+    private void Awake()
+    {
+        this.OnAwake();
+    }
+
+    /// <summary>
+    /// Override this if you need it
+    /// </summary>
+    public virtual void OnAwake()
+    {
+
+    }
+
+
+    /// <summary>
+    /// Don't override this
+    /// </summary>
+    public void Tick()
+    {
+        this.OnTick();
+        this.UpdatePopups();
+    }
+
+
+    /// <summary>
+    /// Override this one
+    /// </summary>
+    public virtual void OnTick()
+    {
+
+    }
+
+    /// <summary>
+    /// Override this specifically for updating popup displays
+    /// </summary>
+    public virtual void UpdatePopups()
+    {
+
+    }
+
 
 
     /**
@@ -80,6 +137,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         }
     }
 
+
     /**
      * Returns the water in the module 
      */
@@ -87,6 +145,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     {
         return this.Water;
     }
+
 
     /**
      * Shift the water
@@ -106,14 +165,8 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     }
 
 
-    public virtual void Tick()
-    {
-
-    }
-
-
     /// <summary>
-    /// No default menu
+    /// Default menu has basic information
     /// </summary>
     /// <param name="builder"></param>
     /// <returns></returns>

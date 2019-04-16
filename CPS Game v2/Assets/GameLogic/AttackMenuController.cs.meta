@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-guid: a733684c1f6360b4895b6f659e43bf02
+guid: c4e789c8093d23241a883036d08cd182
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - NextModule: {instanceID: 0}
-  - PreviousModule: {instanceID: 0}
-  - AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+  - popupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}

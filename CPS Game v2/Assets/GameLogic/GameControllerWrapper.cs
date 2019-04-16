@@ -12,7 +12,17 @@ namespace Assets.GameLogic
 
         public GameControllerWrapper()
         {
-            this.gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+            this.gameController = GameControllerWrapper.GetGameController();
+        }
+
+        /// <summary>
+        /// A static function for retrieving the game controller so it can be used in 
+        /// multiple places without needing to type this stuff all over again.
+        /// </summary>
+        /// <returns></returns>
+        public static GameController GetGameController()
+        {
+            return GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         }
 
 
