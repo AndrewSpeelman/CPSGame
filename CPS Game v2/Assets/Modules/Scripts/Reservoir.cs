@@ -1,58 +1,79 @@
-﻿using System.Collections;
+﻿using Assets.Interfaces.Modules;
+using Assets.Modules.Menu;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
-public class Reservoir : Module
+namespace Assets.Modules.Scripts
 {
-    public List<WaterObject> WaterList = new List<WaterObject>();
+    public class Reservoir : Module, IHaveCapacity
+    {
+        public bool IsStartingReservoir = false; 
 
-    public int Fill {
-        get { return WaterList.Count; }
-    }
+        [SerializeField]
+        [Range(1, 3)]
+        private int _MaxCapacity; 
+        public int MaxCapacity { get { return _MaxCapacity; } set { _MaxCapacity = value; } }
 
-    public float AveragePurity {
-        get {
-            int tot = 0;
-            foreach(WaterObject w in WaterList)
+        public int CurrentCapacity { get { return Water.Count; } }
+
+        public bool IsFull { get { return CurrentCapacity == _MaxCapacity; } }
+        public bool IsEmpty { get { return CurrentCapacity == 0; } }
+
+        public new Queue<WaterObject> Water = new Queue<WaterObject>();
+
+        public Reservoir()
+        {
+            if (this.IsStartingReservoir)
             {
-                tot += (w.purity[0] ? 1 : 0) + (w.purity[1] ? 1 : 0) + (w.purity[2] ? 1 : 0);
+                // Fill the reservoir
+                for (int i = 0; i <= _MaxCapacity; i++)
+                    Water.Enqueue(new WaterObject());
             }
-            return tot / ((float)Fill * 3);
         }
-    }
 
-    private new void Start()
-    {
-        this.displayFields.Add("Fill");
-        this.displayFields.Add("AveragePurity");
-        base.Start();
-    }
 
-    /// <summary>
-    /// Reservoirs ignore capacity, they just keep on filling up
-    /// </summary>
-    protected override void OnFlow()
-    {
-        if (this.PreviousModule.Water != null)
+        public void OnOverfill()
         {
-            this.WaterList.Add(this.PreviousModule.Water);
-            this.PreviousModule.Water = null;
+
         }
-    }
 
-    public override void Attack()
-    {
-        //Don't let the reservoid be attacked
-    }
-
-    public override string ToString()
-    {
-        string result = "";
-        foreach (WaterObject w in this.WaterList)
+        public void OnEmpty()
         {
-            result += "; " + w.purity[0] + ", " + w.purity[1] + ", " + w.purity[2];
+
         }
 
-        return result;
+        // Get water from reservoir
+        public override WaterObject getWater()
+        {
+            if (IsEmpty)
+                return null;
+
+            return Water.Dequeue();
+        }
+
+        // Fill the reservoir
+        public override WaterObject OnFlow(WaterObject inflow)
+        {
+            Water.Enqueue(inflow.Copy());
+
+            return Water.Dequeue();
+        }
+
+        /// <summary>
+        /// Get information about the filter
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetInformation(MenuBuilder builder)
+        {
+            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+            builder.AddStringItem(Strings.Capacity, String.Format("{0}/{1}", CurrentCapacity, MaxCapacity));
+            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
+            return builder.Build();
+        }
     }
 }

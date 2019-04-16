@@ -1,42 +1,61 @@
-﻿using System.Collections;
+﻿using Assets.Interfaces.Modules;
+using Assets.Modules.Menu;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
-public class Pump : Module
+namespace Assets.Modules.Scripts
 {
-    /// <summary>
-    /// Whether the pump is on or not.  If attacked, it is always off (broken)
-    /// </summary>
-    public bool On {
-        get {
-            if (!this.Attacked)
-            {
-                return this.on;
-            }
-            else if (this.AttackDropdowns[0].value == 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        set {
-            this.on = value;
-        }
-    }
-
-    private bool on = true;
-
-    private new void Start()
+    public class Pump: Module, IPumpWater
     {
-        this.displayFields.Add("On");
-        base.Start();
-    }
+        [SerializeField]
+        private bool _isPumping = true; 
+        public bool IsPumping { get { return _isPumping; } protected set { _isPumping = value; } }
 
-    public override bool IsPump()
-    {
-        return true;
+
+        public Pump()
+        {
+        }
+
+
+        public void Off()
+        {
+            this.IsPumping = false;
+        }
+
+        public void On()
+        {
+            this.IsPumping = true;
+        }
+
+
+        /// <summary>
+        /// Pump the Water
+        /// </summary>
+        /// <param name="inflow"></param>
+        /// <returns></returns>
+        public override WaterObject OnFlow(WaterObject inflow)
+        {
+            if (!this.IsPumping)
+                return null; // Do not continue the flow of water if pumping is off
+
+            return base.OnFlow(inflow);
+        }
+
+        /// <summary>
+        /// Get information about the pump
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetInformation(MenuBuilder builder)
+        {
+            builder.AddBoolItem(Strings.IsPumping, this.IsPumping);
+            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
+            return builder.Build();
+        }
     }
 }

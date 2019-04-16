@@ -72,20 +72,21 @@ public class Oracle : MonoBehaviour
         bool firstVal = false; //false = first  true = second
         
         Module firstModule, secondModule;
-        if (this.firstValuation.CurrentSelection < this.secondValuation.CurrentSelection)
-        {
-            firstModule = this.firstValuation.CurrentSelection;
-            secondModule = this.secondValuation.CurrentSelection;
-        }
-        else
-        {
-            firstModule = this.secondValuation.CurrentSelection;
-            secondModule = this.firstValuation.CurrentSelection;
-            firstVal = true;
-        }
+        //if (this.firstValuation.CurrentSelection < this.secondValuation.CurrentSelection)
+        //{
+        //    firstModule = this.firstValuation.CurrentSelection;
+        //    secondModule = this.secondValuation.CurrentSelection;
+        //}
+        //else
+        //{
+        //    firstModule = this.secondValuation.CurrentSelection;
+        //    secondModule = this.firstValuation.CurrentSelection;
+        //    firstVal = true;
+        //}
 
 
         var currVal = firstVal ? secondValuation : firstValuation;
+
         if (firstModule.Attacked)
         {
             currVal.RuleIndicator.gameObject.SetActive(true);
@@ -106,6 +107,7 @@ public class Oracle : MonoBehaviour
         {
             currVal.RuleIndicator.gameObject.SetActive(false);
         }
+
 
         ////Successful attack if all modules between the two modules are attacked
         //bool successfulDefense = true;
@@ -142,22 +144,22 @@ public class Oracle : MonoBehaviour
 
     private bool ModuleMatchesExpected(Module m, Valuation v)
     {
-        if ((m.HasFlow) == (v.dropdowns[0].value == 0))
-        {
-            if (!m.HasFlow) return true;
+        //if ((m.HasFlow) == (v.dropdowns[0].value == 0))
+        //{
+        //    if (!m.HasFlow) return true;
 
-            if ((m.Purity1) == (v.dropdowns[1].value == 0))
-            {
-                if ((m.Purity2) == (v.dropdowns[2].value == 0))
-                {
-                    if ((m.Purity3) == (v.dropdowns[3].value == 0))
-                    {
+        //    if ((m.Purity1) == (v.dropdowns[1].value == 0))
+        //    {
+        //        if ((m.Purity2) == (v.dropdowns[2].value == 0))
+        //        {
+        //            if ((m.Purity3) == (v.dropdowns[3].value == 0))
+        //            {
                         
-                        return true;
-                    }
-                }
-            }
-        }
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //}
 
         return false;
     }
@@ -171,7 +173,7 @@ public class Oracle : MonoBehaviour
         {
             return;
         }
-		
+
 		Module ToFix = this.fixer.CurrentSelection;
 		if(ToFix.Attacked)
         {
