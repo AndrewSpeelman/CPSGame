@@ -72,17 +72,17 @@ public class Oracle : MonoBehaviour
         bool firstVal = false; //false = first  true = second
         
         Module firstModule, secondModule;
-        //if (this.firstValuation.CurrentSelection < this.secondValuation.CurrentSelection)
-        //{
-        //    firstModule = this.firstValuation.CurrentSelection;
-        //    secondModule = this.secondValuation.CurrentSelection;
-        //}
-        //else
-        //{
-        //    firstModule = this.secondValuation.CurrentSelection;
-        //    secondModule = this.firstValuation.CurrentSelection;
-        //    firstVal = true;
-        //}
+        if (this.firstValuation.CurrentSelection < this.secondValuation.CurrentSelection)
+        {
+            firstModule = this.firstValuation.CurrentSelection;
+            secondModule = this.secondValuation.CurrentSelection;
+        }
+        else
+        {
+            firstModule = this.secondValuation.CurrentSelection;
+            secondModule = this.firstValuation.CurrentSelection;
+            firstVal = true;
+        }
 
 
         var currVal = firstVal ? secondValuation : firstValuation;

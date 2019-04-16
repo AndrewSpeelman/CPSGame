@@ -42,15 +42,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1354026458969526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30816d10136ef274c8a70766d85144b7, type: 3}
+  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
-    type: 3}
-  AttackedIndicator: {fileID: 0}
+  NextModule: {fileID: 0}
   PreviousModule: {fileID: 0}
-  InFlowingPump: {fileID: 0}
   Attacked: 0
+  _ExpectedPurity1: 0
+  _ExpectedPurity2: 0
+  _ExpectedPurity3: 0
 --- !u!212 &2900773570438022728
 SpriteRenderer:
   m_ObjectHideFlags: 0
