@@ -111,5 +111,5 @@ MonoBehaviour:
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
   _IsAttacked: 0
-  AttackPopupPrefab: {fileID: 1878364081491878}
+  AttackPopupPrefab: {fileID: 0}
   _PurityControl: 1
