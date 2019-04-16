@@ -6,6 +6,7 @@ using Assets.Interfaces.Modules;
 using Assets.Interfaces;
 using Assets.Modules.Menu;
 using Assets;
+using Assets.GameLogic;
 
 public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, IDetectPurity
 {
@@ -36,11 +37,27 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public bool ExpectedPurity3 { get { return _ExpectedPurity3; } set { _ExpectedPurity3 = value; } }
 
 
+    /**
+     * Unity Things 
+     */
+    protected Renderer renderer;
+    protected Color startingColor;
+    protected GameControllerWrapper gameController;
+
+
     public Module()
     {
         this.Water = new WaterObject();
     }
-    
+
+
+    protected void Start()
+    {
+        this.gameController = new GameControllerWrapper();
+        this.renderer = GetComponent<Renderer>();
+        this.startingColor = renderer.material.color;
+    }
+
 
     /**
      * Determines if the purity is as it should be 

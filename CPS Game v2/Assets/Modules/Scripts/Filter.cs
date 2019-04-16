@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Modules.Scripts
 {
-    public class Filter : Module, IControlPurity
+    public class Filter : AttackableModule, IControlPurity
     {
         [SerializeField]
         [Range(1, 3)]
@@ -32,6 +32,7 @@ namespace Assets.Modules.Scripts
             water.purity[this.PurityIndexToControl - 1] = true;
             return water;
         }
+        
 
 
         /// <summary>

@@ -33,6 +33,7 @@ public class WaterFlowController : MonoBehaviour
         // Flow water through the reservoir, to start flow through everything else
         try
         {
+            this.Reservoir.Tick();
             WaterObject water = this.Reservoir.OnFlow(new WaterObject());
 
             var currentModule = this.Reservoir.NextModule;
@@ -41,6 +42,7 @@ public class WaterFlowController : MonoBehaviour
                 if (!currentModule.HasFlow)
                     break; // Stop the flow here
 
+                currentModule.Tick();
                 water = currentModule.OnFlow(water);
                
                 currentModule = currentModule.NextModule;
