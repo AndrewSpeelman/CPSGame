@@ -1,28 +1,63 @@
-﻿public class Filter : Module
+﻿using Assets.Interfaces.Modules;
+using Assets.Modules.Menu;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+
+namespace Assets.Modules.Scripts
 {
-    public int PurityIndex;
-    /// <summary>
-    /// This onflow override cleans water when passed through based on a specified purity index set on the filter object.
-    /// </summary>
-    protected override void OnFlow()
+    public class Filter : AttackableModule, IControlPurity
     {
-        if (!this.Attacked)
-        {
-            base.OnFlow();
-            if (this.Water != null) this.Water.purity[this.PurityIndex] = true;
-        }
-        else if (this.AttackDropdowns[0].value == 0) //CLOG
-        {
+        [SerializeField]
+        [Range(1, 3)]
+        private int _PurityControl = 1; 
+        public int PurityIndexToControl { get { return _PurityControl; } set { _PurityControl = value; } }
 
-        }
-        else //Disable
+        
+        public Filter()
         {
-            base.OnFlow();
         }
-    }
 
-    public override bool IsFilter()
-    {
-        return true;
+
+        public WaterObject FilterWater(WaterObject water)
+        {
+            if (this.PurityIndexToControl < 1)
+                this.PurityIndexToControl = 1;
+
+            if (this.PurityIndexToControl > 3)
+                this.PurityIndexToControl = 3;
+
+            water.purity[this.PurityIndexToControl - 1] = true;
+            return water;
+        }
+        
+
+
+        /// <summary>
+        /// Apply filtration during flow
+        /// </summary>
+        /// <param name="inflow"></param>
+        /// <returns></returns>
+        public override WaterObject OnFlow(WaterObject inflow)
+        {
+            var water = base.OnFlow(inflow);
+            return FilterWater(water);
+        }
+
+        /// <summary>
+        /// Get information about the filter
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetInformation(MenuBuilder builder)
+        {
+            builder.AddStringItem(Strings.PurityControl, this.PurityIndexToControl.ToString());
+            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
+            return builder.Build();
+        }
     }
 }
