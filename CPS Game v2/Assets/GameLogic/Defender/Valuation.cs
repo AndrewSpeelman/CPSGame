@@ -110,17 +110,7 @@ public class Valuation : MonoBehaviour
 
     private void Update()
     {
-        if (!this.parentOracle.InputActive)
-        {
-            this.popupInstance.SetActive(false);
-        }
-        else
-        {
-            if (this.module)
-            {
-                this.popupInstance.SetActive(true);
-            }
-        }
+        
     }
 
     private void DrawLine(Vector3 start, Vector3 end)
@@ -137,14 +127,14 @@ public class Valuation : MonoBehaviour
     {
         this.module = mod;
         this.DrawLine(this.transform.position, mod.transform.position);
-        this.popupInstance.SetActive(true);
-        this.popupInstance.transform.position = Camera.main.WorldToScreenPoint(this.module.transform.position);
+        //this.popupInstance.SetActive(true);
+        //this.popupInstance.transform.position = Camera.main.WorldToScreenPoint(this.module.transform.position);
     }
 
     private void Deselect()
     {
         this.module = null;
         this.lineRenderer.enabled = false;
-        this.popupInstance.SetActive(false);
+        //this.popupInstance.SetActive(false);
     }
 }

@@ -29,15 +29,15 @@ public class GameController : MonoBehaviour
     public Text TurnText;
 
     public int NumberOfAttacksPerTurn = 1;
-    public int NumberOfOracles = 1;
+    public int NumberOfOracles = 2;
     public int NumAvailableAttacks { get; set; }
 
     private int Turn = 0;
     private int Round = 1;
-    private int RoundMax = 1;
+    private int RoundLimit = 1;
 
     public int ReservoirLimit = 10;
-    public int TurnLimit = 15;
+    public int TurnLimit = 5;
 
     public Text TurnTimer;
     private DateTime ActiveTurnTimer;
@@ -52,9 +52,10 @@ public class GameController : MonoBehaviour
 
     protected void Awake()
     {
-        this.NumberOfAttacksPerTurn = PlayerPrefs.GetInt("Attacks",1);
-        this.RoundMax = PlayerPrefs.GetInt("Rounds",1);
-        this.NumberOfOracles = PlayerPrefs.GetInt("Oracles",2);
+        this.NumberOfAttacksPerTurn = Options.Attacks;
+		this.Round = Options.Round;
+        this.RoundLimit = Options.RoundLimit;
+        this.NumberOfOracles = Options.Oracles;
         Results.ReservoirLimit = ReservoirLimit;
         this.oracles = new List<Oracle>();
         TurnText.gameObject.SetActive(true);
@@ -81,7 +82,6 @@ public class GameController : MonoBehaviour
 
         if (this.GameState == GameState.AttackerTurn)
         {
-            
             this.GameState = GameState.DefenderTurn;
             this.AttackerUI.SetActive(false);
             TurnText.text = "Defender's Turn";
@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour
             this.NumAvailableAttacks = this.NumberOfAttacksPerTurn;
 
             this.AttackerUI.SetActive(true);
-
+            
             for (int i = 0; i < 13; i++) {
                 this.WaterFlowController.TickModules();
             }
@@ -102,15 +102,24 @@ public class GameController : MonoBehaviour
             {
                 o.InputActive = false;
                 o.ApplyRule();
+                o.FixRule();
             }
 
-            if (++Turn >= TurnLimit)
+            if (++Turn > TurnLimit)
             {
                 //Results.ReservoirFill = Reservoir.WaterList.Count;
-                this.SceneLoader.LoadNextScene();
+                Options.Round = ++Options.Round;
+                if(Round >= RoundLimit)
+                {
+                    this.SceneLoader.LoadVictoryScene();
+                }
+                else
+                {
+                    this.SceneLoader.LoadGameScene();
+                }
             }
             //ReservoirCounter.text = Reservoir.WaterList.Count.ToString();
-            TurnCounter.text = "Round: " + Round + "/" + RoundMax + " Turn: " + Turn + "/" + TurnLimit;
+            TurnCounter.text = "Round: " + Round + "/" + RoundLimit + " Turn: " + Turn + "/" + TurnLimit;
             TurnText.text = "Attacker's Turn";
             TurnText.color = new Color(1F, 0, 0);
         }

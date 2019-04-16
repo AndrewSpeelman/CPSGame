@@ -1671,9 +1671,9 @@ MonoBehaviour:
   NumberOfAttacksPerTurn: 1
   NumberOfOracles: 2
   ReservoirLimit: 5
-  TurnLimit: 15
+  TurnLimit: 5
   TurnTimer: {fileID: 1376493227}
-  TurnDuration: 500
+  TurnDuration: 120
   GameState: 1
 --- !u!4 &995454138
 Transform:
@@ -1943,7 +1943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8058047
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.z
@@ -2048,7 +2048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8058047
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.z
@@ -2795,11 +2795,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8058063
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.z

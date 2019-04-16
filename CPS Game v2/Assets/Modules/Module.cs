@@ -13,6 +13,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     // These are used to control the order of the system
     public Module NextModule;
     public Module PreviousModule;
+	public bool Attacked = false;
 
     public WaterObject Water { get; protected set; }
 
@@ -137,6 +138,27 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         }
     }
 
+    /// <summary>
+    /// what to do when the module is no longer being attacked
+    /// </summary>
+    public void Fix()
+    {
+        if (this.Attacked)
+        {
+            this.Attacked = false;
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        if(renderer.material.color == this.startingColor)
+            renderer.material.color = Color.yellow;
+    }
+
+    private void OnMouseExit()
+    {
+        renderer.material.color = this.startingColor;
+    }
 
     /**
      * Returns the water in the module 
@@ -177,6 +199,44 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 
         return builder.Build();
     }
+
+    public Color getStartingColor()
+    {
+        return startingColor;
+    }
+	
+    /// <summary>
+    /// True if the lhs module appears earlier in the system than the rhs
+    /// </summary>
+    /// <param name="lhs">first module to compare</param>
+    /// <param name="rhs">second module to compare</param>
+    /// <returns></returns>
+    public static bool operator <(Module lhs, Module rhs)
+    {
+        Module currMod = rhs.PreviousModule;
+        while (currMod)
+        {
+            if (currMod == lhs)
+            {
+                return true;
+            }
+
+            currMod = currMod.PreviousModule;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// True if the lhs module appears later in the system than the rhs
+    /// </summary>
+    /// <param name="lhs">first module to compare</param>
+    /// <param name="rhs">second module to compare</param>
+    /// <returns></returns>
+    public static bool operator >(Module lhs, Module rhs)
+    {
+        return (!(lhs < rhs) && lhs != rhs);
+    }
 }
 
 /// <summary>
@@ -191,8 +251,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 //    public Module PreviousModule;
 
 //    public PumpOld InFlowingPump;
-
-//    public bool Attacked = false;
 
 //    public WaterObject Water;
 
@@ -427,15 +485,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 //        }
 //    }
 
-//    private void OnMouseEnter()
-//    {
-//        renderer.material.color = Color.yellow;
-//    }
-
-//    private void OnMouseExit()
-//    {
-//        renderer.material.color = this.startingColor;
-//    }
 
 //    /// <summary>
 //    /// Updates the popup display by getting the values of the fields and changing the popup text to display
@@ -489,36 +538,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 //		this.popupInstance.SetActive(false);
 //	}
 
-//    /// <summary>
-//    /// True if the lhs module appears earlier in the system than the rhs
-//    /// </summary>
-//    /// <param name="lhs">first module to compare</param>
-//    /// <param name="rhs">second module to compare</param>
-//    /// <returns></returns>
-//    public static bool operator <(Module lhs, Module rhs)
-//    {
-//        Module currMod = rhs.PreviousModule;
-//        while (currMod)
-//        {
-//            if (currMod == lhs)
-//            {
-//                return true;
-//            }
 
-//            currMod = currMod.PreviousModule;
-//        }
-
-//        return false;
-//    }
-
-//    /// <summary>
-//    /// True if the lhs module appears later in the system than the rhs
-//    /// </summary>
-//    /// <param name="lhs">first module to compare</param>
-//    /// <param name="rhs">second module to compare</param>
-//    /// <returns></returns>
-//    public static bool operator >(Module lhs, Module rhs)
-//    {
-//        return (!(lhs < rhs) && lhs != rhs);
-//    }
 //}
+
