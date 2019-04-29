@@ -51,6 +51,12 @@ namespace Assets.Modules.Menu
             return this;
         }
 
+        public MenuBuilder AddOption(String display)
+        {
+            this.AddChoice(display, "");
+            return this;
+        }
+
         /**
          * Creates the menu from the builder 
          */

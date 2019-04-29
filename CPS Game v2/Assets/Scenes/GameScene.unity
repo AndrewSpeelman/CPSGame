@@ -247,14 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44866a8b1fccee4fa1fbc7ccfb903cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
-    type: 3}
-  AttackedIndicator: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
-    type: 3}
-  PreviousModule: {fileID: 0}
-  InFlowingPump: {fileID: 0}
-  Attacked: 0
-  tank: {fileID: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,13 +800,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
+      propertyPath: m_Name
+      value: Pipe5
+      objectReference: {fileID: 0}
     - target: {fileID: 1354026458969526, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_Name
       value: Sensor5
       objectReference: {fileID: 0}
-    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
-      propertyPath: m_Name
-      value: Pipe5
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 210664560}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: InFlowingPump
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: AttackedIndicator
+      value: 
+      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
+        type: 3}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: Tank
+      value: 
+      objectReference: {fileID: 48865702}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: WaterTank
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -853,32 +871,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: PreviousModule
-      value: 
-      objectReference: {fileID: 210664560}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: InFlowingPump
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: AttackedIndicator
-      value: 
-      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
-        type: 3}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: Tank
-      value: 
-      objectReference: {fileID: 48865702}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: WaterTank
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114201832724189754, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
@@ -905,6 +897,9 @@ MonoBehaviour:
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!1001 &650079317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1087,13 +1082,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
+      propertyPath: m_Name
+      value: Pipe3
+      objectReference: {fileID: 0}
     - target: {fileID: 1354026458969526, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_Name
       value: Sensor3
       objectReference: {fileID: 0}
-    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
-      propertyPath: m_Name
-      value: Pipe3
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: InFlowingPump
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: AttackedIndicator
+      value: 
+      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
+        type: 3}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: Tank
+      value: 
+      objectReference: {fileID: 48865702}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: WaterTank
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1132,32 +1153,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: PreviousModule
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: InFlowingPump
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: AttackedIndicator
-      value: 
-      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
-        type: 3}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: Tank
-      value: 
-      objectReference: {fileID: 48865702}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: WaterTank
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114201832724189754, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
@@ -1179,11 +1174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextModule: {fileID: 0}
+  NextModule: {fileID: 2007097123}
   PreviousModule: {fileID: 220058000}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!1001 &818242694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1284,13 +1282,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
+      propertyPath: m_Name
+      value: Pipe1
+      objectReference: {fileID: 0}
     - target: {fileID: 1354026458969526, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_Name
       value: Sensor1
       objectReference: {fileID: 0}
-    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
-      propertyPath: m_Name
-      value: Pipe1
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: InFlowingPump
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: AttackedIndicator
+      value: 
+      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
+        type: 3}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: Tank
+      value: 
+      objectReference: {fileID: 48865702}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: WaterTank
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1341,27 +1360,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: InFlowingPump
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: AttackedIndicator
-      value: 
-      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
-        type: 3}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: Tank
-      value: 
-      objectReference: {fileID: 48865702}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: WaterTank
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114201832724189754, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
@@ -1388,6 +1386,9 @@ MonoBehaviour:
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 1
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!4 &894097827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3,
@@ -1897,13 +1898,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
+      propertyPath: m_Name
+      value: Pipe6
+      objectReference: {fileID: 0}
     - target: {fileID: 1354026458969526, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_Name
       value: Sensor6
       objectReference: {fileID: 0}
-    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
-      propertyPath: m_Name
-      value: Pipe6
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: InFlowingPump
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1954,16 +1965,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: PreviousModule
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: InFlowingPump
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114201832724189754, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
     - {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
@@ -1991,6 +1992,9 @@ MonoBehaviour:
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!1001 &1183407248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1998,13 +2002,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
+      propertyPath: m_Name
+      value: Pipe4
+      objectReference: {fileID: 0}
     - target: {fileID: 1354026458969526, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_Name
       value: Sensor4
       objectReference: {fileID: 0}
-    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
-      propertyPath: m_Name
-      value: Pipe4
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 220058000}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: InFlowingPump
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: AttackedIndicator
+      value: 
+      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
+        type: 3}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: Tank
+      value: 
+      objectReference: {fileID: 48865702}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: WaterTank
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2059,32 +2089,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: PreviousModule
-      value: 
-      objectReference: {fileID: 220058000}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: InFlowingPump
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: AttackedIndicator
-      value: 
-      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
-        type: 3}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: Tank
-      value: 
-      objectReference: {fileID: 48865702}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: WaterTank
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114201832724189754, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
@@ -2111,6 +2115,9 @@ MonoBehaviour:
   _ExpectedPurity1: 1
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!4 &1202232180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3,
@@ -2744,6 +2751,12 @@ PrefabInstance:
       propertyPath: NextModule
       value: 
       objectReference: {fileID: 715248614}
+    - target: {fileID: 114698971064820580, guid: 2c0771878fa98c542813384f180890d5,
+        type: 3}
+      propertyPath: AttackPopupPrefab
+      value: 
+      objectReference: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c0771878fa98c542813384f180890d5, type: 3}
 --- !u!1001 &1807835888
@@ -2753,13 +2766,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
+      propertyPath: m_Name
+      value: Pipe7
+      objectReference: {fileID: 0}
     - target: {fileID: 1354026458969526, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_Name
       value: Sensor7
       objectReference: {fileID: 0}
-    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
-      propertyPath: m_Name
-      value: Pipe7
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: InFlowingPump
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: AttackedIndicator
+      value: 
+      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
+        type: 3}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: Tank
+      value: 
+      objectReference: {fileID: 48865702}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: WaterTank
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2810,32 +2849,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: PreviousModule
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: InFlowingPump
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: AttackedIndicator
-      value: 
-      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
-        type: 3}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: Tank
-      value: 
-      objectReference: {fileID: 48865702}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: WaterTank
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114201832724189754, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
@@ -2862,6 +2875,9 @@ MonoBehaviour:
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!4 &1824374750 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3,
@@ -3159,7 +3175,8 @@ MonoBehaviour:
   _ExpectedPurity2: 1
   _ExpectedPurity3: 0
   _IsAttacked: 0
-  AttackPopupPrefab: {fileID: 0}
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
   _PurityControl: 3
 --- !u!1 &2054638017
 GameObject:
@@ -3247,13 +3264,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945473464}
     m_Modifications:
+    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
+      propertyPath: m_Name
+      value: Pipe2
+      objectReference: {fileID: 0}
     - target: {fileID: 1354026458969526, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_Name
       value: Sensor2
       objectReference: {fileID: 0}
-    - target: {fileID: 1612925740482596, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
-      propertyPath: m_Name
-      value: Pipe2
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: InFlowingPump
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: AttackedIndicator
+      value: 
+      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
+        type: 3}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: Tank
+      value: 
+      objectReference: {fileID: 48865702}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: WaterTank
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3292,32 +3335,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: PreviousModule
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: InFlowingPump
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: AttackedIndicator
-      value: 
-      objectReference: {fileID: 1322095868030548, guid: 569b7672bd0bcac45b82f9ed902d9677,
-        type: 3}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: Tank
-      value: 
-      objectReference: {fileID: 48865702}
-    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
-        type: 3}
-      propertyPath: WaterTank
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114201832724189754, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
@@ -3344,3 +3361,6 @@ MonoBehaviour:
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 1
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}

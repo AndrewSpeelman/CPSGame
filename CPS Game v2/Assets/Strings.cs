@@ -25,5 +25,15 @@ namespace Assets
             public const String True = "True";
             public const String False = "False";
         }
+
+
+        public static class AttackStrings
+        {
+            public static class Filter
+            {
+                public const String Flow = "Attack Flow";
+                public const String Purity = "Attack Purity";
+            }
+        }
     }
 }

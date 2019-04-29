@@ -1,5 +1,6 @@
 ﻿using Assets.GameLogic;
 using Assets.Interfaces.Modules;
+using Assets.Modules.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Assets.Modules
         /// Default Attack method
         /// </summary>
         /// <returns></returns>
-        public virtual bool Attack()
+        public virtual bool Attack(String AttackMenuOption)
         {
             this._IsAttacked = true;
             return true;
@@ -49,11 +50,21 @@ namespace Assets.Modules
         }
 
         /// <summary>
+        /// Default attack menu
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public virtual MenuToDisplay GetAttackMenu(MenuBuilder builder)
+        {
+            return builder.Build();
+        }
+
+        /// <summary>
         /// Update popup menus each tick
         /// </summary>
         public override void UpdatePopups()
         {
-            this.attackMenuController.UpdateMenu();
+            //this.attackMenuController.UpdateMenu();
         }
 
         /// <summary>
@@ -63,12 +74,18 @@ namespace Assets.Modules
         {
             if (Input.GetMouseButtonDown(0))
             {
-                this.renderer.material.color = Color.yellow; // Turn color yellow while user is clicking on the object
+                try
+                {
+                    this.renderer.material.color = Color.yellow; // Turn color yellow while user is clicking on the object
+                }
+                catch (Exception e)
+                {
+
+                }
                 
                 if (this.gameController.IsAttackersTurn())
                 {
-                    // TODO: Show attack menu
-                    this.attackMenuController.OpenMenu(Input.mousePosition);
+                    this.attackMenuController.OpenMenu();
                 }
             }
         }
@@ -78,7 +95,14 @@ namespace Assets.Modules
         /// </summary>
         private void OnMouseUp()
         {
-            this.renderer.material.color = this.startingColor;
+            try
+            {
+                this.renderer.material.color = this.startingColor;
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
     }

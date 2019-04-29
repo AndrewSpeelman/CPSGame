@@ -30,9 +30,13 @@ public class WaterFlowController : MonoBehaviour
     /// </summary>
     public void TickModules()
     {
+        // TODO: Flow enough water through between rounds so it will clear the system 
+        // and add entirely new water 
+
         // Flow water through the reservoir, to start flow through everything else
         try
         {
+
             this.Reservoir.Tick();
             WaterObject water = this.Reservoir.OnFlow(new WaterObject());
 

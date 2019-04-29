@@ -15,14 +15,25 @@ namespace Assets.Modules.Scripts
         private int _PurityControl = 1; 
         public int PurityIndexToControl { get { return _PurityControl; } set { _PurityControl = value; } }
 
-        
+        private bool PurityBroken;
+        private bool FlowBroken;
+
         public Filter()
         {
+            this.PurityBroken = false;
+            this.FlowBroken = false;
         }
 
-
+        /// <summary>
+        /// Filters the water, as a filter does
+        /// </summary>
+        /// <param name="water"></param>
+        /// <returns></returns>
         public WaterObject FilterWater(WaterObject water)
         {
+            if (this.PurityBroken)
+                return water; // Do not filter it if purity is broken
+
             if (this.PurityIndexToControl < 1)
                 this.PurityIndexToControl = 1;
 
@@ -32,7 +43,43 @@ namespace Assets.Modules.Scripts
             water.purity[this.PurityIndexToControl - 1] = true;
             return water;
         }
-        
+
+        /// <summary>
+        /// Attack the object
+        /// </summary>
+        /// <param name="AttackMenuOption"></param>
+        /// <returns></returns>
+        public override bool Attack(string AttackMenuOption)
+        {
+            base.Attack(AttackMenuOption); // Mark as attacked 
+
+            switch (AttackMenuOption)
+            {
+                case Strings.AttackStrings.Filter.Purity:
+                    this.PurityBroken = true; 
+                    break;
+
+                case Strings.AttackStrings.Filter.Flow:
+                    this.FlowBroken = true;
+                    this.Water = null;
+                    break;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Fixes any problems
+        /// </summary>
+        /// <returns></returns>
+        public override bool Fix()
+        {
+            this.PurityBroken = false;
+            this.FlowBroken = false; 
+
+            return base.Fix();
+        }
+
 
 
         /// <summary>
@@ -42,8 +89,12 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override WaterObject OnFlow(WaterObject inflow)
         {
-            var water = base.OnFlow(inflow);
-            return FilterWater(water);
+            var water = base.OnFlow(inflow); // Returns water that was inside the filter
+
+            if (this.FlowBroken)
+                return null; // Flow is broken
+
+            return FilterWater(water); // Filter it for the next module
         }
 
         /// <summary>
@@ -57,6 +108,19 @@ namespace Assets.Modules.Scripts
             builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
             builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
+            return builder.Build();
+        }
+
+
+        /// <summary>
+        /// Build the menu for displaying attack information
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
+        {
+            builder.AddOption(Strings.AttackStrings.Filter.Purity);
+            builder.AddOption(Strings.AttackStrings.Filter.Flow);
             return builder.Build();
         }
     }
