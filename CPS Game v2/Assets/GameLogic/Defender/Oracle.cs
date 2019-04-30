@@ -71,26 +71,15 @@ public class Oracle : MonoBehaviour
         //used to decide which to fix on
         bool firstVal = false; //false = first  true = second
         
-        Module firstModule, secondModule;
-        if (this.firstValuation.CurrentSelection < this.secondValuation.CurrentSelection)
-        {
-            firstModule = this.firstValuation.CurrentSelection;
-            secondModule = this.secondValuation.CurrentSelection;
-        }
-        else
-        {
-            firstModule = this.secondValuation.CurrentSelection;
-            secondModule = this.firstValuation.CurrentSelection;
-            firstVal = true;
-        }
-
+        Module moduleOne = this.firstValuation.CurrentSelection;
+        Module moduleTwo = this.secondValuation.CurrentSelection;
 
         var currVal = firstVal ? secondValuation : firstValuation;
 
-        if (firstModule.Attacked)
+        if (moduleOne.Attacked)
         {
             currVal.RuleIndicator.gameObject.SetActive(true);
-			firstModule.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
+			moduleOne.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
         }
         else
         {
@@ -98,48 +87,15 @@ public class Oracle : MonoBehaviour
         }
 
         currVal = firstVal ? firstValuation : secondValuation;
-        if (secondModule.Attacked)
+        if (moduleTwo.Attacked)
         {
             currVal.RuleIndicator.gameObject.SetActive(true);
-            secondModule.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
+            moduleTwo.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
         }
         else
         {
-            currVal.RuleIndicator.gameObject.SetActive(false);
+            currVal.RuleIndicator.gameObject.SetActive(false);        
         }
-
-
-        ////Successful attack if all modules between the two modules are attacked
-        //bool successfulDefense = true;
-        //var mods = new List<Module>();
-        //if (!firstModule.Attacked && !secondModule.Attacked)
-        //{
-        //    var currModule = secondModule.PreviousModule;
-        //    while (currModule != firstModule)
-        //    {
-        //        if (!currModule.Attacked)
-        //        {
-        //            successfulDefense = false;
-        //            break;
-        //        }
-        //        else {
-        //            mods.Add(currModule);
-        //        }
-
-        //        currModule = currModule.PreviousModule;
-        //    }
-        //}
-        //else
-        //{
-        //    successfulDefense = false;
-        //}
-
-        //if (successfulDefense)
-        //{
-        //    mods.ForEach(m => m.Fix());
-        //    if(FloatingTextPreFab !=null)
-        //        ShowFloatingText(messageText);
-        //}
     }
 
     private bool ModuleMatchesExpected(Module m, Valuation v)
@@ -177,7 +133,6 @@ public class Oracle : MonoBehaviour
 		Module ToFix = this.fixer.CurrentSelection;
 		if(ToFix.Attacked)
         {
-			ToFix.GetComponent<Renderer>().material.color = ToFix.getStartingColor();
 			ToFix.Fix();
         }
         else
