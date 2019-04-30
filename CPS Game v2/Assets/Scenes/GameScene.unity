@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 138340188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44866a8b1fccee4fa1fbc7ccfb903cc, type: 3}
+  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &170076733
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30816d10136ef274c8a70766d85144b7, type: 3}
+  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &534669902
@@ -794,7 +794,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30816d10136ef274c8a70766d85144b7, type: 3}
+  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &646747176
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30816d10136ef274c8a70766d85144b7, type: 3}
+  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &689642305
@@ -1328,6 +1328,11 @@ PrefabInstance:
       propertyPath: WaterTank
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114635232617175116, guid: ecb9ed18472e91e4a9841f3279372fb3,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 832292919}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.4080276
@@ -1691,9 +1696,9 @@ MonoBehaviour:
   NumberOfAttacksPerTurn: 1
   NumberOfOracles: 2
   ReservoirLimit: 5
-  TurnLimit: 15
+  TurnLimit: 5
   TurnTimer: {fileID: 1376493227}
-  TurnDuration: 500
+  TurnDuration: 120
   GameState: 1
 --- !u!4 &995454138
 Transform:
@@ -1973,7 +1978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8058047
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.z
@@ -2099,7 +2104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8058047
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.z
@@ -2859,11 +2864,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8058063
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3, type: 3}
       propertyPath: m_LocalScale.z
