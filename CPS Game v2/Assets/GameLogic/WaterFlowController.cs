@@ -30,22 +30,28 @@ public class WaterFlowController : MonoBehaviour
     /// </summary>
     public void TickModules()
     {
+        // TODO: Flow enough water through between rounds so it will clear the system 
+        // and add entirely new water 
+
         // Flow water through the reservoir, to start flow through everything else
         try
         {
-            this.Reservoir.Tick();
-            WaterObject water = this.Reservoir.OnFlow(new WaterObject());
-
-            var currentModule = this.Reservoir.NextModule;
-            while (currentModule != null)
+            for (int i = 0; i < 100; i++)
             {
-                if (!currentModule.HasFlow)
-                    break; // Stop the flow here
+                this.Reservoir.Tick();
+                WaterObject water = this.Reservoir.OnFlow(new WaterObject());
 
-                currentModule.Tick();
-                water = currentModule.OnFlow(water);
-               
-                currentModule = currentModule.NextModule;
+                var currentModule = this.Reservoir.NextModule;
+                while (currentModule != null)
+                {
+                    //if (!currentModule.HasFlow)
+                       // break; // Stop the flow here
+
+                    currentModule.Tick();
+                    water = currentModule.OnFlow(water);
+
+                    currentModule = currentModule.NextModule;
+                }
             }
         }
         catch (Exception e)

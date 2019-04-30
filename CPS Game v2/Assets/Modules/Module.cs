@@ -7,6 +7,7 @@ using Assets.Interfaces;
 using Assets.Modules.Menu;
 using Assets;
 using Assets.GameLogic;
+using System;
 
 public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, IDetectPurity
 {
@@ -21,6 +22,14 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// Represents if water is flowing through something
     /// </summary>
     public bool HasFlow { get { return this.Water != null; } }
+
+    /// <summary>
+    /// Will be true if an oracle is attached to this module
+    /// </summary>
+    public bool HasOracleAttached = false;
+
+    public GameObject InfoPopupPrefab;
+    private InfoMenuController infoMenuController;
 
     /// <summary>
     /// Expected Water Purity
@@ -77,6 +86,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// </summary>
     private void Awake()
     {
+        this.infoMenuController = new InfoMenuController(this, this.InfoPopupPrefab);
         this.OnAwake();
     }
 
@@ -174,6 +184,12 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
      */
     public virtual WaterObject OnFlow(WaterObject inflow)
     {
+        if (inflow == null)
+        {
+            this.Water = null;
+            return null; 
+        }
+
         if (this.Water == null)
         {
             this.Water = inflow.Copy();
@@ -200,42 +216,44 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         return builder.Build();
     }
 
-    public Color getStartingColor()
-    {
-        return startingColor;
-    }
-	
+
+
     /// <summary>
-    /// True if the lhs module appears earlier in the system than the rhs
+    /// When the user clicks on a module
     /// </summary>
-    /// <param name="lhs">first module to compare</param>
-    /// <param name="rhs">second module to compare</param>
-    /// <returns></returns>
-    public static bool operator <(Module lhs, Module rhs)
+    public virtual void OnMouseDown()
     {
-        Module currMod = rhs.PreviousModule;
-        while (currMod)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (currMod == lhs)
+            try
             {
-                return true;
+                this.renderer.material.color = Color.yellow; // Turn color yellow while user is clicking on the object
+            }
+            catch (Exception e)
+            {
+
             }
 
-            currMod = currMod.PreviousModule;
+            if (this.gameController.IsAttackersTurn() || this.HasOracleAttached)
+            {
+                this.infoMenuController.OpenMenu();
+            }
         }
-
-        return false;
     }
 
     /// <summary>
-    /// True if the lhs module appears later in the system than the rhs
+    /// Restore color when the mouse is released
     /// </summary>
-    /// <param name="lhs">first module to compare</param>
-    /// <param name="rhs">second module to compare</param>
-    /// <returns></returns>
-    public static bool operator >(Module lhs, Module rhs)
+    public virtual void OnMouseUp()
     {
-        return (!(lhs < rhs) && lhs != rhs);
+        try
+        {
+            this.renderer.material.color = this.startingColor;
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 }
 

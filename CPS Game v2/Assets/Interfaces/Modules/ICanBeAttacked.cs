@@ -9,9 +9,9 @@ namespace Assets.Interfaces.Modules
     public interface ICanBeAttacked
     {
         bool IsAttacked { get; set; }
-        bool Attack();
+        bool Attack(string AttackMenuOption);
         bool Fix();
 
-        //MenuToDisplay GetAttackMenu(MenuBuilder builder);
+        MenuToDisplay GetAttackMenu(MenuBuilder builder);
     }
 }
