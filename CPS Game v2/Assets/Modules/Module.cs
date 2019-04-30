@@ -151,23 +151,14 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <summary>
     /// what to do when the module is no longer being attacked
     /// </summary>
-    public void Fix()
+    public bool Fix()
     {
         if (this.Attacked)
         {
             this.Attacked = false;
+            return true;
         }
-    }
-
-    private void OnMouseEnter()
-    {
-        if(renderer.material.color == this.startingColor)
-            renderer.material.color = Color.yellow;
-    }
-
-    private void OnMouseExit()
-    {
-        renderer.material.color = this.startingColor;
+        return false;
     }
 
     /**

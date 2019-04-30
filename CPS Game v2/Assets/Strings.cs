@@ -35,5 +35,14 @@ namespace Assets
                 public const String Purity = "Attack Purity";
             }
         }
+
+        public static class FixStrings
+        {
+            public static class Filter
+            {
+                public const String FixFlow = "Fix Flow";
+                public const String FixPurity = "Fix Purity";
+            }
+        }
     }
 }

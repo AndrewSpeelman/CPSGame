@@ -33,7 +33,7 @@ namespace Assets.Modules
         /// Default Fix method
         /// </summary>
         /// <returns></returns>
-        public virtual bool Fix()
+        public virtual bool Fix(String FixMenuOption)
         {
             this._IsAttacked = false;
             return true;
@@ -55,6 +55,16 @@ namespace Assets.Modules
         /// <param name="builder"></param>
         /// <returns></returns>
         public virtual MenuToDisplay GetAttackMenu(MenuBuilder builder)
+        {
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Default Fix menu
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public virtual MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
             return builder.Build();
         }

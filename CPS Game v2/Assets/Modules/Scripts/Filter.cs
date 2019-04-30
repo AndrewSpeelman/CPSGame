@@ -75,12 +75,29 @@ namespace Assets.Modules.Scripts
         /// Fixes any problems
         /// </summary>
         /// <returns></returns>
-        public override bool Fix()
+        public override bool Fix(string FixMenuOption)
         {
+            switch (FixMenuOption)
+            {
+                case Strings.FixStrings.Filter.FixPurity:
+                    if(this.PurityBroken)
+                    {
+                        base.Fix();
+                        return true;
+                    }
+                    break;
+                case Strings.FixStrings.Filter.FixFlow:
+                    if(this.FlowBroken) 
+                    {
+                        base.Fix();
+                        return true;
+                    }
+                    break;
+            }
             this.PurityBroken = false;
             this.FlowBroken = false; 
 
-            return base.Fix();
+            return false;
         }
 
 
@@ -124,6 +141,18 @@ namespace Assets.Modules.Scripts
         {
             builder.AddOption(Strings.AttackStrings.Filter.Purity);
             builder.AddOption(Strings.AttackStrings.Filter.Flow);
+            return builder.Build();
+        }
+
+                /// <summary>
+        /// Build the menu for displaying attack information
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetFixMenu(MenuBuilder builder)
+        {
+            builder.AddOption(Strings.FixStrings.Filter.FixPurity);
+            builder.AddOption(Strings.FixStrings.Filter.FixFlow);
             return builder.Build();
         }
     }
