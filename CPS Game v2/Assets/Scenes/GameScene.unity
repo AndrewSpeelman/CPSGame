@@ -1285,7 +1285,8 @@ MonoBehaviour:
   NextModule: {fileID: 1807835890}
   PreviousModule: {fileID: 0}
   HasOracleAttached: 0
-  InfoPopupPrefab: {fileID: 0}
+  InfoPopupPrefab: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
+    type: 3}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
