@@ -83,7 +83,7 @@ namespace Assets.GameLogic
                 this.textContent.text += item.DisplayName + ": " + item.Value + "\n";
             }
 
-            this.textContent.text = this.textContent.text.Substring(0, this.textContent.text.Length - 2); // Remove the last newline
+            this.textContent.text = this.textContent.text.Substring(0, this.textContent.text.Length - 1); // Remove the last newline
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Assets.GameLogic
         /// </summary>
         public void CloseMenu()
         {
-            
+            this.textContent.text = "";
             InfoMenuController.popupInstance.SetActive(false);
         }
     }
