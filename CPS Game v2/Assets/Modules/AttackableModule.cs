@@ -70,40 +70,17 @@ namespace Assets.Modules
         /// <summary>
         /// When the user clicks on a module
         /// </summary>
-        private void OnMouseDown()
+        public override void OnMouseDown()
         {
+            base.OnMouseDown();
+
             if (Input.GetMouseButtonDown(0))
             {
-                try
-                {
-                    this.renderer.material.color = Color.yellow; // Turn color yellow while user is clicking on the object
-                }
-                catch (Exception e)
-                {
-
-                }
-                
                 if (this.gameController.IsAttackersTurn())
                 {
                     this.attackMenuController.OpenMenu();
                 }
             }
         }
-
-        /// <summary>
-        /// Restore color when the mouse is released
-        /// </summary>
-        private void OnMouseUp()
-        {
-            try
-            {
-                this.renderer.material.color = this.startingColor;
-            }
-            catch (Exception e)
-            {
-
-            }
-        }
-
     }
 }

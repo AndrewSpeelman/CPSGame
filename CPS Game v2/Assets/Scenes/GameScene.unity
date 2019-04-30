@@ -132,6 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 646747178}
   PreviousModule: {fileID: 1183373157}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
@@ -426,6 +428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 1183373157}
   PreviousModule: {fileID: 1807835890}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
@@ -894,6 +898,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 210664560}
   PreviousModule: {fileID: 48865703}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
@@ -1010,6 +1016,12 @@ PrefabInstance:
       propertyPath: AttackPopupPrefab
       value: 
       objectReference: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+        type: 3}
+    - target: {fileID: 114698971064820580, guid: 2c0771878fa98c542813384f180890d5,
+        type: 3}
+      propertyPath: InfoPopupPrefab
+      value: 
+      objectReference: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c0771878fa98c542813384f180890d5, type: 3}
@@ -1176,6 +1188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 2007097123}
   PreviousModule: {fileID: 220058000}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 0
@@ -1270,6 +1284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 1807835890}
   PreviousModule: {fileID: 0}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
@@ -1383,6 +1399,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 0}
   PreviousModule: {fileID: 1655650001}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 1
@@ -1989,6 +2007,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 48865703}
   PreviousModule: {fileID: 174817622}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
@@ -2112,6 +2132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 220058000}
   PreviousModule: {fileID: 210664560}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
@@ -2611,6 +2633,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 832292919}
   PreviousModule: {fileID: 2067816603}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 1
@@ -2872,6 +2896,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 174817622}
   PreviousModule: {fileID: 818242696}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
@@ -3171,6 +3197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 2067816603}
   PreviousModule: {fileID: 715248614}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 0
@@ -3358,6 +3386,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 1655650001}
   PreviousModule: {fileID: 0}
+  HasOracleAttached: 0
+  InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 1

@@ -7,6 +7,7 @@ using Assets.Interfaces;
 using Assets.Modules.Menu;
 using Assets;
 using Assets.GameLogic;
+using System;
 
 public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, IDetectPurity
 {
@@ -24,7 +25,10 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <summary>
     /// Will be true if an oracle is attached to this module
     /// </summary>
-    public bool HasOracleAttached = false; 
+    public bool HasOracleAttached = false;
+
+    public GameObject InfoPopupPrefab;
+    private InfoMenuController infoMenuController;
 
     /// <summary>
     /// Expected Water Purity
@@ -81,6 +85,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// </summary>
     private void Awake()
     {
+        this.infoMenuController = new InfoMenuController(this, this.InfoPopupPrefab);
         this.OnAwake();
     }
 
@@ -181,6 +186,46 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
         return builder.Build();
+    }
+
+
+
+    /// <summary>
+    /// When the user clicks on a module
+    /// </summary>
+    public virtual void OnMouseDown()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            try
+            {
+                this.renderer.material.color = Color.yellow; // Turn color yellow while user is clicking on the object
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            if (this.gameController.IsAttackersTurn() || this.HasOracleAttached)
+            {
+                this.infoMenuController.OpenMenu();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Restore color when the mouse is released
+    /// </summary>
+    public virtual void OnMouseUp()
+    {
+        try
+        {
+            this.renderer.material.color = this.startingColor;
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 }
 
