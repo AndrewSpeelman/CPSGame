@@ -31,6 +31,9 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public WaterObject FilterWater(WaterObject water)
         {
+            if (water == null)
+                return water; 
+
             if (this.PurityBroken)
                 return water; // Do not filter it if purity is broken
 
@@ -89,10 +92,10 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override WaterObject OnFlow(WaterObject inflow)
         {
-            var water = base.OnFlow(inflow); // Returns water that was inside the filter
-
             if (this.FlowBroken)
                 return null; // Flow is broken
+
+            var water = base.OnFlow(inflow); // Returns water that was inside the filter
 
             return FilterWater(water); // Filter it for the next module
         }

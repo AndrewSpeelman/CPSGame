@@ -162,6 +162,12 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
      */
     public virtual WaterObject OnFlow(WaterObject inflow)
     {
+        if (inflow == null)
+        {
+            this.Water = null;
+            return null; 
+        }
+
         if (this.Water == null)
         {
             this.Water = inflow.Copy();
