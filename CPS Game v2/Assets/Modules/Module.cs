@@ -22,6 +22,11 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public bool HasFlow { get { return this.Water != null; } }
 
     /// <summary>
+    /// Will be true if an oracle is attached to this module
+    /// </summary>
+    public bool HasOracleAttached = false; 
+
+    /// <summary>
     /// Expected Water Purity
     /// </summary>
     [SerializeField]

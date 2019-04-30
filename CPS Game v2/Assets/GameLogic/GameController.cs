@@ -1,4 +1,5 @@
-﻿using Assets.Modules.Scripts;
+﻿using Assets.GameLogic;
+using Assets.Modules.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,6 +50,11 @@ public class GameController : MonoBehaviour
     public GameState GameState = GameState.AttackerTurn;
 
     private List<Oracle> oracles;
+
+    /// <summary>
+    /// Event listeners for when the turn changes
+    /// </summary>
+    private event EventHandler TurnChange;
 
     protected void Awake()
     {
@@ -119,6 +125,8 @@ public class GameController : MonoBehaviour
         ScreenCover.gameObject.GetComponentsInChildren<Text>()[0].color = TurnText.color;
         
         StartCoroutine(WaitForClick());
+
+        GameEvents.DispatchTurnChangeEvent(this.GameState);
     }
 
     protected void Update()
@@ -170,4 +178,6 @@ public class GameController : MonoBehaviour
             this.oracles.ForEach(o => o.InputActive = true);
         }
     }
+
+    
 }

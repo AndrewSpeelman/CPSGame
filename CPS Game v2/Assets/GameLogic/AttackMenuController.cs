@@ -63,6 +63,13 @@ namespace Assets.GameLogic
 
             textContent.text = "Attack Menu";
             this.CloseMenu();
+
+
+            // Hide the menu if it changes to the defender's turn
+            GameEvents.OnTurnChange((turnChangeArgs) => {
+                if (turnChangeArgs.State == GameState.DefenderTurn)
+                    this.CloseMenu();
+            });
         }
         
         /// <summary>

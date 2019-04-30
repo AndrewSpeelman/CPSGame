@@ -41,5 +41,7 @@ namespace Assets.GameLogic
 
             return this.gameController.GameState == GameState.AttackerTurn;
         }
+
+        
     }
 }
