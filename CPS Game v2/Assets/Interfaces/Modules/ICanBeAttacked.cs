@@ -13,5 +13,6 @@ namespace Assets.Interfaces.Modules
         bool Fix();
 
         MenuToDisplay GetAttackMenu(MenuBuilder builder);
+        MenuToDisplay GetFixMenu(MenuBuilder builder);
     }
 }

@@ -112,13 +112,13 @@ public class Fixer : MonoBehaviour
     {
         if (!this.parentOracle.InputActive)
         {
-            this.popupInstance.SetActive(false);
+            this.module.HasOracleAttached = false;
         }
         else
         {
             if (this.module)
             {
-                this.popupInstance.SetActive(true);
+                this.module.HasOracleAttached = true;
             }
         }
     }
