@@ -31,6 +31,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 
     public GameObject InfoPopupPrefab;
     private InfoMenuController infoMenuController;
+    private ExpectedValuesMenuController expectedValuesMenuController;
 
     /// <summary>
     /// Expected Water Purity
@@ -96,6 +97,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     private void Awake()
     {
         this.infoMenuController = new InfoMenuController(this, this.InfoPopupPrefab);
+        this.expectedValuesMenuController = new ExpectedValuesMenuController(this, this.InfoPopupPrefab);
         this.OnAwake();
     }
 
@@ -246,6 +248,10 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
             catch (Exception e)
             {
 
+            }
+            if (this.gameController.IsDefendersTurn())
+            {
+                this.expectedValuesMenuController.OpenMenu();
             }
 
             if (this.gameController.IsAttackersTurn() || this.HasOracleAttached)

@@ -39,7 +39,7 @@ namespace Assets.GameLogic
             if (!this.gameController)
                 return false; 
 
-            return this.gameController.GameState == GameState.AttackerTurn;
+            return this.gameController.GameState == GameState.DefenderTurn;
         }
 
         
