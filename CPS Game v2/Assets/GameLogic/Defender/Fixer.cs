@@ -114,16 +114,7 @@ public class Fixer : MonoBehaviour
     {
         if (!this.parentOracle.InputActive)
         {
-            this.module.HasFixerAttached = false;
-            this.module.CloseFixMenu();
-        }
-        else
-        {
-            if (this.module)
-            {
-                this.module.HasFixerAttached = true;
-                this.module.OpenFixMenu();
-            }
+            // this.module.CloseFixMenu();
         }
     }
 
@@ -140,15 +131,16 @@ public class Fixer : MonoBehaviour
     private void Select(AttackableModule mod)
     {
         this.module = mod;
+        this.module.OpenFixMenu();
+        this.module.HasFixerAttached = true;
         this.DrawLine(this.transform.position, mod.transform.position);
-        //this.popupInstance.SetActive(true);
-        //this.popupInstance.transform.position = Camera.main.WorldToScreenPoint(this.module.transform.position);
     }
 
     private void Deselect()
     {
-        this.module = null;
+        this.module.CloseFixMenu();
         this.lineRenderer.enabled = false;
-        //this.popupInstance.SetActive(false);
+        this.module.HasFixerAttached = false;
+        this.module = null;
     }
 }

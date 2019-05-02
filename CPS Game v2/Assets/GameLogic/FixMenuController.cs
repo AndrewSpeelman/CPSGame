@@ -77,6 +77,16 @@ namespace Assets.GameLogic
         /// </summary>
         public void UpdateMenu()
         {
+ 
+        }
+
+        /// <summary>
+        /// Shows the menu
+        /// </summary>
+        /// <param name="position"></param>
+        public void OpenMenu()
+        {
+            this.CloseMenu();
             MenuToDisplay menu = this.module.GetFixMenu(new MenuBuilder());
             
             int start = 0;
@@ -95,16 +105,6 @@ namespace Assets.GameLogic
                 buttons[i].gameObject.SetActive(true);
                 //this.buttons[i].transform.position = new Vector3(100, this.buttons[i].transform.position.y, this.buttons[i].transform.position.z);
             }
-        }
-
-        /// <summary>
-        /// Shows the menu
-        /// </summary>
-        /// <param name="position"></param>
-        public void OpenMenu()
-        {
-            this.CloseMenu();
-            this.UpdateMenu();
 
             // Move to position
             RectTransform uiTransform = FixMenuController.popupInstance.GetComponent<RectTransform>();
@@ -140,9 +140,8 @@ namespace Assets.GameLogic
         private void addListener(int i)
         {
             buttons[i].onClick.AddListener(() => {
-                this.gameController.NumAvailableAttacks--; // Decrease the number of attacks left
                 var btnText = buttons[i].GetComponentInChildren<Text>();
-                this.module.Attack(btnText.text); // Attack the module
+                this.module.Fix(btnText.text); // Attack the module
                 this.CloseMenu();
             });
         }

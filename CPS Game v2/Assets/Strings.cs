@@ -34,14 +34,24 @@ namespace Assets
                 public const String Flow = "Attack Flow";
                 public const String Purity = "Attack Purity";
             }
+
+            public static class Pipe
+            {
+                public const String Sensor = "Attack Sensor";
+            }
         }
 
         public static class FixStrings
         {
             public static class Filter
             {
-                public const String FixFlow = "Fix Flow";
-                public const String FixPurity = "Fix Purity";
+                public const String Flow = "Fix Flow";
+                public const String Purity = "Fix Purity";
+                
+            }
+            public static class Pipe
+            {
+                public const String Sensor = "Fix Sensor";
             }
         }
     }

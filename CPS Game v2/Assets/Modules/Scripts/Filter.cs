@@ -72,31 +72,28 @@ namespace Assets.Modules.Scripts
         }
 
         /// <summary>
-        /// Fixes any problems
+        /// Fixes problems if broken
         /// </summary>
         /// <returns></returns>
         public override bool Fix(string FixMenuOption)
         {
             switch (FixMenuOption)
             {
-                case Strings.FixStrings.Filter.FixPurity:
+                case Strings.FixStrings.Filter.Purity:
                     if(this.PurityBroken)
                     {
-                        base.Fix();
-                        return true;
+                        this.PurityBroken = false;
+                        return base.Fix();
                     }
                     break;
-                case Strings.FixStrings.Filter.FixFlow:
+                case Strings.FixStrings.Filter.Flow:
                     if(this.FlowBroken) 
                     {
-                        base.Fix();
-                        return true;
+                        this.FlowBroken = false;
+                        return base.Fix();
                     }
                     break;
             }
-            this.PurityBroken = false;
-            this.FlowBroken = false; 
-
             return false;
         }
 
@@ -151,8 +148,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
-            builder.AddOption(Strings.FixStrings.Filter.FixPurity);
-            builder.AddOption(Strings.FixStrings.Filter.FixFlow);
+            builder.AddOption(Strings.FixStrings.Filter.Purity);
+            builder.AddOption(Strings.FixStrings.Filter.Flow);
             return builder.Build();
         }
     }
