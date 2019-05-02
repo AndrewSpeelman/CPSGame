@@ -108,7 +108,7 @@ namespace Assets.GameLogic
 
             // Move to position
             RectTransform uiTransform = FixMenuController.popupInstance.GetComponent<RectTransform>();
-            uiTransform.position = new Vector2((float)400, (float)500);
+            uiTransform.position = new Vector2((float)1700, (float)500);
 
             FixMenuController.popupInstance.SetActive(true);
         }

@@ -16,7 +16,9 @@ namespace Assets.Modules
         public bool IsAttacked { get { return _IsAttacked; } set { _IsAttacked = value; } }
 
         public GameObject AttackPopupPrefab;
+        public GameObject FixPopupPrefab;
         private AttackMenuController attackMenuController;
+        private FixMenuController fixMenuController;
         
 
         /// <summary>
@@ -46,6 +48,7 @@ namespace Assets.Modules
         {
             //this.AttackPopupInstance = Instantiate(this.AttackPopupPrefab, this.AttackPopupPrefab.transform.position, this.AttackPopupPrefab.transform.rotation);
             this.attackMenuController = new AttackMenuController(this, this.AttackPopupPrefab);
+            this.fixMenuController = new FixMenuController(this, this.FixPopupPrefab);
             
         }
 
@@ -91,6 +94,22 @@ namespace Assets.Modules
                     this.attackMenuController.OpenMenu();
                 }
             }
+        }
+
+        /// <summary>
+        /// Open Fix Menu
+        /// <summary>
+        public void OpenFixMenu()
+        {
+            this.fixMenuController.OpenMenu();
+        }
+
+        /// <summary>
+        /// Open Fix Menu
+        /// <summary>
+        public void CloseFixMenu()
+        {
+            this.fixMenuController.CloseMenu();
         }
     }
 }
