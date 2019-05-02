@@ -13,6 +13,7 @@ namespace Assets.Modules.Menu
         public List<MenuItem<float>> FloatMenuItems = new List<MenuItem<float>>();
         public List<MenuItem<string>> MenuChoices = new List<MenuItem<string>>();
 
+        public MenuBuilder builder; 
 
 
         public List<MenuItem<String>> GetAllAsStrings()
@@ -29,6 +30,11 @@ namespace Assets.Modules.Menu
                 list.Add(new MenuItem<string>(item.DisplayName, item.Value.ToString()));
 
             return list; 
+        }
+
+        public MenuBuilder GetBuilder()
+        {
+            return builder;
         }
     }
 }

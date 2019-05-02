@@ -107,9 +107,9 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetInformation(MenuBuilder builder)
         {
+            builder = base.GetInformation(builder).GetBuilder();
+
             builder.AddStringItem(Strings.PurityControl, this.PurityIndexToControl.ToString());
-            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
-            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
             return builder.Build();
         }

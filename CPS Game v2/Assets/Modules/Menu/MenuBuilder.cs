@@ -41,7 +41,6 @@ namespace Assets.Modules.Menu
         public MenuBuilder AddBoolItem(String display, bool value, String trueValue = Strings.BooleanStrings.Yes, String falseValue = Strings.BooleanStrings.No)
         {
             menu.StringMenuItems.Add(new MenuItem<string>(display, value ? trueValue : falseValue));
-            //menu.BoolMenuItems.Add(new MenuItem<bool>(display, value));
             return this;
         }
 
@@ -62,6 +61,7 @@ namespace Assets.Modules.Menu
          */
         public MenuToDisplay Build()
         {
+            this.menu.builder = this; 
             return menu;
         }
     }
