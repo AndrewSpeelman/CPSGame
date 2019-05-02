@@ -122,6 +122,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder = base.GetAttackMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.AttackStrings.Filter.Purity);
             builder.AddOption(Strings.AttackStrings.Filter.Flow);
             return builder.Build();

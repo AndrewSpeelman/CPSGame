@@ -78,7 +78,10 @@ namespace Assets.GameLogic
         public void UpdateMenu()
         {
             MenuToDisplay menu = this.module.GetAttackMenu(new MenuBuilder());
-            
+
+            if (!String.IsNullOrEmpty(menu.Title))
+                textContent.text = menu.Title; 
+
             int start = 0;
             int end = menu.MenuChoices.Count;
 

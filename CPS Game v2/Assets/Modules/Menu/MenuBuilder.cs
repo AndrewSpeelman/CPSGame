@@ -56,6 +56,13 @@ namespace Assets.Modules.Menu
             return this;
         }
 
+
+        public MenuBuilder SetTitle(String title)
+        {
+            this.menu.Title = title;
+            return this;
+        }
+
         /**
          * Creates the menu from the builder 
          */

@@ -17,6 +17,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder = base.GetAttackMenu(builder).GetBuilder(); 
+
             builder.AddOption("Meow");
 
             return builder.Build();

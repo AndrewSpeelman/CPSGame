@@ -198,6 +198,8 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <returns></returns>
     public virtual MenuToDisplay GetInformation(MenuBuilder builder)
     {
+        builder.SetTitle(this.GetType().Name.ToString() + " Info");
+
         builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
         builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
@@ -211,6 +213,8 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <returns></returns>
     public MenuToDisplay GetExpectedValuesPopup(MenuBuilder builder)
     {
+        builder.SetTitle(this.GetType().Name.ToString() + " Expected");
+
         builder.AddBoolItem(Strings.HasFlow, this.ExpectedValues.HasFlow);
         builder.AddBoolItem(Strings.IsPurityAsExpected, this.ExpectedValues.IsPurityAsExpected);
 
