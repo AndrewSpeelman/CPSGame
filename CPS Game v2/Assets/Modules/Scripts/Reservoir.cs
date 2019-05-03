@@ -8,10 +8,11 @@ using UnityEngine;
 
 namespace Assets.Modules.Scripts
 {
-    public class Reservoir : Module, IHaveCapacity
+    public class Reservoir : AttackableModule, IHaveCapacity
     {
         public bool IsStartingReservoir = false; 
-
+        private bool FlowBroken;
+        private bool SensorBroken;
         [SerializeField]
         [Range(1, 3)]
         private int _MaxCapacity; 
@@ -32,6 +33,8 @@ namespace Assets.Modules.Scripts
                 for (int i = 0; i <= _MaxCapacity; i++)
                     Water.Enqueue(new WaterObject());
             }
+            this.FlowBroken = false;
+            this.SensorBroken = false;
         }
 
 
@@ -63,6 +66,55 @@ namespace Assets.Modules.Scripts
         }
 
         /// <summary>
+        /// Attack the object
+        /// </summary>
+        /// <param name="AttackMenuOption"></param>
+        /// <returns></returns>
+        public override bool Attack(string AttackMenuOption)
+        {
+            base.Attack(AttackMenuOption); // Mark as attacked 
+
+            switch (AttackMenuOption)
+            {
+                case Strings.AttackStrings.Reservoir.Flow:
+                    this.FlowBroken = true; 
+                    break;
+
+                case Strings.AttackStrings.Reservoir.Sensor:
+                    this.SensorBroken = true;
+                    break;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Fixes problems if broken
+        /// </summary>
+        /// <returns></returns>
+        public override bool Fix(string FixMenuOption)
+        {
+            switch (FixMenuOption)
+            {
+                case Strings.FixStrings.Reservoir.Flow:
+                    if(this.FlowBroken)
+                    {
+                        this.FlowBroken = false;
+                        return base.Fix();
+                    }
+                    break;
+                case Strings.FixStrings.Reservoir.Sensor:
+                    if(this.SensorBroken) 
+                    {
+                        this.SensorBroken = false;
+                        return base.Fix();
+                    }
+                    break;
+            }
+            return false;
+        }
+        
+        /// <summary>
         /// Get information about the filter
         /// </summary>
         /// <param name="builder"></param>
@@ -73,6 +125,30 @@ namespace Assets.Modules.Scripts
             builder.AddStringItem(Strings.Capacity, String.Format("{0}/{1}", CurrentCapacity, MaxCapacity));
             builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Build the menu for displaying attacking
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
+        {
+            builder.AddOption(Strings.AttackStrings.Reservoir.Flow);
+            builder.AddOption(Strings.AttackStrings.Reservoir.Sensor);
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Build the menu for displaying fixing
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetFixMenu(MenuBuilder builder)
+        {
+            builder.AddOption(Strings.FixStrings.Reservoir.Flow);
+            builder.AddOption(Strings.FixStrings.Reservoir.Sensor);
             return builder.Build();
         }
     }

@@ -37,7 +37,6 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override bool Fix(string FixMenuOption)
         {
-            this.SensorBroken = false;
             if(this.SensorBroken)
             {
                 this.SensorBroken = false;
@@ -67,7 +66,7 @@ namespace Assets.Modules.Scripts
         }
 
         /// <summary>
-        /// Build the menu for displaying attack information
+        /// Build the menu for displaying attacking
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
@@ -78,7 +77,7 @@ namespace Assets.Modules.Scripts
         }
 
         /// <summary>
-        /// Build the menu for displaying fix options
+        /// Build the menu for displaying fixing
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
