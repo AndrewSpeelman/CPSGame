@@ -71,8 +71,7 @@ namespace Assets.Modules.Scripts
             }
             else
             {
-                builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
-                builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+                builder = base.GetInformation(builder).GetBuilder();
             }
             return builder.Build();
         }
