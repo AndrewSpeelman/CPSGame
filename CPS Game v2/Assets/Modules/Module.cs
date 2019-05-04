@@ -16,6 +16,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     // These are used to control the order of the system
     public Module NextModule;
     public Module PreviousModule;
+	public bool Attacked = false;
 
     public WaterObject Water { get; protected set; }
 
@@ -25,9 +26,14 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public bool HasFlow { get { return this.Water != null; } }
 
     /// <summary>
-    /// Will be true if an oracle is attached to this module
+    /// Will be true if an oracle inspector is attached to this module
     /// </summary>
-    public bool HasOracleAttached = false;
+    public bool HasInspectorAttached = false;
+
+    /// <summary>
+    /// Will be true if an oracle fixer is attached to this module
+    /// </summary>
+    public bool HasFixerAttached = false;
 
     public GameObject InfoPopupPrefab;
     private InfoMenuController infoMenuController;
@@ -159,6 +165,18 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         }
     }
 
+    /// <summary>
+    /// what to do when the module is no longer being attacked
+    /// </summary>
+    public virtual bool Fix()
+    {
+        if (this.Attacked)
+        {
+            this.Attacked = false;
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Returns the water in the module 
@@ -254,7 +272,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
                 this.expectedValuesMenuController.OpenMenu();
             }
 
-            if (this.gameController.IsAttackersTurn() || this.HasOracleAttached)
+            if (this.gameController.IsAttackersTurn())
             {
                 this.infoMenuController.OpenMenu();
             }
@@ -289,8 +307,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 //    public Module PreviousModule;
 
 //    public PumpOld InFlowingPump;
-
-//    public bool Attacked = false;
 
 //    public WaterObject Water;
 
@@ -525,15 +541,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 //        }
 //    }
 
-//    private void OnMouseEnter()
-//    {
-//        renderer.material.color = Color.yellow;
-//    }
-
-//    private void OnMouseExit()
-//    {
-//        renderer.material.color = this.startingColor;
-//    }
 
 //    /// <summary>
 //    /// Updates the popup display by getting the values of the fields and changing the popup text to display
@@ -587,36 +594,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 //		this.popupInstance.SetActive(false);
 //	}
 
-//    /// <summary>
-//    /// True if the lhs module appears earlier in the system than the rhs
-//    /// </summary>
-//    /// <param name="lhs">first module to compare</param>
-//    /// <param name="rhs">second module to compare</param>
-//    /// <returns></returns>
-//    public static bool operator <(Module lhs, Module rhs)
-//    {
-//        Module currMod = rhs.PreviousModule;
-//        while (currMod)
-//        {
-//            if (currMod == lhs)
-//            {
-//                return true;
-//            }
 
-//            currMod = currMod.PreviousModule;
-//        }
-
-//        return false;
-//    }
-
-//    /// <summary>
-//    /// True if the lhs module appears later in the system than the rhs
-//    /// </summary>
-//    /// <param name="lhs">first module to compare</param>
-//    /// <param name="rhs">second module to compare</param>
-//    /// <returns></returns>
-//    public static bool operator >(Module lhs, Module rhs)
-//    {
-//        return (!(lhs < rhs) && lhs != rhs);
-//    }
 //}
+

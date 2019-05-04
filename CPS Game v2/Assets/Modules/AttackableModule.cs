@@ -14,9 +14,10 @@ namespace Assets.Modules
         [SerializeField]
         private bool _IsAttacked = false;
         public bool IsAttacked { get { return _IsAttacked; } set { _IsAttacked = value; } }
-
         public GameObject AttackPopupPrefab;
+        public GameObject FixPopupPrefab;
         private AttackMenuController attackMenuController;
+        private FixMenuController fixMenuController;
         
 
         /// <summary>
@@ -30,10 +31,18 @@ namespace Assets.Modules
         }
 
         /// <summary>
-        /// Default Fix method
+        /// Method called by menus
         /// </summary>
         /// <returns></returns>
-        public virtual bool Fix()
+        public virtual void SetAttackToFix(String FixMenuOption)
+        {
+
+        }
+        /// <summary>
+        /// Default Fix method, oracles call this method
+        /// </summary>
+        /// <returns></returns>
+        public override bool Fix()
         {
             this._IsAttacked = false;
             return true;
@@ -46,6 +55,7 @@ namespace Assets.Modules
         {
             //this.AttackPopupInstance = Instantiate(this.AttackPopupPrefab, this.AttackPopupPrefab.transform.position, this.AttackPopupPrefab.transform.rotation);
             this.attackMenuController = new AttackMenuController(this, this.AttackPopupPrefab);
+            this.fixMenuController = new FixMenuController(this, this.FixPopupPrefab);
             
         }
 
@@ -58,6 +68,16 @@ namespace Assets.Modules
         {
             builder.SetTitle(this.GetType().Name.ToString() + " Attacks");
 
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Default Fix menu
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public virtual MenuToDisplay GetFixMenu(MenuBuilder builder)
+        {
             return builder.Build();
         }
 
@@ -83,6 +103,22 @@ namespace Assets.Modules
                     this.attackMenuController.OpenMenu();
                 }
             }
+        }
+
+        /// <summary>
+        /// Open Fix Menu
+        /// <summary>
+        public void OpenFixMenu()
+        {
+            this.fixMenuController.OpenMenu();
+        }
+
+        /// <summary>
+        /// Open Fix Menu
+        /// <summary>
+        public void CloseFixMenu()
+        {
+            this.fixMenuController.CloseMenu();
         }
     }
 }

@@ -18,8 +18,6 @@ public class Valuation : MonoBehaviour
 
     public Dropdown[] dropdowns;
 
-    private GameObject popupInstance;
-
     private Module module;
 
     private LineRenderer lineRenderer;
@@ -42,19 +40,6 @@ public class Valuation : MonoBehaviour
         this.lineRenderer.startWidth = 0.1f;
         this.lineRenderer.endWidth = 0.1f;
         this.parentOracle = this.GetComponentInParent<Oracle>();
-        this.popupInstance = Instantiate(this.parentOracle.OraclePopupPrefab);
-        this.popupInstance.transform.SetParent(((Canvas)FindObjectOfType(typeof(Canvas))).transform);
-        this.popupInstance.SetActive(false);
-        this.dropdowns = this.popupInstance.GetComponentsInChildren<Dropdown>();
-        var texts = this.popupInstance.GetComponentsInChildren<Text>();
-        foreach (Text t in texts)
-        {
-            if (t.text == "RULE BROKEN")
-            {
-                this.RuleIndicator = t;
-                this.RuleIndicator.gameObject.SetActive(false);
-            }
-        }
     }
 
     private void OnMouseDown()
@@ -110,17 +95,7 @@ public class Valuation : MonoBehaviour
 
     private void Update()
     {
-        if (!this.parentOracle.InputActive)
-        {
-            this.popupInstance.SetActive(false);
-        }
-        else
-        {
-            if (this.module)
-            {
-                this.popupInstance.SetActive(true);
-            }
-        }
+        
     }
 
     private void DrawLine(Vector3 start, Vector3 end)
@@ -137,14 +112,29 @@ public class Valuation : MonoBehaviour
     {
         this.module = mod;
         this.DrawLine(this.transform.position, mod.transform.position);
-        this.popupInstance.SetActive(true);
-        this.popupInstance.transform.position = Camera.main.WorldToScreenPoint(this.module.transform.position);
     }
 
     private void Deselect()
     {
-        this.module = null;
+        if(this.module)
+        {
+            this.module = null;
+            this.module.HasInspectorAttached = false;
+        }
         this.lineRenderer.enabled = false;
-        this.popupInstance.SetActive(false);
+
+    }
+
+    public void ModeChange(bool isActive)
+    {
+        if(isActive)
+        {
+            this.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.Deselect();
+            this.gameObject.SetActive(false);
+        }
     }
 }

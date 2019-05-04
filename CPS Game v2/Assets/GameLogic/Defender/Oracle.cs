@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEditor;
 
 /// <summary>
-/// The Oracle has two valuations that, each can point at a module.  The Oracle uses these valuations to fix modules.
+/// The Oracle has two valuations that, each can point at a module.  
 /// </summary>
 public class Oracle : MonoBehaviour
 {
@@ -17,17 +17,21 @@ public class Oracle : MonoBehaviour
     public GameObject OraclePopupPrefab;
 
     private Valuation firstValuation, secondValuation;
-    
+    private Fixer fixer;
+    private Button modeButton;
     private void Awake()
     {
         var vals = this.GetComponentsInChildren<Valuation>();
         this.firstValuation = vals[0];
         this.secondValuation = vals[1];
+        this.fixer = this.GetComponentInChildren<Fixer>();
+		
     }
 
     private void Start()
     {
         this.MovementPlane = new Plane(Vector3.up, this.transform.position);
+        this.fixer.gameObject.SetActive(false);
     }
     
     private void OnMouseDrag()
@@ -50,6 +54,7 @@ public class Oracle : MonoBehaviour
             //Update the lines that come from the valuations
             this.firstValuation.UpdateLine();
             this.secondValuation.UpdateLine();
+			this.fixer.UpdateLine();
         }
     }
 
@@ -66,123 +71,60 @@ public class Oracle : MonoBehaviour
         //used to decide which to fix on
         bool firstVal = false; //false = first  true = second
         
-        Module firstModule, secondModule;
-        //if (this.firstValuation.CurrentSelection < this.secondValuation.CurrentSelection)
-        //{
-        //    firstModule = this.firstValuation.CurrentSelection;
-        //    secondModule = this.secondValuation.CurrentSelection;
-        //}
-        //else
-        //{
-        //    firstModule = this.secondValuation.CurrentSelection;
-        //    secondModule = this.firstValuation.CurrentSelection;
-        //    firstVal = true;
-        //}
-
-        firstValuation.RuleIndicator.text = "RULE BROKEN";
-        secondValuation.RuleIndicator.text = "RULE BROKEN";
+        Module moduleOne = this.firstValuation.CurrentSelection;
+        Module moduleTwo = this.secondValuation.CurrentSelection;
 
         var currVal = firstVal ? secondValuation : firstValuation;
-        //if (!this.ModuleMatchesExpected(firstModule, currVal))
-        //{
-        //    currVal.RuleIndicator.gameObject.SetActive(true);
-        //    this.FixAttackedModule(firstModule, secondModule, currVal);
-        //}
-        //else
-        //{
-        //    currVal.RuleIndicator.gameObject.SetActive(false);
-        //}
+
+        if (moduleOne.Attacked)
+        {
+            currVal.RuleIndicator.gameObject.SetActive(true);
+			moduleOne.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
+        }
+        else
+        {
+            currVal.RuleIndicator.gameObject.SetActive(false);
+        }
 
         currVal = firstVal ? firstValuation : secondValuation;
-        //if (!this.ModuleMatchesExpected(secondModule, currVal))
-        //{
-        //    currVal.RuleIndicator.gameObject.SetActive(true);
-        //    this.FixAttackedModule(firstModule, secondModule, currVal);
-        //}
-        //else
-        //{
-        //    currVal.RuleIndicator.gameObject.SetActive(false);
-        //}
-
-        ////Successful attack if all modules between the two modules are attacked
-        //bool successfulDefense = true;
-        //var mods = new List<Module>();
-        //if (!firstModule.Attacked && !secondModule.Attacked)
-        //{
-        //    var currModule = secondModule.PreviousModule;
-        //    while (currModule != firstModule)
-        //    {
-        //        if (!currModule.Attacked)
-        //        {
-        //            successfulDefense = false;
-        //            break;
-        //        }
-        //        else {
-        //            mods.Add(currModule);
-        //        }
-
-        //        currModule = currModule.PreviousModule;
-        //    }
-        //}
-        //else
-        //{
-        //    successfulDefense = false;
-        //}
-
-        //if (successfulDefense)
-        //{
-        //    mods.ForEach(m => m.Fix());
-        //    if(FloatingTextPreFab !=null)
-        //        ShowFloatingText(messageText);
-        //}
-    }
-
-    private bool ModuleMatchesExpected(Module m, Valuation v)
-    {
-        //if ((m.HasFlow) == (v.dropdowns[0].value == 0))
-        //{
-        //    if (!m.HasFlow) return true;
-
-        //    if ((m.Purity1) == (v.dropdowns[1].value == 0))
-        //    {
-        //        if ((m.Purity2) == (v.dropdowns[2].value == 0))
-        //        {
-        //            if ((m.Purity3) == (v.dropdowns[3].value == 0))
-        //            {
-                        
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //}
-
-        return false;
+        if (moduleTwo.Attacked)
+        {
+            currVal.RuleIndicator.gameObject.SetActive(true);
+            moduleTwo.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
+        }
+        else
+        {
+            currVal.RuleIndicator.gameObject.SetActive(false);        
+        }
     }
 
     /// <summary>
     /// Fixes a module if rules have caught an error. Only fixes if in span of 3 modules.
     /// </summary>
-    private void FixAttackedModule(Module first, Module second, Valuation val)
+    public void FixRule()
     {
-        Module ToFix;
-
-        if (first == second)
+		if (this.fixer.CurrentSelection == null)
         {
             return;
         }
-        
-        //ToFix = second.PreviousModule;
-        //if(ToFix.PreviousModule != null && ToFix.PreviousModule == first)
-        //{
-        //    if(ToFix.Attacked)
-        //    {
-        //        val.RuleIndicator.text = "FIXED ATTACK";
-        //    }
-        //    ToFix.Fix();
-        //}
-        //else
-        //{
-        //    return;
-        //}
+
+		Module ToFix = this.fixer.CurrentSelection;
+		ToFix.Fix();
     }
+	
+	public void SwapMode(bool mode)
+	{
+		if(mode)
+		{
+			this.firstValuation.ModeChange(false);
+			this.secondValuation.ModeChange(false);
+			this.fixer.ModeChange(true);
+		}
+		else
+		{
+            this.fixer.ModeChange(false);
+			this.firstValuation.ModeChange(true);
+            this.secondValuation.ModeChange(true);
+		}
+	}
   }
