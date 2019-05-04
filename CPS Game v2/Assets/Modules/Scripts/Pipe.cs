@@ -11,10 +11,12 @@ namespace Assets.Modules.Scripts
     public class Pipe : AttackableModule
     {
         private bool SensorBroken;
+        private String AttackToFix;
 
         public Pipe()
         {
             this.SensorBroken = false;
+            this.AttackToFix = null;
         }
 
         /// <summary>
@@ -31,13 +33,23 @@ namespace Assets.Modules.Scripts
             return true;
         }
 
+
+        /// <summary>
+        /// Sets what problem to be fixed
+        /// </summary>
+        /// <returns></returns>
+        public override void SetAttackToFix(string FixMenuOption)
+        {
+            AttackToFix = FixMenuOption;
+        }
+
         /// <summary>
         /// Fixes problems if broken
         /// </summary>
         /// <returns></returns>
-        public override bool Fix(string FixMenuOption)
+        public override bool Fix()
         {
-            if(this.SensorBroken)
+            if(this.SensorBroken && this.AttackToFix == Strings.FixStrings.Pipe.Sensor)
             {
                 this.SensorBroken = false;
                 return base.Fix();

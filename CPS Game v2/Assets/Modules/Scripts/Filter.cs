@@ -17,11 +17,12 @@ namespace Assets.Modules.Scripts
 
         private bool PurityBroken;
         private bool FlowBroken;
-
+        private String AttackToFix;
         public Filter()
         {
             this.PurityBroken = false;
             this.FlowBroken = false;
+            this.AttackToFix = null;
         }
 
         /// <summary>
@@ -70,14 +71,22 @@ namespace Assets.Modules.Scripts
 
             return true;
         }
+        /// <summary>
+        /// Sets what problem to be fixed
+        /// </summary>
+        /// <returns></returns>
+        public override void SetAttackToFix(string FixMenuOption)
+        {
+            AttackToFix = FixMenuOption;
+        }
 
         /// <summary>
         /// Fixes problems if broken
         /// </summary>
         /// <returns></returns>
-        public override bool Fix(string FixMenuOption)
+        public override bool Fix()
         {
-            switch (FixMenuOption)
+            switch (this.AttackToFix)
             {
                 case Strings.FixStrings.Filter.Purity:
                     if(this.PurityBroken)

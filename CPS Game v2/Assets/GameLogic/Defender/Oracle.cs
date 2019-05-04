@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEditor;
 
 /// <summary>
-/// The Oracle has two valuations that, each can point at a module.  The Oracle uses these valuations to fix modules.
+/// The Oracle has two valuations that, each can point at a module.  
 /// </summary>
 public class Oracle : MonoBehaviour
 {
@@ -98,28 +98,6 @@ public class Oracle : MonoBehaviour
         }
     }
 
-    private bool ModuleMatchesExpected(Module m, Valuation v)
-    {
-        //if ((m.HasFlow) == (v.dropdowns[0].value == 0))
-        //{
-        //    if (!m.HasFlow) return true;
-
-        //    if ((m.Purity1) == (v.dropdowns[1].value == 0))
-        //    {
-        //        if ((m.Purity2) == (v.dropdowns[2].value == 0))
-        //        {
-        //            if ((m.Purity3) == (v.dropdowns[3].value == 0))
-        //            {
-                        
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //}
-
-        return false;
-    }
-
     /// <summary>
     /// Fixes a module if rules have caught an error. Only fixes if in span of 3 modules.
     /// </summary>
@@ -131,29 +109,22 @@ public class Oracle : MonoBehaviour
         }
 
 		Module ToFix = this.fixer.CurrentSelection;
-		if(ToFix.Attacked)
-        {
-			ToFix.Fix();
-        }
-        else
-        {
-            return;
-        }
+		ToFix.Fix();
     }
 	
 	public void SwapMode(bool mode)
 	{
 		if(mode)
 		{
-			this.firstValuation.gameObject.SetActive(true);
-			this.secondValuation.gameObject.SetActive(true);
-			this.fixer.gameObject.SetActive(false);
+			this.firstValuation.ModeChange(false);
+			this.secondValuation.ModeChange(false);
+			this.fixer.ModeChange(true);
 		}
 		else
 		{
-			this.firstValuation.gameObject.SetActive(false);
-			this.secondValuation.gameObject.SetActive(false);
-			this.fixer.gameObject.SetActive(true);
+            this.fixer.ModeChange(false);
+			this.firstValuation.ModeChange(true);
+            this.secondValuation.ModeChange(true);
 		}
 	}
   }

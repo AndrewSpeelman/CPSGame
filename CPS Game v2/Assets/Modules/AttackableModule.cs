@@ -14,7 +14,6 @@ namespace Assets.Modules
         [SerializeField]
         private bool _IsAttacked = false;
         public bool IsAttacked { get { return _IsAttacked; } set { _IsAttacked = value; } }
-
         public GameObject AttackPopupPrefab;
         public GameObject FixPopupPrefab;
         private AttackMenuController attackMenuController;
@@ -32,10 +31,18 @@ namespace Assets.Modules
         }
 
         /// <summary>
-        /// Default Fix method
+        /// Method called by menus
         /// </summary>
         /// <returns></returns>
-        public virtual bool Fix(String FixMenuOption)
+        public virtual void SetAttackToFix(String FixMenuOption)
+        {
+
+        }
+        /// <summary>
+        /// Default Fix method, oracles call this method
+        /// </summary>
+        /// <returns></returns>
+        public override bool Fix()
         {
             this._IsAttacked = false;
             return true;

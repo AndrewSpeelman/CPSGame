@@ -141,7 +141,7 @@ namespace Assets.GameLogic
         {
             buttons[i].onClick.AddListener(() => {
                 var btnText = buttons[i].GetComponentInChildren<Text>();
-                this.module.Fix(btnText.text); // Attack the module
+                this.module.SetAttackToFix(btnText.text); // Attack the module
                 this.CloseMenu();
             });
         }

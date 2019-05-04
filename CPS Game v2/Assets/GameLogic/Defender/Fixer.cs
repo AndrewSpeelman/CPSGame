@@ -138,9 +138,25 @@ public class Fixer : MonoBehaviour
 
     private void Deselect()
     {
-        this.module.CloseFixMenu();
+        if(this.module)
+        {
+            this.module.CloseFixMenu();
+            this.module.HasFixerAttached = false;
+            this.module = null;
+        }
         this.lineRenderer.enabled = false;
-        this.module.HasFixerAttached = false;
-        this.module = null;
+    }
+
+    public void ModeChange(bool isActive)
+    {
+        if(isActive)
+        {
+            this.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.Deselect();
+            this.gameObject.SetActive(false);
+        }
     }
 }

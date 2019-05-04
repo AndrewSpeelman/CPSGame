@@ -156,7 +156,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <summary>
     /// what to do when the module is no longer being attacked
     /// </summary>
-    public bool Fix()
+    public virtual bool Fix()
     {
         if (this.Attacked)
         {
