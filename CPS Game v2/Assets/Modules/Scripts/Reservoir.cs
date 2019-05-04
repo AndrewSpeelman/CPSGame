@@ -132,9 +132,9 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetInformation(MenuBuilder builder)
         {
-            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+            builder = base.GetInformation(builder).GetBuilder(); 
+
             builder.AddStringItem(Strings.Capacity, String.Format("{0}/{1}", CurrentCapacity, MaxCapacity));
-            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
             return builder.Build();
         }

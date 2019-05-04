@@ -66,6 +66,8 @@ namespace Assets.Modules
         /// <returns></returns>
         public virtual MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder.SetTitle(this.GetType().Name.ToString() + " Attacks");
+
             return builder.Build();
         }
 

@@ -130,9 +130,9 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetInformation(MenuBuilder builder)
         {
+            builder = base.GetInformation(builder).GetBuilder();
+
             builder.AddStringItem(Strings.PurityControl, this.PurityIndexToControl.ToString());
-            builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
-            builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
             return builder.Build();
         }
@@ -145,6 +145,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder = base.GetAttackMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.AttackStrings.Filter.Purity);
             builder.AddOption(Strings.AttackStrings.Filter.Flow);
             return builder.Build();

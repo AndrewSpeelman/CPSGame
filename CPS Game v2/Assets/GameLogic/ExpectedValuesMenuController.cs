@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Assets.GameLogic
 {
-    public class InfoMenuController
+    public class ExpectedValuesMenuController
     {
         public static GameObject _popupPrefab = null;
         public static GameObject _popupInstance = null;
@@ -22,7 +22,7 @@ namespace Assets.GameLogic
                     InfoMenuController._popupInstance = UnityEngine.Object.Instantiate(_popupPrefab, _popupPrefab.transform.position, _popupPrefab.transform.rotation);
                     _popupInstance.transform.SetParent(rootCanvas.transform, false);
 
-                   
+
                 }
 
                 return InfoMenuController._popupInstance;
@@ -43,7 +43,7 @@ namespace Assets.GameLogic
         private Text textContent;
 
 
-        public InfoMenuController(Module obj, GameObject popupPrefab)
+        public ExpectedValuesMenuController(Module obj, GameObject popupPrefab)
         {
             this.module = obj;
 
@@ -56,7 +56,7 @@ namespace Assets.GameLogic
             this.texts = InfoMenuController.popupInstance.GetComponentsInChildren<Text>();
             this.textContent = this.texts[1];
 
-            this.texts[0].text = "Info Menu";
+            this.texts[0].text = "Expected Values";
             this.textContent.text = "";
             this.CloseMenu();
 
@@ -72,10 +72,10 @@ namespace Assets.GameLogic
         /// </summary>
         public void UpdateMenu()
         {
-            MenuToDisplay menu = this.module.GetInformation(new MenuBuilder());
+            MenuToDisplay menu = this.module.GetExpectedValuesPopup(new MenuBuilder());
 
             if (!String.IsNullOrEmpty(menu.Title))
-                this.texts[0].text = menu.Title; 
+                this.texts[0].text = menu.Title;
 
             int start = 0;
             int end = menu.MenuChoices.Count;
@@ -100,7 +100,7 @@ namespace Assets.GameLogic
 
             // Move to position
             RectTransform uiTransform = InfoMenuController.popupInstance.GetComponent<RectTransform>();
-            uiTransform.position = new Vector2((float)400, (float)900);
+            uiTransform.position = new Vector2((float)800, (float)900);
 
             InfoMenuController.popupInstance.SetActive(true);
         }

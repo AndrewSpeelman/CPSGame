@@ -14,5 +14,6 @@ namespace Assets.Interfaces
         void Tick();
 
         MenuToDisplay GetInformation(MenuBuilder builder);
+        MenuToDisplay GetExpectedValuesPopup(MenuBuilder builder);
     }
 }

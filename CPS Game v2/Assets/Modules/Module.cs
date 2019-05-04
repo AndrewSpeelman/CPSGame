@@ -8,6 +8,8 @@ using Assets.Modules.Menu;
 using Assets;
 using Assets.GameLogic;
 using System;
+using Assets.Modules;
+using Assets.Modules.Scripts;
 
 public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, IDetectPurity
 {
@@ -35,6 +37,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 
     public GameObject InfoPopupPrefab;
     private InfoMenuController infoMenuController;
+    private ExpectedValuesMenuController expectedValuesMenuController;
 
     /// <summary>
     /// Expected Water Purity
@@ -52,6 +55,8 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public bool ExpectedPurity3 { get { return _ExpectedPurity3; } set { _ExpectedPurity3 = value; } }
 
 
+    public ExpectedValuesClass ExpectedValues { get; set; }
+
     /**
      * Unity Things 
      */
@@ -63,6 +68,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public Module()
     {
         this.Water = new WaterObject();
+        this.ExpectedValues = new ExpectedValuesClass();
     }
 
 
@@ -75,6 +81,11 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         this.renderer = GetComponent<Renderer>();
         this.startingColor = renderer.material.color;
 
+        // Set default expected values
+        this.ExpectedValues.ExpectedPurity1 = this.ExpectedPurity1;
+        this.ExpectedValues.ExpectedPurity2 = this.ExpectedPurity2;
+        this.ExpectedValues.ExpectedPurity3 = this.ExpectedPurity3;
+
         this.OnStart();
     }
 
@@ -83,7 +94,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// </summary>
     public virtual void OnStart()
     {
-
+        // Nothing here, this is for child classes to override
     }
 
     /// <summary>
@@ -92,6 +103,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     private void Awake()
     {
         this.infoMenuController = new InfoMenuController(this, this.InfoPopupPrefab);
+        this.expectedValuesMenuController = new ExpectedValuesMenuController(this, this.InfoPopupPrefab);
         this.OnAwake();
     }
 
@@ -100,7 +112,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// </summary>
     public virtual void OnAwake()
     {
-
+        // Nothing here, this is for child classes to override
     }
 
 
@@ -119,7 +131,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// </summary>
     public virtual void OnTick()
     {
-
+        // Nothing here, this is for child classes to override
     }
 
     /// <summary>
@@ -127,7 +139,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// </summary>
     public virtual void UpdatePopups()
     {
-
+        // Nothing here, this is for child classes to override
     }
 
 
@@ -183,7 +195,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         if (inflow == null)
         {
             this.Water = null;
-            return null; 
+            return null;
         }
 
         if (this.Water == null)
@@ -206,8 +218,34 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <returns></returns>
     public virtual MenuToDisplay GetInformation(MenuBuilder builder)
     {
+        builder.SetTitle(this.GetType().Name.ToString() + " Info");
+
         builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
         builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+
+        return builder.Build();
+    }
+
+    /// <summary>
+    /// Gets what to display for the expected values popup
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <returns></returns>
+    public MenuToDisplay GetExpectedValuesPopup(MenuBuilder builder)
+    {
+        builder.SetTitle(this.GetType().Name.ToString() + " Expected");
+
+        builder.AddBoolItem(Strings.HasFlow, this.ExpectedValues.HasFlow);
+        builder.AddBoolItem(Strings.IsPurityAsExpected, this.ExpectedValues.IsPurityAsExpected);
+
+        if (this.GetType() == typeof(Pump))
+            builder.AddBoolItem(Strings.IsPumping, this.ExpectedValues.IsPumping);
+
+        if (this.GetType() == typeof(Reservoir))
+        {
+            builder.AddBoolItem(Strings.IsFull, this.ExpectedValues.IsFull);
+            builder.AddBoolItem(Strings.IsEmpty, this.ExpectedValues.IsEmpty);
+        }
 
         return builder.Build();
     }
@@ -228,6 +266,10 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
             catch (Exception e)
             {
 
+            }
+            if (this.gameController.IsDefendersTurn())
+            {
+                this.expectedValuesMenuController.OpenMenu();
             }
 
             if (this.gameController.IsAttackersTurn())
