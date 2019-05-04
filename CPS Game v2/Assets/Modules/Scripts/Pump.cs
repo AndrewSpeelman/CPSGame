@@ -8,15 +8,19 @@ using UnityEngine;
 
 namespace Assets.Modules.Scripts
 {
-    public class Pump: Module, IPumpWater
+    public class Pump : AttackableModule, IPumpWater
     {
         [SerializeField]
         private bool _isPumping = true; 
         public bool IsPumping { get { return _isPumping; } protected set { _isPumping = value; } }
 
+        private bool SensorBroken; 
+        private String AttackToFix;
 
         public Pump()
         {
+            this.SensorBroken = false;
+            this.AttackToFix = null;
         }
 
 
@@ -45,6 +49,65 @@ namespace Assets.Modules.Scripts
         }
 
         /// <summary>
+        /// Attack the object
+        /// </summary>
+        /// <param name="AttackMenuOption"></param>
+        /// <returns></returns>
+        public override bool Attack(string AttackMenuOption)
+        {
+            base.Attack(AttackMenuOption); // Mark as attacked 
+
+            switch (AttackMenuOption)
+            {
+                case Strings.AttackStrings.Pump.Flow:
+                    this.IsPumping = true; 
+                    break;
+
+                case Strings.AttackStrings.Pump.Sensor:
+                    this.SensorBroken = true;
+                    break;
+            }
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// Sets what problem to be fixed
+        /// </summary>
+        /// <returns></returns>
+        public override void SetAttackToFix(string FixMenuOption)
+        {
+            AttackToFix = FixMenuOption;
+        }
+
+        /// <summary>
+        /// Fixes problems if broken
+        /// </summary>
+        /// <returns></returns>
+        public override bool Fix()
+        {
+            switch (this.AttackToFix)
+            {
+                case Strings.FixStrings.Pump.Flow:
+                    if(this.IsPumping)
+                    {
+                        this.IsPumping = false;
+                        return base.Fix();
+                    }
+                    break;
+                case Strings.FixStrings.Pump.Sensor:
+                    if(this.SensorBroken) 
+                    {
+                        this.SensorBroken = false;
+                        return base.Fix();
+                    }
+                    break;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Get information about the pump
         /// </summary>
         /// <param name="builder"></param>
@@ -55,6 +118,30 @@ namespace Assets.Modules.Scripts
             builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
             builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
 
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Build the menu for displaying attacking
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
+        {
+            builder.AddOption(Strings.AttackStrings.Pump.Flow);
+            builder.AddOption(Strings.AttackStrings.Pump.Sensor);
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Build the menu for displaying fixing
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetFixMenu(MenuBuilder builder)
+        {
+            builder.AddOption(Strings.FixStrings.Pump.Flow);
+            builder.AddOption(Strings.FixStrings.Pump.Sensor);
             return builder.Build();
         }
     }

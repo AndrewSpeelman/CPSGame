@@ -10,8 +10,10 @@ namespace Assets.Interfaces.Modules
     {
         bool IsAttacked { get; set; }
         bool Attack(string AttackMenuOption);
+        void SetAttackToFix(string FixMenuOption);
         bool Fix();
 
         MenuToDisplay GetAttackMenu(MenuBuilder builder);
+        MenuToDisplay GetFixMenu(MenuBuilder builder);
     }
 }

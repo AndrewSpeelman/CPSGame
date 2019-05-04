@@ -34,6 +34,50 @@ namespace Assets
                 public const String Flow = "Attack Flow";
                 public const String Purity = "Attack Purity";
             }
+
+            public static class Pipe
+            {
+                public const String Sensor = "Attack Sensor";
+            }
+
+            public static class Pump
+            {
+                public const String Flow = "Attack Flow";
+                public const String Sensor = "Attack Sensor";
+            }
+
+            public static class Reservoir
+            {
+                public const String Flow = "Attack Flow";
+                public const String Sensor = "Attack Sensor";
+            }
+        }
+
+        public static class FixStrings
+        {
+            public static class Filter
+            {
+                public const String Flow = "Fix Flow";
+                public const String Purity = "Fix Purity";
+                
+            }
+
+            public static class Pipe
+            {
+                public const String Sensor = "Fix Sensor";
+            }
+
+            public static class Pump
+            {
+                public const String Flow = "Fix Flow";
+                public const String Sensor = "Fix Sensor";
+            }
+
+            public static class Reservoir
+            {
+                public const String Flow = "Fix Flow";
+                public const String Sensor = "Fix Sensor";
+            }
         }
     }
 }

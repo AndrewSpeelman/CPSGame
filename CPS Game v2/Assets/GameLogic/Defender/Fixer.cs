@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Modules;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Modules.Menu;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Fixer : MonoBehaviour
@@ -9,7 +11,7 @@ public class Fixer : MonoBehaviour
     /// <summary>
     /// The Module the valuation is currently pointed at
     /// </summary>
-    public Module CurrentSelection {
+    public AttackableModule CurrentSelection {
         get {
             if (this.module) return this.module;
             return null;
@@ -20,7 +22,7 @@ public class Fixer : MonoBehaviour
 
     private GameObject popupInstance;
 
-    private Module module;
+    private AttackableModule module;
 
     private LineRenderer lineRenderer;
 
@@ -77,7 +79,7 @@ public class Fixer : MonoBehaviour
         {
             Transform objectHit = hit.transform;
 
-            Module mod = hit.transform.GetComponent<Module>();
+            AttackableModule mod = hit.transform.GetComponent<AttackableModule>();
             if (mod != null)
             {
                 this.Select(mod);
@@ -112,14 +114,7 @@ public class Fixer : MonoBehaviour
     {
         if (!this.parentOracle.InputActive)
         {
-            this.popupInstance.SetActive(false);
-        }
-        else
-        {
-            if (this.module)
-            {
-                this.popupInstance.SetActive(true);
-            }
+            // this.module.CloseFixMenu();
         }
     }
 
@@ -133,18 +128,35 @@ public class Fixer : MonoBehaviour
         }.ToArray());
     }
 
-    private void Select(Module mod)
+    private void Select(AttackableModule mod)
     {
         this.module = mod;
+        this.module.OpenFixMenu();
+        this.module.HasFixerAttached = true;
         this.DrawLine(this.transform.position, mod.transform.position);
-        //this.popupInstance.SetActive(true);
-        //this.popupInstance.transform.position = Camera.main.WorldToScreenPoint(this.module.transform.position);
     }
 
     private void Deselect()
     {
-        this.module = null;
+        if(this.module)
+        {
+            this.module.CloseFixMenu();
+            this.module.HasFixerAttached = false;
+            this.module = null;
+        }
         this.lineRenderer.enabled = false;
-        //this.popupInstance.SetActive(false);
+    }
+
+    public void ModeChange(bool isActive)
+    {
+        if(isActive)
+        {
+            this.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.Deselect();
+            this.gameObject.SetActive(false);
+        }
     }
 }

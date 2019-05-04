@@ -17,11 +17,12 @@ namespace Assets.Modules.Scripts
 
         private bool PurityBroken;
         private bool FlowBroken;
-
+        private String AttackToFix;
         public Filter()
         {
             this.PurityBroken = false;
             this.FlowBroken = false;
+            this.AttackToFix = null;
         }
 
         /// <summary>
@@ -70,17 +71,39 @@ namespace Assets.Modules.Scripts
 
             return true;
         }
+        /// <summary>
+        /// Sets what problem to be fixed
+        /// </summary>
+        /// <returns></returns>
+        public override void SetAttackToFix(string FixMenuOption)
+        {
+            AttackToFix = FixMenuOption;
+        }
 
         /// <summary>
-        /// Fixes any problems
+        /// Fixes problems if broken
         /// </summary>
         /// <returns></returns>
         public override bool Fix()
         {
-            this.PurityBroken = false;
-            this.FlowBroken = false; 
-
-            return base.Fix();
+            switch (this.AttackToFix)
+            {
+                case Strings.FixStrings.Filter.Purity:
+                    if(this.PurityBroken)
+                    {
+                        this.PurityBroken = false;
+                        return base.Fix();
+                    }
+                    break;
+                case Strings.FixStrings.Filter.Flow:
+                    if(this.FlowBroken) 
+                    {
+                        this.FlowBroken = false;
+                        return base.Fix();
+                    }
+                    break;
+            }
+            return false;
         }
 
 
@@ -116,7 +139,7 @@ namespace Assets.Modules.Scripts
 
 
         /// <summary>
-        /// Build the menu for displaying attack information
+        /// Build the menu for displaying attacking
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
@@ -124,6 +147,18 @@ namespace Assets.Modules.Scripts
         {
             builder.AddOption(Strings.AttackStrings.Filter.Purity);
             builder.AddOption(Strings.AttackStrings.Filter.Flow);
+            return builder.Build();
+        }
+
+                /// <summary>
+        /// Build the menu for displaying fixing
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public override MenuToDisplay GetFixMenu(MenuBuilder builder)
+        {
+            builder.AddOption(Strings.FixStrings.Filter.Purity);
+            builder.AddOption(Strings.FixStrings.Filter.Flow);
             return builder.Build();
         }
     }

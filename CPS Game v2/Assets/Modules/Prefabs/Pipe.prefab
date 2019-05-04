@@ -48,9 +48,18 @@ MonoBehaviour:
   NextModule: {fileID: 0}
   PreviousModule: {fileID: 0}
   Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
+  InfoPopupPrefab: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
+    type: 3}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
+  FixPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!212 &2900773570438022728
 SpriteRenderer:
   m_ObjectHideFlags: 0

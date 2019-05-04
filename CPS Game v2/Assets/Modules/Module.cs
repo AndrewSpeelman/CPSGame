@@ -24,9 +24,14 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     public bool HasFlow { get { return this.Water != null; } }
 
     /// <summary>
-    /// Will be true if an oracle is attached to this module
+    /// Will be true if an oracle inspector is attached to this module
     /// </summary>
-    public bool HasOracleAttached = false;
+    public bool HasInspectorAttached = false;
+
+    /// <summary>
+    /// Will be true if an oracle fixer is attached to this module
+    /// </summary>
+    public bool HasFixerAttached = false;
 
     public GameObject InfoPopupPrefab;
     private InfoMenuController infoMenuController;
@@ -151,23 +156,14 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <summary>
     /// what to do when the module is no longer being attacked
     /// </summary>
-    public void Fix()
+    public virtual bool Fix()
     {
         if (this.Attacked)
         {
             this.Attacked = false;
+            return true;
         }
-    }
-
-    private void OnMouseEnter()
-    {
-        if(renderer.material.color == this.startingColor)
-            renderer.material.color = Color.yellow;
-    }
-
-    private void OnMouseExit()
-    {
-        renderer.material.color = this.startingColor;
+        return false;
     }
 
     /**
@@ -234,7 +230,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
 
             }
 
-            if (this.gameController.IsAttackersTurn() || this.HasOracleAttached)
+            if (this.gameController.IsAttackersTurn())
             {
                 this.infoMenuController.OpenMenu();
             }
