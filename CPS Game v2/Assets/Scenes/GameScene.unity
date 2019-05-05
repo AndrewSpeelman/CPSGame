@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -132,11 +132,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 646747178}
   PreviousModule: {fileID: 1183373157}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 0}
+  FixPopupPrefab: {fileID: 0}
   IsStartingReservoir: 0
   _MaxCapacity: 3
 --- !u!1 &99058772
@@ -249,6 +254,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextModule: {fileID: 0}
+  PreviousModule: {fileID: 0}
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
+  InfoPopupPrefab: {fileID: 0}
+  _ExpectedPurity1: 0
+  _ExpectedPurity2: 0
+  _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 0}
+  FixPopupPrefab: {fileID: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +345,10 @@ PrefabInstance:
     - target: {fileID: 1606839888046256, guid: 9c98cec72dcc6484b9854215ff2db438, type: 3}
       propertyPath: m_Name
       value: Pump2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606839888046256, guid: 9c98cec72dcc6484b9854215ff2db438, type: 3}
+      propertyPath: m_TagString
+      value: GameBoardObject
       objectReference: {fileID: 0}
     - target: {fileID: 4931362457983008, guid: 9c98cec72dcc6484b9854215ff2db438, type: 3}
       propertyPath: m_LocalPosition.x
@@ -428,11 +449,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 1183373157}
   PreviousModule: {fileID: 1807835890}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 0}
+  FixPopupPrefab: {fileID: 0}
   _isPumping: 1
 --- !u!4 &176067067 stripped
 Transform:
@@ -898,7 +924,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 210664560}
   PreviousModule: {fileID: 48865703}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
@@ -906,6 +934,7 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}
 --- !u!1001 &650079317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1188,7 +1217,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 2007097123}
   PreviousModule: {fileID: 220058000}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
@@ -1196,6 +1227,7 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}
 --- !u!1001 &818242694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1284,12 +1316,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 1807835890}
   PreviousModule: {fileID: 0}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
     type: 3}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
+  FixPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
   IsStartingReservoir: 1
   _MaxCapacity: 0
 --- !u!1001 &832292917
@@ -1405,7 +1444,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 0}
   PreviousModule: {fileID: 1655650001}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
@@ -1413,6 +1454,7 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}
 --- !u!4 &894097827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3,
@@ -2013,7 +2055,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 48865703}
   PreviousModule: {fileID: 174817622}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
@@ -2021,6 +2065,7 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}
 --- !u!1001 &1183407248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2138,7 +2183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 220058000}
   PreviousModule: {fileID: 210664560}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 0
@@ -2146,6 +2193,7 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}
 --- !u!4 &1202232180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3,
@@ -2539,6 +2587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pump1
       objectReference: {fileID: 0}
+    - target: {fileID: 1606839888046256, guid: 9c98cec72dcc6484b9854215ff2db438, type: 3}
+      propertyPath: m_TagString
+      value: GameBoardObject
+      objectReference: {fileID: 0}
     - target: {fileID: 4931362457983008, guid: 9c98cec72dcc6484b9854215ff2db438, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.19802737
@@ -2615,6 +2667,16 @@ PrefabInstance:
       propertyPath: WaterTank
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6073742405293016737, guid: 9c98cec72dcc6484b9854215ff2db438,
+        type: 3}
+      propertyPath: NextModule
+      value: 
+      objectReference: {fileID: 832292919}
+    - target: {fileID: 6073742405293016737, guid: 9c98cec72dcc6484b9854215ff2db438,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 2067816603}
     m_RemovedComponents:
     - {fileID: 114127325393874920, guid: 9c98cec72dcc6484b9854215ff2db438, type: 3}
     - {fileID: 114441962571396894, guid: 9c98cec72dcc6484b9854215ff2db438, type: 3}
@@ -2639,11 +2701,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 832292919}
   PreviousModule: {fileID: 2067816603}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
   _ExpectedPurity3: 1
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 0}
+  FixPopupPrefab: {fileID: 0}
   _isPumping: 1
 --- !u!1 &1663656655
 GameObject:
@@ -2902,7 +2969,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 174817622}
   PreviousModule: {fileID: 818242696}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
@@ -2910,6 +2979,7 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}
 --- !u!4 &1824374750 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4099675452661254, guid: ecb9ed18472e91e4a9841f3279372fb3,
@@ -3203,7 +3273,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextModule: {fileID: 2067816603}
   PreviousModule: {fileID: 715248614}
-  HasOracleAttached: 0
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
@@ -3211,6 +3283,7 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}
   _PurityControl: 3
 --- !u!1 &2054638017
 GameObject:
@@ -3391,8 +3464,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextModule: {fileID: 1655650001}
-  PreviousModule: {fileID: 0}
-  HasOracleAttached: 0
+  PreviousModule: {fileID: 2007097123}
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
   InfoPopupPrefab: {fileID: 0}
   _ExpectedPurity1: 1
   _ExpectedPurity2: 1
@@ -3400,3 +3475,4 @@ MonoBehaviour:
   _IsAttacked: 0
   AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
     type: 3}
+  FixPopupPrefab: {fileID: 0}

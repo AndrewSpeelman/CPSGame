@@ -16,12 +16,12 @@ namespace Assets.Modules.Scripts
         public int PurityIndexToControl { get { return _PurityControl; } set { _PurityControl = value; } }
 
         private bool PurityBroken;
-        private bool FlowBroken;
+        private bool SensorBroken;
         private String AttackToFix;
         public Filter()
         {
             this.PurityBroken = false;
-            this.FlowBroken = false;
+            this.SensorBroken = false;
             this.AttackToFix = null;
         }
 
@@ -63,9 +63,8 @@ namespace Assets.Modules.Scripts
                     this.PurityBroken = true; 
                     break;
 
-                case Strings.AttackStrings.Filter.Flow:
-                    this.FlowBroken = true;
-                    this.Water = null;
+                case Strings.AttackStrings.Filter.Sensor:
+                    this.SensorBroken = true;
                     break;
             }
 
@@ -95,10 +94,10 @@ namespace Assets.Modules.Scripts
                         return base.Fix();
                     }
                     break;
-                case Strings.FixStrings.Filter.Flow:
-                    if(this.FlowBroken) 
+                case Strings.FixStrings.Filter.Sensor:
+                    if(this.SensorBroken) 
                     {
-                        this.FlowBroken = false;
+                        this.SensorBroken = false;
                         return base.Fix();
                     }
                     break;
@@ -115,9 +114,6 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override WaterObject OnFlow(WaterObject inflow)
         {
-            if (this.FlowBroken)
-                return null; // Flow is broken
-
             var water = base.OnFlow(inflow); // Returns water that was inside the filter
 
             return FilterWater(water); // Filter it for the next module
@@ -131,9 +127,18 @@ namespace Assets.Modules.Scripts
         public override MenuToDisplay GetInformation(MenuBuilder builder)
         {
             builder = base.GetInformation(builder).GetBuilder();
-
-            builder.AddStringItem(Strings.PurityControl, this.PurityIndexToControl.ToString());
-
+            if (this.SensorBroken)
+            {
+                builder.AddStringItem(Strings.HasFlow, Strings.Hacked);
+                builder.AddStringItem(Strings.IsPurityAsExpected, Strings.Hacked);
+                builder.AddStringItem(Strings.PurityControl, Strings.Hacked);
+            }
+            else
+            {
+                builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+                builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+                builder.AddStringItem(Strings.PurityControl, this.PurityIndexToControl.ToString());
+            }
             return builder.Build();
         }
 
@@ -148,7 +153,7 @@ namespace Assets.Modules.Scripts
             builder = base.GetAttackMenu(builder).GetBuilder(); 
 
             builder.AddOption(Strings.AttackStrings.Filter.Purity);
-            builder.AddOption(Strings.AttackStrings.Filter.Flow);
+            builder.AddOption(Strings.AttackStrings.Filter.Sensor);
             return builder.Build();
         }
 
@@ -160,7 +165,7 @@ namespace Assets.Modules.Scripts
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
             builder.AddOption(Strings.FixStrings.Filter.Purity);
-            builder.AddOption(Strings.FixStrings.Filter.Flow);
+            builder.AddOption(Strings.FixStrings.Filter.Sensor);
             return builder.Build();
         }
     }

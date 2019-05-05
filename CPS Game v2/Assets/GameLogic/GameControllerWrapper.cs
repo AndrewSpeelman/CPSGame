@@ -42,6 +42,13 @@ namespace Assets.GameLogic
             return this.gameController.GameState == GameState.DefenderTurn;
         }
 
+        public bool IsAttackersAttacksZero()
+        {
+            if (!this.gameController)
+                return false; 
+
+            return (this.gameController.NumAvailableAttacks == 0) ? true : false;
+        }
         
     }
 }

@@ -14,6 +14,7 @@ namespace Assets
         public const String IsEmpty = "Is Empty";
         public const String Capacity = "Capacity";
         public const String IsPumping = "Is Pumping";
+        public const String Hacked = "-";
 
 
         public static class BooleanStrings
@@ -31,7 +32,7 @@ namespace Assets
         {
             public static class Filter
             {
-                public const String Flow = "Attack Flow";
+                public const String Sensor = "Attack Sensor";
                 public const String Purity = "Attack Purity";
             }
 
@@ -48,7 +49,7 @@ namespace Assets
 
             public static class Reservoir
             {
-                public const String Flow = "Attack Flow";
+                public const String Drain = "Attack Drain";
                 public const String Sensor = "Attack Sensor";
             }
         }
@@ -57,7 +58,7 @@ namespace Assets
         {
             public static class Filter
             {
-                public const String Flow = "Fix Flow";
+                public const String Sensor = "Fix Sensor";
                 public const String Purity = "Fix Purity";
                 
             }
@@ -75,7 +76,7 @@ namespace Assets
 
             public static class Reservoir
             {
-                public const String Flow = "Fix Flow";
+                public const String Drain = "Fix Drain";
                 public const String Sensor = "Fix Sensor";
             }
         }

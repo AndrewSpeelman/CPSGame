@@ -115,9 +115,18 @@ namespace Assets.Modules.Scripts
         public override MenuToDisplay GetInformation(MenuBuilder builder)
         {
             builder = base.GetInformation(builder).GetBuilder();
-
-            builder.AddBoolItem(Strings.IsPumping, this.IsPumping);
-
+            if (this.SensorBroken)
+            {
+                builder.AddStringItem(Strings.HasFlow, Strings.Hacked);
+                builder.AddStringItem(Strings.IsPurityAsExpected, Strings.Hacked);
+                builder.AddStringItem(Strings.IsPumping, Strings.Hacked);
+            }
+            else
+            {
+                builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+                builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+                builder.AddBoolItem(Strings.IsPumping, this.IsPumping);
+            }
             return builder.Build();
         }
 

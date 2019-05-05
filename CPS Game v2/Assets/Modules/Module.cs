@@ -218,12 +218,7 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// <returns></returns>
     public virtual MenuToDisplay GetInformation(MenuBuilder builder)
     {
-        builder.SetTitle(this.GetType().Name.ToString() + " Info");
-
-        builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
-        builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
-
-        return builder.Build();
+        return builder.SetTitle(this.GetType().Name.ToString() + " Info").Build();
     }
 
     /// <summary>
@@ -246,7 +241,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
             builder.AddBoolItem(Strings.IsFull, this.ExpectedValues.IsFull);
             builder.AddBoolItem(Strings.IsEmpty, this.ExpectedValues.IsEmpty);
         }
-
         return builder.Build();
     }
 
@@ -261,7 +255,8 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         {
             try
             {
-                this.renderer.material.color = Color.yellow; // Turn color yellow while user is clicking on the object
+                if(this.renderer.material.color == this.startingColor)
+                    this.renderer.material.color = Color.yellow; // Turn color yellow while user is clicking on the object if it's not inspected
             }
             catch (Exception e)
             {
@@ -269,9 +264,15 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
             }
             if (this.gameController.IsDefendersTurn())
             {
-                this.expectedValuesMenuController.OpenMenu();
+                if(this.HasInspectorAttached)
+                {
+                    this.infoMenuController.OpenMenu();
+                }
+                else
+                {
+                    this.expectedValuesMenuController.OpenMenu();
+                }
             }
-
             if (this.gameController.IsAttackersTurn())
             {
                 this.infoMenuController.OpenMenu();
@@ -283,6 +284,13 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     /// Restore color when the mouse is released
     /// </summary>
     public virtual void OnMouseUp()
+    {
+        if(this.renderer.material.color == Color.yellow || this.renderer.material.color == Color.red)
+            this.ResetColor();
+
+    }
+
+    public void ResetColor()
     {
         try
         {

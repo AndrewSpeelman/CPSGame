@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Valuation : MonoBehaviour
+public class Inspector : MonoBehaviour
 {
     /// <summary>
-    /// The Module the valuation is currently pointed at
+    /// The Module the inspector is currently pointed at
     /// </summary>
     public Module CurrentSelection {
         get {
@@ -23,8 +23,6 @@ public class Valuation : MonoBehaviour
     private LineRenderer lineRenderer;
 
     private Oracle parentOracle;
-
-    public Text RuleIndicator;
 
     public void UpdateLine()
     {
@@ -119,10 +117,8 @@ public class Valuation : MonoBehaviour
         if(this.module)
         {
             this.module = null;
-            this.module.HasInspectorAttached = false;
         }
         this.lineRenderer.enabled = false;
-
     }
 
     public void ModeChange(bool isActive)

@@ -11,7 +11,7 @@ namespace Assets.Modules.Scripts
     public class Reservoir : AttackableModule, IHaveCapacity
     {
         public bool IsStartingReservoir = false; 
-        private bool FlowBroken;
+        private bool DrainBroken;
         private bool SensorBroken;
         private String AttackToFix;
         [SerializeField]
@@ -34,7 +34,7 @@ namespace Assets.Modules.Scripts
                 for (int i = 0; i <= _MaxCapacity; i++)
                     Water.Enqueue(new WaterObject());
             }
-            this.FlowBroken = false;
+            this.DrainBroken = false;
             this.SensorBroken = false;
             this.AttackToFix = null;
         }
@@ -78,8 +78,8 @@ namespace Assets.Modules.Scripts
 
             switch (AttackMenuOption)
             {
-                case Strings.AttackStrings.Reservoir.Flow:
-                    this.FlowBroken = true; 
+                case Strings.AttackStrings.Reservoir.Drain:
+                    this.DrainBroken = true; 
                     break;
 
                 case Strings.AttackStrings.Reservoir.Sensor:
@@ -107,10 +107,10 @@ namespace Assets.Modules.Scripts
         {
             switch (this.AttackToFix)
             {
-                case Strings.FixStrings.Reservoir.Flow:
-                    if(this.FlowBroken)
+                case Strings.FixStrings.Reservoir.Drain:
+                    if(this.DrainBroken)
                     {
-                        this.FlowBroken = false;
+                        this.DrainBroken = false;
                         return base.Fix();
                     }
                     break;
@@ -133,9 +133,18 @@ namespace Assets.Modules.Scripts
         public override MenuToDisplay GetInformation(MenuBuilder builder)
         {
             builder = base.GetInformation(builder).GetBuilder(); 
-
-            builder.AddStringItem(Strings.Capacity, String.Format("{0}/{1}", CurrentCapacity, MaxCapacity));
-
+            if (this.SensorBroken)
+            {
+                builder.AddStringItem(Strings.HasFlow, Strings.Hacked);
+                builder.AddStringItem(Strings.IsPurityAsExpected, Strings.Hacked);
+                builder.AddStringItem(Strings.Capacity, Strings.Hacked);
+            }
+            else
+            {
+                builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+                builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
+                builder.AddStringItem(Strings.Capacity, String.Format("{0}/{1}", CurrentCapacity, MaxCapacity));
+            }
             return builder.Build();
         }
 
@@ -146,7 +155,7 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
-            builder.AddOption(Strings.AttackStrings.Reservoir.Flow);
+            builder.AddOption(Strings.AttackStrings.Reservoir.Drain);
             builder.AddOption(Strings.AttackStrings.Reservoir.Sensor);
             return builder.Build();
         }
@@ -158,7 +167,7 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
-            builder.AddOption(Strings.FixStrings.Reservoir.Flow);
+            builder.AddOption(Strings.FixStrings.Reservoir.Drain);
             builder.AddOption(Strings.FixStrings.Reservoir.Sensor);
             return builder.Build();
         }

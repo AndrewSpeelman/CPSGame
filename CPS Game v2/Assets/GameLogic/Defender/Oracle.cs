@@ -16,14 +16,14 @@ public class Oracle : MonoBehaviour
 
     public GameObject OraclePopupPrefab;
 
-    private Valuation firstValuation, secondValuation;
+    private Inspector firstInspector, secondInspector;
     private Fixer fixer;
     private Button modeButton;
     private void Awake()
     {
-        var vals = this.GetComponentsInChildren<Valuation>();
-        this.firstValuation = vals[0];
-        this.secondValuation = vals[1];
+        var vals = this.GetComponentsInChildren<Inspector>();
+        this.firstInspector = vals[0];
+        this.secondInspector = vals[1];
         this.fixer = this.GetComponentInChildren<Fixer>();
 		
     }
@@ -52,56 +52,32 @@ public class Oracle : MonoBehaviour
             }
 
             //Update the lines that come from the valuations
-            this.firstValuation.UpdateLine();
-            this.secondValuation.UpdateLine();
+            this.firstInspector.UpdateLine();
+            this.secondInspector.UpdateLine();
 			this.fixer.UpdateLine();
         }
     }
 
     /// <summary>
-    /// Applies a rule between the two valuations, if successfull, it will fix the modules between the valuations.
+    /// Will let defender display the real information
     /// </summary>
-    public void ApplyRule()
+    public void InspectModule()
     {
-        if (this.firstValuation.CurrentSelection == null || this.secondValuation.CurrentSelection == null)
+        if (this.firstInspector.CurrentSelection == null || this.secondInspector.CurrentSelection == null)
         {
             return;
         }
-
-        //used to decide which to fix on
-        bool firstVal = false; //false = first  true = second
-        
-        Module moduleOne = this.firstValuation.CurrentSelection;
-        Module moduleTwo = this.secondValuation.CurrentSelection;
-
-        var currVal = firstVal ? secondValuation : firstValuation;
-
-        if (moduleOne.Attacked)
-        {
-            currVal.RuleIndicator.gameObject.SetActive(true);
-			moduleOne.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
-        }
-        else
-        {
-            currVal.RuleIndicator.gameObject.SetActive(false);
-        }
-
-        currVal = firstVal ? firstValuation : secondValuation;
-        if (moduleTwo.Attacked)
-        {
-            currVal.RuleIndicator.gameObject.SetActive(true);
-            moduleTwo.GetComponent<Renderer>().material.color = new Color(1f, .3f, .15f);
-        }
-        else
-        {
-            currVal.RuleIndicator.gameObject.SetActive(false);        
-        }
+        this.firstInspector.CurrentSelection.GetComponent<Renderer>().material.color = new Color(0, 1F, 1F);
+        this.secondInspector.CurrentSelection.GetComponent<Renderer>().material.color = new Color(0, 1F, 1F);
+        this.firstInspector.CurrentSelection.HasInspectorAttached = true;
+        this.secondInspector.CurrentSelection.HasInspectorAttached = true;
+        return;
     }
 
     /// <summary>
-    /// Fixes a module if rules have caught an error. Only fixes if in span of 3 modules.
+    /// Fixes a module if fixer attached
     /// </summary>
-    public void FixRule()
+    public void FixModule()
     {
 		if (this.fixer.CurrentSelection == null)
         {
@@ -116,15 +92,15 @@ public class Oracle : MonoBehaviour
 	{
 		if(mode)
 		{
-			this.firstValuation.ModeChange(false);
-			this.secondValuation.ModeChange(false);
+			this.firstInspector.ModeChange(false);
+			this.secondInspector.ModeChange(false);
 			this.fixer.ModeChange(true);
 		}
 		else
 		{
             this.fixer.ModeChange(false);
-			this.firstValuation.ModeChange(true);
-            this.secondValuation.ModeChange(true);
+			this.firstInspector.ModeChange(true);
+            this.secondInspector.ModeChange(true);
 		}
 	}
   }

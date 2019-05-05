@@ -98,7 +98,7 @@ namespace Assets.Modules
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (this.gameController.IsAttackersTurn())
+                if (this.gameController.IsAttackersTurn() && !this.gameController.IsAttackersAttacksZero())
                 {
                     this.attackMenuController.OpenMenu();
                 }

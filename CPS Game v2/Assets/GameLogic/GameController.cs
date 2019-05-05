@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     public Image ScreenCover;
     public GameObject GameUI;
     public GameObject GameBoard;
+    private Module[] GameBoardObjects;
     public Text TurnText;
 
     public int NumberOfAttacksPerTurn = 1;
@@ -58,6 +59,7 @@ public class GameController : MonoBehaviour
 
     protected void Awake()
     {
+        this.GameBoardObjects = GameObject.FindObjectsOfType<Module>();
         this.NumberOfAttacksPerTurn = Options.Attacks;
 		this.Round = Options.Round;
         this.RoundLimit = Options.RoundLimit;
@@ -100,15 +102,22 @@ public class GameController : MonoBehaviour
 
             this.AttackerUI.SetActive(true);
             
-            for (int i = 0; i < 13; i++) {
-                this.WaterFlowController.TickModules();
+            foreach(Module m in this.GameBoardObjects)
+            {
+                m.HasInspectorAttached = false;
+                m.HasFixerAttached = false;
+                m.ResetColor();
             }
-
+            
             foreach (Oracle o in this.oracles)
             {
                 o.InputActive = false;
-                o.ApplyRule();
-                o.FixRule();
+                o.InspectModule();
+                o.FixModule();
+            }
+
+            for (int i = 0; i < 13; i++) {
+                this.WaterFlowController.TickModules();
             }
 
             if (++Turn > TurnLimit)

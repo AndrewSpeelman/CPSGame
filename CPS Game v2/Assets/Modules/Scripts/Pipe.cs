@@ -65,13 +65,16 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetInformation(MenuBuilder builder)
         {
-            if(this.SensorBroken)
+            builder = base.GetInformation(builder).GetBuilder();
+            if (this.SensorBroken)
             {
-                builder.AddStringItem(Strings.HasFlow, Strings.BooleanStrings.Bad);
+                builder.AddStringItem(Strings.HasFlow, Strings.Hacked);
+                builder.AddStringItem(Strings.IsPurityAsExpected, Strings.Hacked);
             }
             else
             {
-                builder = base.GetInformation(builder).GetBuilder();
+                builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
+                builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
             }
             return builder.Build();
         }

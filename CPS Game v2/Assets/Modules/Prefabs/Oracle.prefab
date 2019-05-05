@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 212926252368542398}
   - component: {fileID: 65420513989546966}
   - component: {fileID: 120848061397085514}
-  - component: {fileID: 114220589651844654}
+  - component: {fileID: 3833308734239031859}
   m_Layer: 0
-  m_Name: Valuation1
+  m_Name: Inspector1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &114220589651844654
+--- !u!114 &3833308734239031859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,11 +199,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1102526797967046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94b531595fea6f49913966d3aa5f17a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ee0bdf9a3ea7f645a5586f0ed5c5c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dropdowns: []
-  RuleIndicator: {fileID: 0}
 --- !u!1 &1114583208881314
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,9 +215,9 @@ GameObject:
   - component: {fileID: 212901072669293262}
   - component: {fileID: 65106584762602664}
   - component: {fileID: 120268876633022152}
-  - component: {fileID: 114212415893554430}
+  - component: {fileID: 4651153744397484419}
   m_Layer: 0
-  m_Name: Valuation2
+  m_Name: Inspector2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,7 +393,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &114212415893554430
+--- !u!114 &4651153744397484419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,11 +402,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1114583208881314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94b531595fea6f49913966d3aa5f17a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ee0bdf9a3ea7f645a5586f0ed5c5c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dropdowns: []
-  RuleIndicator: {fileID: 0}
 --- !u!1 &1151573525474462
 GameObject:
   m_ObjectHideFlags: 0
