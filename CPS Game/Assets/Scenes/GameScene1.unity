@@ -442,13 +442,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaterFlowController: {fileID: 282375714}
   SceneLoader: {fileID: 1308041964}
-  OraclePrefab: {fileID: 0}
+  OraclePrefab: {fileID: 1229390187271172, guid: 555c3370b98e8514684f3caa8a95a082,
+    type: 3}
   OracleSpawnPoint: {x: 0, y: 0, z: 0}
   AttackerUI: {fileID: 2106539841}
   Reservoir: {fileID: 0}
   TurnCounter: {fileID: 1469869320}
   ReservoirCounter: {fileID: 621672316}
-  ScreenCover: {fileID: 0}
+  ScreenCover: {fileID: 1059765793}
   GameUI: {fileID: 1692031713}
   GameBoard: {fileID: 893429563}
   TurnText: {fileID: 125642244}

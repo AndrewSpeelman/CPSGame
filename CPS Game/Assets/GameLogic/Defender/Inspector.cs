@@ -53,13 +53,10 @@ public class Inspector : MonoBehaviour
         if (!this.parentOracle.InputActive)
             return;
 
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-        if (Physics.Raycast(ray, out hit))
+        if (hit.collider != null)
         {
-            Transform objectHit = hit.transform;
-
             Module mod = hit.transform.GetComponent<Module>();
             if (mod != null)
             {
@@ -81,14 +78,8 @@ public class Inspector : MonoBehaviour
         if (!this.parentOracle.InputActive)
             return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float enter = 0.0f;
-
-        if (this.parentOracle.MovementPlane.Raycast(ray, out enter))
-        {
-            Vector3 hitPoint = ray.GetPoint(enter);
-            this.DrawLine(this.transform.position, hitPoint);
-        }
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        this.DrawLine(this.transform.position, mousePos);
     }
 
     private void Update()
@@ -101,8 +92,8 @@ public class Inspector : MonoBehaviour
         this.lineRenderer.enabled = true;
         this.lineRenderer.SetPositions(new List<Vector3>()
         {
-            new Vector3(start.x, start.y, start.z),
-            new Vector3(end.x, end.y, end.z)
+            new Vector3(start.x, start.y, -10),
+            new Vector3(end.x, end.y, -10)
         }.ToArray());
     }
 

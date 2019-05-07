@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < this.NumberOfOracles; i++)
         {
-            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x + (i * 2), this.OracleSpawnPoint.y, this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
+            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x - (i * 2), this.OracleSpawnPoint.y, this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
             oracles.Add(newOracle.GetComponent<Oracle>());
         }
 

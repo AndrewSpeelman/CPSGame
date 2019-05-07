@@ -16,9 +16,13 @@ public class Oracle : MonoBehaviour
 
     public GameObject OraclePopupPrefab;
 
+    private Vector3 screenPoint, offset;
+    private Vector2 minScreen = new Vector2(0, 0);
+    private Vector2 maxScreen = new Vector2(Screen.width, Screen.height);
     private Inspector firstInspector, secondInspector;
     private Fixer fixer;
     private Button modeButton;
+
     private void Awake()
     {
         var vals = this.GetComponentsInChildren<Inspector>();
@@ -34,30 +38,68 @@ public class Oracle : MonoBehaviour
         this.fixer.gameObject.SetActive(false);
     }
     
+    private void OnMouseDown()
+    {
+        if (InputActive)
+        {
+            screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+            offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+        }
+    }
+
     private void OnMouseDrag()
     {
         if (InputActive)
         {
-            //Shoot a raycast to the x-z plane that the owl resides to get the location to move to
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float enter = 0.0f;
-
-            if (this.MovementPlane.Raycast(ray, out enter))
+            Vector3 cursorPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+            Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(cursorPoint) + offset;
+ 
+            Vector2 minPosition = Camera.main.ScreenToWorldPoint(minScreen);
+            Vector2 maxPosition = Camera.main.ScreenToWorldPoint(maxScreen);
+ 
+            //owl screen bounds
+            if ( (cursorPosition.x) < minPosition.x)
             {
-                //Get the point that is clicked
-                Vector3 hitPoint = ray.GetPoint(enter);
-
-                //Move your cube GameObject to the point where you clicked
-                this.transform.position = hitPoint;
+                cursorPosition.x = minPosition.x;
+            }else if(cursorPosition.x > maxPosition.x)
+            {
+                cursorPosition.x = maxPosition.x;
             }
-
-            //Update the lines that come from the valuations
+ 
+            if (cursorPosition.y < minPosition.y)
+            {
+                cursorPosition.y = minPosition.y;
+            }else if(cursorPosition.y > maxPosition.y)
+            {
+                cursorPosition.y = maxPosition.y;
+            }
+ 
+            transform.position = cursorPosition;
             this.firstInspector.UpdateLine();
             this.secondInspector.UpdateLine();
-			this.fixer.UpdateLine();
+            this.fixer.UpdateLine();
         }
     }
+        // if (InputActive)
+        // {
+        //     //Shoot a raycast to the x-z plane that the owl resides to get the location to move to
+        //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //     float enter = 0.0f;
 
+        //     if (this.MovementPlane.Raycast(ray, out enter))
+        //     {
+        //         //Get the point that is clicked
+        //         Vector3 hitPoint = ray.GetPoint(enter);
+
+        //         //Move your cube GameObject to the point where you clicked
+        //         this.transform.position = hitPoint;
+        //     }
+
+        //     //Update the lines that come from the valuations
+        //     this.firstInspector.UpdateLine();
+        //     this.secondInspector.UpdateLine();
+		// 	this.fixer.UpdateLine();
+        // }
     /// <summary>
     /// Will let defender display the real information
     /// </summary>
