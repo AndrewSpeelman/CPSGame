@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.GameLogic;
+using Assets.Modules.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +15,7 @@ public class GameController : MonoBehaviour
     public SceneLoader SceneLoader;
 
     public GameObject OraclePrefab;
-    public Vector2 OracleSpawnPoint;
+    public Vector3 OracleSpawnPoint;
 
     public GameObject AttackerUI;
 
@@ -22,47 +24,63 @@ public class GameController : MonoBehaviour
     public Text TurnCounter;
     public Text ReservoirCounter;
 
-    public GameObject ScreenCover;
+    public Image ScreenCover;
     public GameObject GameUI;
+    public GameObject GameBoard;
+    private Module[] GameBoardObjects;
     public Text TurnText;
 
     public int NumberOfAttacksPerTurn = 1;
-    public int NumberOfOracles = 1;
+    public int NumberOfOracles = 2;
     public int NumAvailableAttacks { get; set; }
 
     private int Turn = 0;
+    private int Round = 1;
+    private int RoundLimit = 1;
 
     public int ReservoirLimit = 10;
-    public int TurnLimit = 15;
+    public int TurnLimit = 5;
 
     public Text TurnTimer;
     private DateTime ActiveTurnTimer;
-    private DateTime EndTurnTimer;
+    private DateTime StartTurnTimer;
+    public int TurnDuration = 15; // Seconds
     private bool ActiveTurn;
 
 
     public GameState GameState = GameState.AttackerTurn;
 
-    protected List<Oracle> oracles;
+    private List<Oracle> oracles;
 
-    private void Awake()
+    /// <summary>
+    /// Event listeners for when the turn changes
+    /// </summary>
+    private event EventHandler TurnChange;
+
+    protected void Awake()
     {
-        this.NumAvailableAttacks = this.NumberOfAttacksPerTurn;
+        this.GameBoardObjects = GameObject.FindObjectsOfType<Module>();
+        this.NumberOfAttacksPerTurn = Options.Attacks;
+		this.Round = Options.Round;
+        this.RoundLimit = Options.RoundLimit;
+        this.NumberOfOracles = Options.Oracles;
         Results.ReservoirLimit = ReservoirLimit;
         this.oracles = new List<Oracle>();
-        TurnText.gameObject.SetActive(false);
+        TurnText.gameObject.SetActive(true);
+        ScreenCover.gameObject.SetActive(false);
+        ScreenCover.fillCenter = true;
     }
 
     protected void Start()
     {
         for (int i = 0; i < this.NumberOfOracles; i++)
         {
-            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x, this.OracleSpawnPoint.y + (-i * 2), -9), Quaternion.identity);
+            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x - (i * 2), this.OracleSpawnPoint.y, this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
             oracles.Add(newOracle.GetComponent<Oracle>());
         }
 
-        ActiveTurnTimer = DateTime.Now;
-        EndTurnTimer = DateTime.Now.AddSeconds(15);
+        this.EndTurn();
+        StartTurnTimer = DateTime.Now;
         ActiveTurn = true;
     }
 
@@ -72,7 +90,6 @@ public class GameController : MonoBehaviour
 
         if (this.GameState == GameState.AttackerTurn)
         {
-            this.oracles.ForEach(o => o.InputActive = true);
             this.GameState = GameState.DefenderTurn;
             this.AttackerUI.SetActive(false);
             TurnText.text = "Defender's Turn";
@@ -84,70 +101,101 @@ public class GameController : MonoBehaviour
             this.NumAvailableAttacks = this.NumberOfAttacksPerTurn;
 
             this.AttackerUI.SetActive(true);
+            
+            foreach(Module m in this.GameBoardObjects)
+            {
+                m.HasInspectorAttached = false;
+                m.HasFixerAttached = false;
+                m.ResetColor();
+            }
+            
             foreach (Oracle o in this.oracles)
             {
                 o.InputActive = false;
-                o.ApplyRule();
+                o.InspectModule();
+                o.FixModule();
             }
 
-            this.WaterFlowController.TickModules();
+            for (int i = 0; i < 13; i++) {
+                this.WaterFlowController.TickModules();
+            }
 
-            if (Reservoir.Fill >= ReservoirLimit)
+            if (++Turn > TurnLimit)
             {
-                Results.ReservoirFill = Reservoir.Fill;
-                this.SceneLoader.LoadNextScene();
+                //Results.ReservoirFill = Reservoir.WaterList.Count;
+                Options.Round = ++Options.Round;
+                if(Round >= RoundLimit)
+                {
+                    this.SceneLoader.LoadVictoryScene();
+                }
+                else
+                {
+                    this.SceneLoader.LoadGameScene();
+                }
             }
-
-            if (++Turn >= TurnLimit)
-            {
-                Results.ReservoirFill = Reservoir.Fill;
-                this.SceneLoader.LoadNextScene();
-            }
-            ReservoirCounter.text = Reservoir.Fill.ToString();
-            TurnCounter.text = "Turn: " + (Turn+1);
+            //ReservoirCounter.text = Reservoir.WaterList.Count.ToString();
+            TurnCounter.text = "Round: " + Round + "/" + RoundLimit + " Turn: " + Turn + "/" + TurnLimit;
             TurnText.text = "Attacker's Turn";
             TurnText.color = new Color(1F, 0, 0);
         }
 
+        ScreenCover.gameObject.GetComponentsInChildren<Text>()[0].text = TurnText.text;
+        ScreenCover.gameObject.GetComponentsInChildren<Text>()[0].color = TurnText.color;
+        
         StartCoroutine(WaitForClick());
+
+        GameEvents.DispatchTurnChangeEvent(this.GameState);
     }
 
-    void Update()
+    protected void Update()
     {
-        if (TurnTimer != null && ActiveTurn)  //enables game to be run without a timer
+        if (ActiveTurn)
         {
             ActiveTurnTimer = DateTime.Now;
-            TurnTimer.text = "Time left: " + (EndTurnTimer.Second - ActiveTurnTimer.Second).ToString();
+            int SecondsRemaining = (TurnDuration - (ActiveTurnTimer - StartTurnTimer).Seconds);
+            TurnTimer.text = "Time Left: " + SecondsRemaining.ToString();
 
-            if (ActiveTurnTimer > EndTurnTimer)
+            if (SecondsRemaining > 5)
+            {
+                TurnTimer.color = new Color(.79f, .82f, .16f);
+            }
+            else if (SecondsRemaining % 2 == 0)
+            {
+                TurnTimer.color = new Color(1f, .3f, .15f);
+            }
+            else
+            {
+                TurnTimer.color = new Color(1f, .2f, 0);
+            }
+
+            if (ActiveTurnTimer > StartTurnTimer.AddSeconds(TurnDuration))
             {
                 EndTurn();   
             }
         }
-
     }
 
-    IEnumerator WaitForClick()
+    protected IEnumerator WaitForClick()
     {
-        ScreenCover.transform.localPosition -= Vector3.up * 15;
+        ScreenCover.gameObject.SetActive(true);
         GameUI.SetActive(false);
-        TurnText.gameObject.SetActive(true);
-        if (TurnTimer != null)
-        {
-            TurnTimer.gameObject.SetActive(false);
-        }
+        GameBoard.SetActive(false);
+        TurnTimer.gameObject.SetActive(false);
+
         yield return new WaitWhile(() => !Input.GetMouseButtonDown(0));
 
-        TurnText.gameObject.SetActive(false);
-        if (TurnTimer != null)
-        {
-            TurnTimer.gameObject.SetActive(true);
-        }
+        ScreenCover.gameObject.SetActive(false);
+        TurnTimer.gameObject.SetActive(true);
         GameUI.SetActive(true);
-        ScreenCover.transform.localPosition += Vector3.up * 15;
+        GameBoard.SetActive(true);
 
         ActiveTurn = true;
-        EndTurnTimer = DateTime.Now.AddSeconds(15);
+        StartTurnTimer = DateTime.Now;
+        if (this.GameState == GameState.DefenderTurn)
+        {
+            this.oracles.ForEach(o => o.InputActive = true);
+        }
     }
-}
 
+    
+}

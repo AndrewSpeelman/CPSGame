@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TutorialGameController : GameController
 {
-    public Text TutorialText;
+    //public Text TutorialText;
     private int stage;
     private string[] messages = {
             "Welcome to the CPS game Tutorial.\n" +
@@ -39,7 +39,14 @@ public class TutorialGameController : GameController
         base.Start();
     }
 
-    public void TutorialStep()
+
+    public void UpdateTutorialText()
+    {
+        //TutorialText.text = messages[stage];
+    }
+
+
+    /*public void TutorialStep()
     {
         if(stage <= 1)
         {
@@ -61,11 +68,6 @@ public class TutorialGameController : GameController
             EndTurnAvailable = true;
         }
         UpdateTutorialText();
-    }
-
-    public void UpdateTutorialText()
-    {
-        TutorialText.text = messages[stage];
     }
 
     new void EndTurn()
@@ -109,5 +111,5 @@ public class TutorialGameController : GameController
             CurrentModule = CurrentModule.PreviousModule;
         }
         return null;
-    }
+    }*/
 }

@@ -1,46 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 
 /// <summary>
-/// The Oracle has two valuations that, each can point at a module.  The Oracle uses these valuations to fix modules.
+/// The Oracle has two valuations that, each can point at a module.  
 /// </summary>
 public class Oracle : MonoBehaviour
 {
-    public GameObject FloatingTextPreFab;
     public bool InputActive = false;
     public string messageText = "Stopped an attack!";
 
-    private Valuation firstValuation, secondValuation;
+    public Plane MovementPlane;
+
+    public GameObject OraclePopupPrefab;
 
     private Vector3 screenPoint, offset;
-
     private Vector2 minScreen = new Vector2(0, 0);
     private Vector2 maxScreen = new Vector2(Screen.width, Screen.height);
-
-    private int count = 0; // used for testing right mouse clicks
+    private Inspector firstInspector, secondInspector;
+    private Fixer fixer;
+    private Button modeButton;
 
     private void Awake()
     {
-        var vals = this.GetComponentsInChildren<Valuation>();
-        this.firstValuation = vals[0];
-        this.secondValuation = vals[1];
+        var vals = this.GetComponentsInChildren<Inspector>();
+        this.firstInspector = vals[0];
+        this.secondInspector = vals[1];
+        this.fixer = this.GetComponentInChildren<Fixer>();
+		
     }
 
-    private void OnMouseOver()
+    private void Start()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            ShowFloatingText("RIGHT CLICK: " + count);
-            this.InputActive = false; // makes the owl unmoveable
-        }
-        if(Input.GetMouseButton(0) && Input.GetMouseButton(1))
-        {
-            this.InputActive = true; // makes the owl moveable again
-        }
+        this.MovementPlane = new Plane(Vector3.up, this.transform.position);
+        this.fixer.gameObject.SetActive(false);
     }
-
+    
     private void OnMouseDown()
     {
         if (InputActive)
@@ -50,19 +47,17 @@ public class Oracle : MonoBehaviour
         }
     }
 
-    
-
     private void OnMouseDrag()
     {
         if (InputActive)
         {
             Vector3 cursorPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(cursorPoint) + offset;
-
+ 
             Vector2 minPosition = Camera.main.ScreenToWorldPoint(minScreen);
             Vector2 maxPosition = Camera.main.ScreenToWorldPoint(maxScreen);
-
-            //owl screen bounds 
+ 
+            //owl screen bounds
             if ( (cursorPosition.x) < minPosition.x)
             {
                 cursorPosition.x = minPosition.x;
@@ -70,7 +65,7 @@ public class Oracle : MonoBehaviour
             {
                 cursorPosition.x = maxPosition.x;
             }
-
+ 
             if (cursorPosition.y < minPosition.y)
             {
                 cursorPosition.y = minPosition.y;
@@ -78,77 +73,76 @@ public class Oracle : MonoBehaviour
             {
                 cursorPosition.y = maxPosition.y;
             }
-
+ 
             transform.position = cursorPosition;
-            this.firstValuation.UpdateLine();
-            this.secondValuation.UpdateLine();
+            this.firstInspector.UpdateLine();
+            this.secondInspector.UpdateLine();
+            this.fixer.UpdateLine();
         }
+    }
+        // if (InputActive)
+        // {
+        //     //Shoot a raycast to the x-z plane that the owl resides to get the location to move to
+        //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //     float enter = 0.0f;
+
+        //     if (this.MovementPlane.Raycast(ray, out enter))
+        //     {
+        //         //Get the point that is clicked
+        //         Vector3 hitPoint = ray.GetPoint(enter);
+
+        //         //Move your cube GameObject to the point where you clicked
+        //         this.transform.position = hitPoint;
+        //     }
+
+        //     //Update the lines that come from the valuations
+        //     this.firstInspector.UpdateLine();
+        //     this.secondInspector.UpdateLine();
+		// 	this.fixer.UpdateLine();
+        // }
+    /// <summary>
+    /// Will let defender display the real information
+    /// </summary>
+    public void InspectModule()
+    {
+        if (this.firstInspector.CurrentSelection == null || this.secondInspector.CurrentSelection == null)
+        {
+            return;
+        }
+        this.firstInspector.CurrentSelection.GetComponent<Renderer>().material.color = new Color(0, 1F, 1F);
+        this.secondInspector.CurrentSelection.GetComponent<Renderer>().material.color = new Color(0, 1F, 1F);
+        this.firstInspector.CurrentSelection.HasInspectorAttached = true;
+        this.secondInspector.CurrentSelection.HasInspectorAttached = true;
+        return;
     }
 
     /// <summary>
-    /// Applies a rule between the two valuations, if successfull, it will fix the modules between the valuations.
+    /// Fixes a module if fixer attached
     /// </summary>
-    public void ApplyRule()
+    public void FixModule()
     {
-        if (this.firstValuation.CurrentSelection == null || this.secondValuation.CurrentSelection == null)
+		if (this.fixer.CurrentSelection == null)
         {
-            Debug.Log("must set both valuations");
             return;
         }
 
-        Module firstModule, secondModule;
-        if (this.firstValuation.CurrentSelection < this.secondValuation.CurrentSelection)
-        {
-            firstModule = this.firstValuation.CurrentSelection;
-            secondModule = this.secondValuation.CurrentSelection;
-        }
-        else
-        {
-            firstModule = this.secondValuation.CurrentSelection;
-            secondModule = this.firstValuation.CurrentSelection;
-        }
-
-        //Successful attack if all modules between the two modules are attacked
-        bool successfulDefense = true;
-        var mods = new List<Module>();
-        if (!firstModule.Attacked && !secondModule.Attacked)
-        {
-            var currModule = secondModule.PreviousModule;
-            while (currModule != firstModule)
-            {
-                if (!currModule.Attacked)
-                {
-                    successfulDefense = false;
-                    break;
-                }
-                else {
-                    mods.Add(currModule);
-                }
-
-                currModule = currModule.PreviousModule;
-            }
-        }
-        else
-        {
-            successfulDefense = false;
-        }
-
-        if (successfulDefense)
-        {
-            mods.ForEach(m => m.Fix());
-            if(FloatingTextPreFab !=null)
-                ShowFloatingText(messageText);
-        }
+		Module ToFix = this.fixer.CurrentSelection;
+		ToFix.Fix();
     }
-    void ShowFloatingText(string message)
-    {
-        var go = Instantiate(FloatingTextPreFab, transform.position, Quaternion.identity, transform);
-        go.GetComponent<TextMesh>().text = message;
-    }
-
-    public void SetValuation(Module first, Module second)
-    {
-        this.firstValuation.Select(first);
-        this.secondValuation.Select(second);
-    }
-}
+	
+	public void SwapMode(bool mode)
+	{
+		if(mode)
+		{
+			this.firstInspector.ModeChange(false);
+			this.secondInspector.ModeChange(false);
+			this.fixer.ModeChange(true);
+		}
+		else
+		{
+            this.fixer.ModeChange(false);
+			this.firstInspector.ModeChange(true);
+            this.secondInspector.ModeChange(true);
+		}
+	}
+  }

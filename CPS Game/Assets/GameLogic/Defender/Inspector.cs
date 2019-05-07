@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Valuation : MonoBehaviour
+public class Inspector : MonoBehaviour
 {
     /// <summary>
-    /// The Module the valuation is currently pointed at
+    /// The Module the inspector is currently pointed at
     /// </summary>
     public Module CurrentSelection {
         get {
@@ -14,6 +15,8 @@ public class Valuation : MonoBehaviour
             return null;
         }
     }
+
+    public Dropdown[] dropdowns;
 
     private Module module;
 
@@ -50,8 +53,8 @@ public class Valuation : MonoBehaviour
         if (!this.parentOracle.InputActive)
             return;
 
-        //determine if it was dragged onto a module, if so, select that module
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
         if (hit.collider != null)
         {
             Module mod = hit.transform.GetComponent<Module>();
@@ -79,6 +82,11 @@ public class Valuation : MonoBehaviour
         this.DrawLine(this.transform.position, mousePos);
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void DrawLine(Vector3 start, Vector3 end)
     {
         this.lineRenderer.enabled = true;
@@ -89,7 +97,7 @@ public class Valuation : MonoBehaviour
         }.ToArray());
     }
 
-    public void Select(Module mod)
+    private void Select(Module mod)
     {
         this.module = mod;
         this.DrawLine(this.transform.position, mod.transform.position);
@@ -97,7 +105,23 @@ public class Valuation : MonoBehaviour
 
     private void Deselect()
     {
-        this.module = null;
+        if(this.module)
+        {
+            this.module = null;
+        }
         this.lineRenderer.enabled = false;
+    }
+
+    public void ModeChange(bool isActive)
+    {
+        if(isActive)
+        {
+            this.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.Deselect();
+            this.gameObject.SetActive(false);
+        }
     }
 }
