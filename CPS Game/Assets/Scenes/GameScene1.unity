@@ -179,7 +179,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
 --- !u!4 &5916131 stripped
 Transform:
@@ -289,18 +290,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 813216393fec7684896edcfce3299490, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &224971805 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73,
-    type: 3}
-  m_PrefabInstance: {fileID: 1308462644}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &282375713
@@ -767,7 +756,8 @@ PrefabInstance:
       propertyPath: PreviousModule
       value: 
       objectReference: {fileID: 1936010694}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
 --- !u!4 &641377266 stripped
 Transform:
@@ -793,18 +783,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextModule: {fileID: 0}
+  NextModule: {fileID: 1936010694}
   PreviousModule: {fileID: 997974996}
   Attacked: 0
   HasInspectorAttached: 0
   HasFixerAttached: 0
-  InfoPopupPrefab: {fileID: 0}
+  InfoPopupPrefab: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
+    type: 3}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
   _IsAttacked: 0
-  AttackPopupPrefab: {fileID: 0}
-  FixPopupPrefab: {fileID: 0}
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
+  FixPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!1001 &735047142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -842,7 +835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059899217567472, guid: 19f183e47a0c5394b9804c387f7da7bf, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 212728295020099044, guid: 19f183e47a0c5394b9804c387f7da7bf,
         type: 3}
@@ -1137,7 +1130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1059765791
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1230,13 +1223,16 @@ MonoBehaviour:
   Attacked: 0
   HasInspectorAttached: 0
   HasFixerAttached: 0
-  InfoPopupPrefab: {fileID: 0}
+  InfoPopupPrefab: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
+    type: 3}
   _ExpectedPurity1: 0
   _ExpectedPurity2: 0
   _ExpectedPurity3: 0
   _IsAttacked: 0
-  AttackPopupPrefab: {fileID: 0}
-  FixPopupPrefab: {fileID: 0}
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
+  FixPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!1001 &1080607833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1406,7 +1402,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3.5826173
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73,
+        type: 3}
+      propertyPath: PreviousModule
+      value: 
+      objectReference: {fileID: 997974996}
+    - target: {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73,
+        type: 3}
+      propertyPath: NextModule
+      value: 
+      objectReference: {fileID: 1285837366}
+    m_RemovedComponents:
+    - {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
 --- !u!4 &1098279837 stripped
 Transform:
@@ -1505,6 +1512,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1200884845 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1797861047731168, guid: 58eb944207bbe2242afe4ae84a453f73,
+    type: 3}
+  m_PrefabInstance: {fileID: 1267688757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1200884846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200884845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextModule: {fileID: 1243438663}
+  PreviousModule: {fileID: 889476119}
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
+  InfoPopupPrefab: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
+    type: 3}
+  _ExpectedPurity1: 1
+  _ExpectedPurity2: 0
+  _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
+  FixPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!1001 &1208433483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1674,7 +1714,8 @@ PrefabInstance:
       propertyPath: NextModule
       value: 
       objectReference: {fileID: 1243438663}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
 --- !u!4 &1267688758 stripped
 Transform:
@@ -1741,7 +1782,7 @@ PrefabInstance:
         type: 3}
       propertyPath: PreviousModule
       value: 
-      objectReference: {fileID: 1638221804}
+      objectReference: {fileID: 1200884846}
     - target: {fileID: 114120365281760552, guid: 2a56dd1b1d2660542b025535d7521e6c,
         type: 3}
       propertyPath: InFlowingPump
@@ -1756,7 +1797,7 @@ PrefabInstance:
         type: 3}
       propertyPath: NextModule
       value: 
-      objectReference: {fileID: 224971805}
+      objectReference: {fileID: 1343758286}
     - target: {fileID: 114120365281760552, guid: 2a56dd1b1d2660542b025535d7521e6c,
         type: 3}
       propertyPath: _PurityControl
@@ -1881,9 +1922,13 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 2.1183054
       objectReference: {fileID: 0}
+    - target: {fileID: 1634944730348920, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
+      propertyPath: m_Name
+      value: PipeSprite
+      objectReference: {fileID: 0}
     - target: {fileID: 1001398908764492, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
       propertyPath: m_Name
-      value: Pipe3
+      value: PipeSensor
       objectReference: {fileID: 0}
     - target: {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73,
         type: 3}
@@ -1905,7 +1950,8 @@ PrefabInstance:
       propertyPath: NextModule
       value: 
       objectReference: {fileID: 202460600}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 58eb944207bbe2242afe4ae84a453f73, type: 3}
 --- !u!4 &1308462645 stripped
 Transform:
@@ -1913,6 +1959,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1308462644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1343758285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1797861047731168, guid: 58eb944207bbe2242afe4ae84a453f73,
+    type: 3}
+  m_PrefabInstance: {fileID: 1308462644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1343758286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343758285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextModule: {fileID: 202460600}
+  PreviousModule: {fileID: 1243438663}
+  Attacked: 0
+  HasInspectorAttached: 0
+  HasFixerAttached: 0
+  InfoPopupPrefab: {fileID: 1771340278282874, guid: c907c48fe8fa7a24fbf1939b59360195,
+    type: 3}
+  _ExpectedPurity1: 1
+  _ExpectedPurity2: 1
+  _ExpectedPurity3: 0
+  _IsAttacked: 0
+  AttackPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
+  FixPopupPrefab: {fileID: 1771340278282874, guid: 20825e5a22a5815499c875070af46bdd,
+    type: 3}
 --- !u!1 &1408182695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,7 +2202,7 @@ PrefabInstance:
         type: 3}
       propertyPath: NextModule
       value: 
-      objectReference: {fileID: 1638221804}
+      objectReference: {fileID: 1200884846}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a56dd1b1d2660542b025535d7521e6c, type: 3}
 --- !u!4 &1526032236 stripped
@@ -2169,7 +2248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4615739556474060, guid: e5f38c439bbf69b4586c048a785dfefd, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114482524715397362, guid: e5f38c439bbf69b4586c048a785dfefd,
         type: 3}
@@ -2198,18 +2277,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5f38c439bbf69b4586c048a785dfefd, type: 3}
---- !u!114 &1638221804 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114625599545536306, guid: 58eb944207bbe2242afe4ae84a453f73,
-    type: 3}
-  m_PrefabInstance: {fileID: 1267688757}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20fcc495de6bd1488566e7e72386d3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1692031713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,7 +2465,7 @@ PrefabInstance:
         type: 3}
       propertyPath: PreviousModule
       value: 
-      objectReference: {fileID: 224971805}
+      objectReference: {fileID: 1343758286}
     - target: {fileID: 114120365281760552, guid: 2a56dd1b1d2660542b025535d7521e6c,
         type: 3}
       propertyPath: InFlowingPump

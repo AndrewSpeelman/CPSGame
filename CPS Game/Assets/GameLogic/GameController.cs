@@ -94,6 +94,8 @@ public class GameController : MonoBehaviour
             this.AttackerUI.SetActive(false);
             TurnText.text = "Defender's Turn";
             TurnText.color = new Color(0, .5F, 1F);
+
+            this.WaterFlowController.TickModules();
         }
         else
         {
@@ -114,10 +116,6 @@ public class GameController : MonoBehaviour
                 o.InputActive = false;
                 o.InspectModule();
                 o.FixModule();
-            }
-
-            for (int i = 0; i < 13; i++) {
-                this.WaterFlowController.TickModules();
             }
 
             if (++Turn > TurnLimit)
