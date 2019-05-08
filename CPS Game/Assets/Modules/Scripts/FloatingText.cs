@@ -10,7 +10,6 @@ public class FloatingText : MonoBehaviour {
 	void Start ()
     {
         Destroy(gameObject, DestroyTime);
-
         transform.localPosition += Offset;
 	}
 	

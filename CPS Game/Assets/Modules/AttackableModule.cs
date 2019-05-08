@@ -53,7 +53,6 @@ namespace Assets.Modules
         /// </summary>
         public override void OnAwake()
         {
-            //this.AttackPopupInstance = Instantiate(this.AttackPopupPrefab, this.AttackPopupPrefab.transform.position, this.AttackPopupPrefab.transform.rotation);
             this.attackMenuController = new AttackMenuController(this, this.AttackPopupPrefab);
             this.fixMenuController = new FixMenuController(this, this.FixPopupPrefab);
             
@@ -86,7 +85,6 @@ namespace Assets.Modules
         /// </summary>
         public override void UpdatePopups()
         {
-            //this.attackMenuController.UpdateMenu();
         }
 
         /// <summary>

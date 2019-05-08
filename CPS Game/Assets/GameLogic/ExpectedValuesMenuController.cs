@@ -34,11 +34,6 @@ namespace Assets.GameLogic
         private Canvas rootCanvas;
 
         private Module module;
-
-        //public GameObject popupPrefab;
-        //private GameObject popupInstance;
-
-        // private Button[] buttons;
         private Text[] texts;
         private Text textContent;
 

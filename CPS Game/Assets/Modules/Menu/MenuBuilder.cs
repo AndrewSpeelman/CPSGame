@@ -63,7 +63,7 @@ namespace Assets.Modules.Menu
             return this;
         }
 
-        /**
+        /*
          * Creates the menu from the builder 
          */
         public MenuToDisplay Build()

@@ -47,7 +47,7 @@ namespace Assets.GameLogic
             if (!this.gameController)
                 return false; 
 
-            return (this.gameController.NumAvailableAttacks == 0) ? true : false;
+            return this.gameController.NumAvailableAttacks == 0;
         }
         
     }

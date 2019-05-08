@@ -16,12 +16,6 @@ public class WaterFlowController : MonoBehaviour
     private void Start()
     {
         Module currMod = Reservoir;
-        //while (currMod.PreviousModule)
-        //{
-         //   currMod = currMod.PreviousModule;
-        //}
-        //this.firstModule = currMod;
-        //this.firstModule.Water = new WaterObject();
     }
 
     /// <summary>
@@ -44,9 +38,6 @@ public class WaterFlowController : MonoBehaviour
                 var currentModule = this.Reservoir.NextModule;
                 while (currentModule != null)
                 {
-                    //if (!currentModule.HasFlow)
-                       // break; // Stop the flow here
-
                     currentModule.Tick();
                     water = currentModule.OnFlow(water);
 

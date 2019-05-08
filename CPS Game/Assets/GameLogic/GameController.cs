@@ -122,7 +122,6 @@ public class GameController : MonoBehaviour
 
             if (++Turn > TurnLimit)
             {
-                //Results.ReservoirFill = Reservoir.WaterList.Count;
                 Options.Round = ++Options.Round;
                 if(Round >= RoundLimit)
                 {
@@ -133,7 +132,6 @@ public class GameController : MonoBehaviour
                     this.SceneLoader.LoadGameScene();
                 }
             }
-            //ReservoirCounter.text = Reservoir.WaterList.Count.ToString();
             TurnCounter.text = "Round: " + Round + "/" + RoundLimit + " Turn: " + Turn + "/" + TurnLimit;
             TurnText.text = "Attacker's Turn";
             TurnText.color = new Color(1F, 0, 0);
@@ -170,7 +168,7 @@ public class GameController : MonoBehaviour
 
             if (ActiveTurnTimer > StartTurnTimer.AddSeconds(TurnDuration))
             {
-                EndTurn();   
+                EndTurn();
             }
         }
     }
@@ -196,6 +194,4 @@ public class GameController : MonoBehaviour
             this.oracles.ForEach(o => o.InputActive = true);
         }
     }
-
-    
 }

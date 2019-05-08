@@ -37,11 +37,6 @@ namespace Assets.GameLogic
         private Canvas rootCanvas;
 
         private ICanBeAttacked module;
-
-        //public GameObject popupPrefab;
-        //private GameObject popupInstance;
-
-       // private Button[] buttons;
         private Text[] texts;
         private Text textContent;
 
@@ -58,8 +53,6 @@ namespace Assets.GameLogic
 
             this.texts = FixMenuController.popupInstance.GetComponentsInChildren<Text>();
             this.textContent = this.texts[0];
-
-            //this.buttons = FixMenuController.popupInstance.GetComponentsInChildren<Button>();
 
             textContent.text = "Fix Menu";
             this.CloseMenu();
@@ -103,7 +96,6 @@ namespace Assets.GameLogic
                 this.addListener(i);
 
                 buttons[i].gameObject.SetActive(true);
-                //this.buttons[i].transform.position = new Vector3(100, this.buttons[i].transform.position.y, this.buttons[i].transform.position.z);
             }
 
             // Move to position
@@ -124,7 +116,6 @@ namespace Assets.GameLogic
                 buttons[i].onClick.RemoveAllListeners();
                 buttons[i].GetComponentInChildren<Text>().text = "";
                 buttons[i].gameObject.SetActive(false);
-                //this.buttons[i].transform.position = new Vector3(1000000, this.buttons[i].transform.position.y, this.buttons[i].transform.position.z);
             }
 
             FixMenuController.popupInstance.SetActive(false);

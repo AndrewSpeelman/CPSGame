@@ -10,8 +10,5 @@ namespace Assets.Interfaces.Modules
         bool Purity1 { get; }
         bool Purity2 { get; }
         bool Purity3 { get; }
-
-        //int TargetPurity { get; }
-        //int CurrentPurity { get; }
     }
 }

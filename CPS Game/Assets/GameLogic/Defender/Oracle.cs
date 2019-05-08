@@ -80,26 +80,7 @@ public class Oracle : MonoBehaviour
             this.fixer.UpdateLine();
         }
     }
-        // if (InputActive)
-        // {
-        //     //Shoot a raycast to the x-z plane that the owl resides to get the location to move to
-        //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //     float enter = 0.0f;
 
-        //     if (this.MovementPlane.Raycast(ray, out enter))
-        //     {
-        //         //Get the point that is clicked
-        //         Vector3 hitPoint = ray.GetPoint(enter);
-
-        //         //Move your cube GameObject to the point where you clicked
-        //         this.transform.position = hitPoint;
-        //     }
-
-        //     //Update the lines that come from the valuations
-        //     this.firstInspector.UpdateLine();
-        //     this.secondInspector.UpdateLine();
-		// 	this.fixer.UpdateLine();
-        // }
     /// <summary>
     /// Will let defender display the real information
     /// </summary>
