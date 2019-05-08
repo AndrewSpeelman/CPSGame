@@ -13,7 +13,7 @@ namespace Assets.Modules.Scripts
         public bool IsStartingReservoir = false; 
         private bool DrainBroken;
         private bool SensorBroken;
-        private String AttackToFix;
+
         [SerializeField]
         [Range(1, 3)]
         private int _MaxCapacity; 
@@ -88,15 +88,6 @@ namespace Assets.Modules.Scripts
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Sets what problem to be fixed
-        /// </summary>
-        /// <returns></returns>
-        public override void SetAttackToFix(string FixMenuOption)
-        {
-            AttackToFix = FixMenuOption;
         }
 
         /// <summary>

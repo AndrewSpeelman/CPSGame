@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour
     private bool ActiveTurn;
 
 
-    public GameState GameState = GameState.AttackerTurn;
+    public GameState GameState;
 
     private List<Oracle> oracles;
 

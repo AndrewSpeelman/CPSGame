@@ -15,7 +15,6 @@ namespace Assets.Modules.Scripts
         public bool IsPumping { get { return _isPumping; } protected set { _isPumping = value; } }
 
         private bool SensorBroken; 
-        private String AttackToFix;
 
         public Pump()
         {
@@ -69,16 +68,6 @@ namespace Assets.Modules.Scripts
             }
 
             return true;
-        }
-
-
-        /// <summary>
-        /// Sets what problem to be fixed
-        /// </summary>
-        /// <returns></returns>
-        public override void SetAttackToFix(string FixMenuOption)
-        {
-            AttackToFix = FixMenuOption;
         }
 
         /// <summary>

@@ -11,7 +11,6 @@ namespace Assets.Modules.Scripts
     public class Pipe : AttackableModule
     {
         private bool SensorBroken;
-        private String AttackToFix;
 
         public Pipe()
         {
@@ -31,16 +30,6 @@ namespace Assets.Modules.Scripts
             this.SensorBroken = true;
 
             return true;
-        }
-
-
-        /// <summary>
-        /// Sets what problem to be fixed
-        /// </summary>
-        /// <returns></returns>
-        public override void SetAttackToFix(string FixMenuOption)
-        {
-            AttackToFix = FixMenuOption;
         }
 
         /// <summary>

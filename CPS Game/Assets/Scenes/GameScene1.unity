@@ -437,7 +437,7 @@ MonoBehaviour:
   SceneLoader: {fileID: 1308041964}
   OraclePrefab: {fileID: 1229390187271172, guid: 555c3370b98e8514684f3caa8a95a082,
     type: 3}
-  OracleSpawnPoint: {x: 0, y: 0, z: 0}
+  OracleSpawnPoint: {x: -4, y: 0, z: 0}
   AttackerUI: {fileID: 2106539841}
   Reservoir: {fileID: 0}
   TurnCounter: {fileID: 1469869320}
@@ -783,7 +783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4059899217567472, guid: 19f183e47a0c5394b9804c387f7da7bf, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 212728295020099044, guid: 19f183e47a0c5394b9804c387f7da7bf,
         type: 3}
@@ -1954,7 +1954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4615739556474060, guid: e5f38c439bbf69b4586c048a785dfefd, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114482524715397362, guid: e5f38c439bbf69b4586c048a785dfefd,
         type: 3}
