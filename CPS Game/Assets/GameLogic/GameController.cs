@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < this.NumberOfOracles; i++)
         {
-            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x - (i * 2), this.OracleSpawnPoint.y, this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
+            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x, this.OracleSpawnPoint.y - (i * 2), this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
             oracles.Add(newOracle.GetComponent<Oracle>());
         }
 
@@ -92,8 +92,9 @@ public class GameController : MonoBehaviour
         {
             this.GameState = GameState.DefenderTurn;
             this.AttackerUI.SetActive(false);
-            TurnText.text = "Defender's Turn";
+            TurnText.text = "Defender's\nTurn";
             TurnText.color = new Color(0, .5F, 1F);
+            TurnText.transform.Rotate(0,0,180);
         }
         else
         {
@@ -133,8 +134,9 @@ public class GameController : MonoBehaviour
                 }
             }
             TurnCounter.text = "Round: " + Round + "/" + RoundLimit + " Turn: " + Turn + "/" + TurnLimit;
-            TurnText.text = "Attacker's Turn";
+            TurnText.text = "Attacker's\n Turn";
             TurnText.color = new Color(1F, 0, 0);
+            TurnText.transform.Rotate(0,0,180);
         }
 
         ScreenCover.gameObject.GetComponentsInChildren<Text>()[0].text = TurnText.text;

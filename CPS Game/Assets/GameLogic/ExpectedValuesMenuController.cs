@@ -95,7 +95,8 @@ namespace Assets.GameLogic
 
             // Move to position
             RectTransform uiTransform = InfoMenuController.popupInstance.GetComponent<RectTransform>();
-            uiTransform.position = new Vector2((float)800, (float)900);
+            uiTransform.position = new Vector2((float)1625, (float)545);
+            uiTransform.rotation = Quaternion.Euler(0,0,90);
 
             InfoMenuController.popupInstance.SetActive(true);
         }

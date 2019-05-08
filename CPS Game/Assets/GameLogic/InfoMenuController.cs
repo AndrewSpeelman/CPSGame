@@ -29,8 +29,7 @@ namespace Assets.GameLogic
             }
         }
 
-        private GameController gameController;
-        private GameControllerWrapper gameControllerWrapper;
+        private GameControllerWrapper gameController;
         private Canvas rootCanvas;
 
         private Module module;
@@ -45,7 +44,7 @@ namespace Assets.GameLogic
             if (InfoMenuController._popupPrefab == null && popupPrefab != null)
                 InfoMenuController._popupPrefab = popupPrefab;
 
-            this.gameController = GameControllerWrapper.GetGameController();
+            this.gameController = new GameControllerWrapper();
             this.rootCanvas = (Canvas)GameObject.FindObjectOfType(typeof(Canvas));
 
             this.texts = InfoMenuController.popupInstance.GetComponentsInChildren<Text>();
@@ -93,10 +92,21 @@ namespace Assets.GameLogic
             this.CloseMenu();
             this.UpdateMenu();
 
-            // Move to position
-            RectTransform uiTransform = InfoMenuController.popupInstance.GetComponent<RectTransform>();
-            uiTransform.position = new Vector2((float)400, (float)900);
+                RectTransform uiTransform = InfoMenuController.popupInstance.GetComponent<RectTransform>();
+            // Move to position dependent on player turn
+            if(this.gameController.IsAttackersTurn())
+            {
+                uiTransform.position = new Vector2((float)250, (float)565);
+                uiTransform.rotation = Quaternion.Euler(0,0,270);
+            }
+            else
+            {
+                uiTransform.position = new Vector2((float)1800, (float)545);
+                uiTransform.rotation = Quaternion.Euler(0,0,90);
+            }
 
+        
+            
             InfoMenuController.popupInstance.SetActive(true);
         }
 

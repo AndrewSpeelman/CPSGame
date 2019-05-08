@@ -60,7 +60,6 @@ namespace Assets.GameLogic
 
             // Hide the menu if it changes to the defender's turn
             GameEvents.OnTurnChange((turnChangeArgs) => {
-                if (turnChangeArgs.State == GameState.DefenderTurn)
                     this.CloseMenu();
             });
         }
@@ -100,7 +99,8 @@ namespace Assets.GameLogic
 
             // Move to position
             RectTransform uiTransform = FixMenuController.popupInstance.GetComponent<RectTransform>();
-            uiTransform.position = new Vector2((float)1700, (float)500);
+            uiTransform.position = new Vector2((float)1675, (float)210);
+            uiTransform.rotation = Quaternion.Euler(0,0,90);
 
             FixMenuController.popupInstance.SetActive(true);
         }
