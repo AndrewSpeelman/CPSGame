@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public Vector3 OracleSpawnPoint;
 
     public GameObject AttackerUI;
+    public GameObject DefenderUI;
 
     public Reservoir Reservoir;
 
@@ -25,6 +26,8 @@ public class GameController : MonoBehaviour
     public Text ReservoirCounter;
 
     public Image ScreenCover;
+    public Image AttackerUICover;
+    public Image DefenderUICover;
     public GameObject GameUI;
     public GameObject GameBoard;
     private Module[] GameBoardObjects;
@@ -69,6 +72,8 @@ public class GameController : MonoBehaviour
         TurnText.gameObject.SetActive(true);
         ScreenCover.gameObject.SetActive(false);
         ScreenCover.fillCenter = true;
+        AttackerUICover.gameObject.SetActive(false);
+        DefenderUICover.gameObject.SetActive(false);
     }
 
     protected void Start()
@@ -92,16 +97,22 @@ public class GameController : MonoBehaviour
         {
             this.GameState = GameState.DefenderTurn;
             this.AttackerUI.SetActive(false);
+            this.DefenderUI.SetActive(true);
             TurnText.text = "Defender's\nTurn";
             TurnText.color = new Color(0, .5F, 1F);
             TurnText.transform.Rotate(0,0,180);
+            AttackerUICover.gameObject.SetActive(true);
+            DefenderUICover.gameObject.SetActive(false);
         }
         else
         {
             this.GameState = GameState.AttackerTurn;
             this.NumAvailableAttacks = this.NumberOfAttacksPerTurn;
 
+            AttackerUICover.gameObject.SetActive(false);
+            DefenderUICover.gameObject.SetActive(true);
             this.AttackerUI.SetActive(true);
+            this.DefenderUI.SetActive(false);
             
             foreach(Module m in this.GameBoardObjects)
             {
