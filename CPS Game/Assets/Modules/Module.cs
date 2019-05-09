@@ -194,8 +194,12 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
     {
         if (inflow == null)
         {
+            WaterObject myWater = null;
+            if (this.Water != null)
+                myWater = this.Water.Copy();
+
             this.Water = null;
-            return null;
+            return myWater;
         }
 
         if (this.Water == null)

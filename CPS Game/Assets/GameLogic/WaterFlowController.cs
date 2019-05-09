@@ -29,7 +29,7 @@ public class WaterFlowController : MonoBehaviour
         // Flow water through the reservoir, to start flow through everything else
         try
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
                 this.Reservoir.Tick();
                 WaterObject water = this.Reservoir.OnFlow(new WaterObject());
