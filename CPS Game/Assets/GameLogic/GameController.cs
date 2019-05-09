@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
 
     public GameObject AttackerUI;
     public GameObject DefenderUI;
+    private AttackerUI AttackerUIObject;
+    private DefenderUI DefenderUIObject;
 
     public Reservoir Reservoir;
 
@@ -69,6 +71,8 @@ public class GameController : MonoBehaviour
         this.NumberOfOracles = Options.Oracles;
         Results.ReservoirLimit = ReservoirLimit;
         this.oracles = new List<Oracle>();
+        this.AttackerUIObject = GameObject.FindGameObjectWithTag("Attacker").GetComponent<AttackerUI>();
+        this.DefenderUIObject = GameObject.FindGameObjectWithTag("Defender").GetComponent<DefenderUI>();
         TurnText.gameObject.SetActive(true);
         ScreenCover.gameObject.SetActive(false);
         ScreenCover.fillCenter = true;
@@ -83,6 +87,10 @@ public class GameController : MonoBehaviour
             var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x, this.OracleSpawnPoint.y - (i * 2), this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
             oracles.Add(newOracle.GetComponent<Oracle>());
         }
+        AttackerUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+        AttackerUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
+        DefenderUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+        DefenderUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
 
         this.EndTurn();
         StartTurnTimer = DateTime.Now;
@@ -144,7 +152,10 @@ public class GameController : MonoBehaviour
                     this.SceneLoader.LoadGameScene();
                 }
             }
-            TurnCounter.text = "Round: " + Round + "/" + RoundLimit + " Turn: " + Turn + "/" + TurnLimit;
+            AttackerUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+            AttackerUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
+            DefenderUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+            DefenderUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
             TurnText.text = "Attacker's\n Turn";
             TurnText.color = new Color(1F, 0, 0);
             TurnText.transform.Rotate(0,0,180);
@@ -164,20 +175,8 @@ public class GameController : MonoBehaviour
         {
             ActiveTurnTimer = DateTime.Now;
             int SecondsRemaining = (TurnDuration - (ActiveTurnTimer - StartTurnTimer).Seconds);
-            TurnTimer.text = "Time Left: " + SecondsRemaining.ToString();
-
-            if (SecondsRemaining > 5)
-            {
-                TurnTimer.color = new Color(.79f, .82f, .16f);
-            }
-            else if (SecondsRemaining % 2 == 0)
-            {
-                TurnTimer.color = new Color(1f, .3f, .15f);
-            }
-            else
-            {
-                TurnTimer.color = new Color(1f, .2f, 0);
-            }
+            AttackerUIObject.SetTurnTimer("Time: " + SecondsRemaining.ToString());
+            DefenderUIObject.SetTurnTimer("Time: " + SecondsRemaining.ToString());
 
             if (ActiveTurnTimer > StartTurnTimer.AddSeconds(TurnDuration))
             {

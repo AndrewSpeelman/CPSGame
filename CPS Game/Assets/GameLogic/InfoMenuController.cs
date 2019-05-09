@@ -92,11 +92,11 @@ namespace Assets.GameLogic
             this.CloseMenu();
             this.UpdateMenu();
 
-                RectTransform uiTransform = InfoMenuController.popupInstance.GetComponent<RectTransform>();
+            RectTransform uiTransform = InfoMenuController.popupInstance.GetComponent<RectTransform>();
             // Move to position dependent on player turn
             if(this.gameController.IsAttackersTurn())
             {
-                uiTransform.position = new Vector2((float)250, (float)565);
+                uiTransform.position = new Vector2((float)300, (float)565);
                 uiTransform.rotation = Quaternion.Euler(0,0,270);
             }
             else
