@@ -22,6 +22,6 @@ namespace Assets.GameLogic
         public static ScoreController GetScoreController()
         {
             return GameObject.FindGameObjectWithTag("ScoreController").GetComponent<ScoreController>();
-        }       
+        }
     }
 }
