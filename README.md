@@ -100,11 +100,11 @@ data/object management given a specific event handler.
   script writing will be greatly useful before attempting to update or work with
   the given code.
 
-# Current Bugs
-  - One Bug
-  - Two Bug
-  - Red Bug
-  - Blue Bug
+# Current Bugs and Undesirable Architecture
+  - Oracles will sporadically disappear on Defender Turn start
+  - Use of Type Doubles in `Ints.cs`
+  - Capacity on Reservoirs is not tracked
+  - Menus Initial placement is incorrect
 
 # Future Work
 ## User Interface
