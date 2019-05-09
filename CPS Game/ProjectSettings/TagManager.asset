@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Attacker
   - Defender
+  - ScoreController
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,6 @@
-﻿using Assets.GameLogic;
+﻿using Assets;
+using Assets.GameLogic;
+using Assets.Modules;
 using Assets.Modules.Scripts;
 using System;
 using System.Collections;
@@ -31,8 +33,9 @@ public class GameController : MonoBehaviour
     public Image AttackerUICover;
     public Image DefenderUICover;
     public GameObject GameUI;
+    public ScoreController ScoreController;
     public GameObject GameBoard;
-    private Module[] GameBoardObjects;
+    private AttackableModule[] GameBoardObjects;
     public Text TurnText;
 
     public int NumberOfAttacksPerTurn = 1;
@@ -64,7 +67,7 @@ public class GameController : MonoBehaviour
 
     protected void Awake()
     {
-        this.GameBoardObjects = GameObject.FindObjectsOfType<Module>();
+        this.GameBoardObjects = GameObject.FindObjectsOfType<AttackableModule>();
         this.NumberOfAttacksPerTurn = Options.Attacks;
 		this.Round = Options.Round;
         this.RoundLimit = Options.RoundLimit;
@@ -73,6 +76,7 @@ public class GameController : MonoBehaviour
         this.oracles = new List<Oracle>();
         this.AttackerUIObject = GameObject.FindGameObjectWithTag("Attacker").GetComponent<AttackerUI>();
         this.DefenderUIObject = GameObject.FindGameObjectWithTag("Defender").GetComponent<DefenderUI>();
+        this.ScoreController = GameObject.FindGameObjectWithTag("ScoreController").GetComponent<ScoreController>();
         TurnText.gameObject.SetActive(true);
         ScreenCover.gameObject.SetActive(false);
         ScreenCover.fillCenter = true;
@@ -123,18 +127,30 @@ public class GameController : MonoBehaviour
             this.AttackerUI.SetActive(true);
             this.DefenderUI.SetActive(false);
             
-            foreach(Module m in this.GameBoardObjects)
+            // Reset modules attachments
+            foreach(AttackableModule m in this.GameBoardObjects)
             {
                 m.HasInspectorAttached = false;
                 m.HasFixerAttached = false;
                 m.ResetColor();
             }
             
+            // Oracles Get their values and fixes done
             foreach (Oracle o in this.oracles)
             {
                 o.InputActive = false;
                 o.InspectModule();
                 o.FixModule();
+            }
+
+            // Score points for non-fixed modules
+            foreach(AttackableModule m in this.GameBoardObjects)
+            {
+                if(m.IsAttacked)
+                {
+                    m.SetAttackDuration(m.GetAttackDuration()+1);
+                    ScoreController.AddAttackerScore(m.GetAttackDuration() * Ints.Score.Defender.Fix);
+                }
             }
 
             for (int i = 0; i < 13; i++) {
