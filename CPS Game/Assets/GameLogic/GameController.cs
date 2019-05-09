@@ -119,6 +119,10 @@ public class GameController : MonoBehaviour
             TurnText.color = new Color(0, .5F, 1F);
 
             this.WaterLeavingSystemOnLastTurnChange = this.WaterFlowController.TickModules();
+            foreach(WaterObject w in this.WaterLeavingSystemOnLastTurnChange)
+            {
+                ScoreController.AddDefenderScore(w.GetWaterScore());
+            }
             TurnText.transform.Rotate(0,0,180);
             AttackerUICover.gameObject.SetActive(true);
             DefenderUICover.gameObject.SetActive(false);

@@ -17,7 +17,12 @@ namespace Assets
             public static class Defender
             {
                 public const int Fix = 100;
-                public const int WaterBase = 5;
+                public const double WaterBaseValue = 5;
+                public const double WaterPurityMultiplier = 1;
+                public const double WaterPurity1 = 0.20;
+                public const double WaterPurity2 = 0.30;
+                public const double WaterPurity3 = 0.50;
+                
             }
 
         }

@@ -7,7 +7,7 @@ namespace Assets.Interfaces.Modules
 {
     public interface IPumpWater
     {
-        bool IsPumping { get; }
+        bool PumpBroken { get; }
 
         void Off();
         void On(); 

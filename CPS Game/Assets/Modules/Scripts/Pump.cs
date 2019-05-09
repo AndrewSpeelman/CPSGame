@@ -11,26 +11,27 @@ namespace Assets.Modules.Scripts
     public class Pump : AttackableModule, IPumpWater
     {
         [SerializeField]
-        private bool _isPumping = true; 
-        public bool IsPumping { get { return _isPumping; } protected set { _isPumping = value; } }
+        private bool _PumpBroken = true; 
+        public bool PumpBroken { get { return _PumpBroken; } protected set { _PumpBroken = value; } }
 
         private bool SensorBroken; 
 
         public Pump()
         {
             this.SensorBroken = false;
+            this.PumpBroken = false;
             this.AttackToFix = null;
         }
 
 
         public void Off()
         {
-            this.IsPumping = false;
+            this.PumpBroken = true;
         }
 
         public void On()
         {
-            this.IsPumping = true;
+            this.PumpBroken = false;
         }
 
 
@@ -41,7 +42,7 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override WaterObject OnFlow(WaterObject inflow)
         {
-            if (!this.IsPumping)
+            if (this.PumpBroken)
                 return null; // Do not continue the flow of water if pumping is off
 
             return base.OnFlow(inflow);
@@ -59,7 +60,7 @@ namespace Assets.Modules.Scripts
             switch (AttackMenuOption)
             {
                 case Strings.AttackStrings.Pump.Flow:
-                    this.IsPumping = false; 
+                    this.PumpBroken = true; 
                     break;
 
                 case Strings.AttackStrings.Pump.Sensor:
@@ -79,9 +80,9 @@ namespace Assets.Modules.Scripts
             switch (this.AttackToFix)
             {
                 case Strings.FixStrings.Pump.Flow:
-                    if(this.IsPumping)
+                    if(this.PumpBroken)
                     {
-                        this.IsPumping = false;
+                        this.PumpBroken = false;
                         return base.Fix();
                     }
                     break;
@@ -114,7 +115,7 @@ namespace Assets.Modules.Scripts
             {
                 builder.AddBoolItem(Strings.HasFlow, this.HasFlow);
                 builder.AddBoolItem(Strings.IsPurityAsExpected, this.IsPurityAsExpected);
-                builder.AddBoolItem(Strings.IsPumping, this.IsPumping);
+                builder.AddBoolItem(Strings.IsPumping, !this.PumpBroken);
             }
             return builder.Build();
         }

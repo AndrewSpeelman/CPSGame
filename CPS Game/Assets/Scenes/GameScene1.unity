@@ -1147,7 +1147,7 @@ MonoBehaviour:
   AttackerUICover: {fileID: 1903448069}
   DefenderUICover: {fileID: 1362298658}
   GameUI: {fileID: 1692031713}
-  ScoreController: {fileID: 0}
+  ScoreController: {fileID: 1949932022}
   GameBoard: {fileID: 893429563}
   TurnText: {fileID: 87416483}
   NumberOfAttacksPerTurn: 1
