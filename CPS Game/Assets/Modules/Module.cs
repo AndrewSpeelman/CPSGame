@@ -270,8 +270,9 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
                 }
                 else
                 {
-                    this.expectedValuesMenuController.OpenMenu();
+                    this.infoMenuController.CloseMenu();
                 }
+                this.expectedValuesMenuController.OpenMenu();
             }
             if (this.gameController.IsAttackersTurn())
             {

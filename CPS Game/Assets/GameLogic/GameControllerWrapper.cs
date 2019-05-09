@@ -49,6 +49,11 @@ namespace Assets.GameLogic
 
             return this.gameController.NumAvailableAttacks == 0;
         }
+
+        public int GetAttacks()
+        {
+            return this.gameController.NumAvailableAttacks;
+        }
         
     }
 }
