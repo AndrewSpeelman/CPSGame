@@ -85,6 +85,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < this.NumberOfOracles; i++)
         {
             var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x, this.OracleSpawnPoint.y - (i * 2), this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
+            newOracle.transform.Rotate(0,0,90);
             oracles.Add(newOracle.GetComponent<Oracle>());
         }
         AttackerUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
