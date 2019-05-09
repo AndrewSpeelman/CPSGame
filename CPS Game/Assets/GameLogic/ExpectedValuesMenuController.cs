@@ -16,16 +16,16 @@ namespace Assets.GameLogic
         {
             get
             {
-                if (InfoMenuController._popupInstance == null)
+                if (ExpectedValuesMenuController._popupInstance == null)
                 {
                     var rootCanvas = (Canvas)GameObject.FindObjectOfType(typeof(Canvas));
-                    InfoMenuController._popupInstance = UnityEngine.Object.Instantiate(_popupPrefab, _popupPrefab.transform.position, _popupPrefab.transform.rotation);
+                    ExpectedValuesMenuController._popupInstance = UnityEngine.Object.Instantiate(_popupPrefab, _popupPrefab.transform.position, _popupPrefab.transform.rotation);
                     _popupInstance.transform.SetParent(rootCanvas.transform, false);
 
 
                 }
 
-                return InfoMenuController._popupInstance;
+                return ExpectedValuesMenuController._popupInstance;
             }
         }
 
@@ -42,13 +42,13 @@ namespace Assets.GameLogic
         {
             this.module = obj;
 
-            if (InfoMenuController._popupPrefab == null && popupPrefab != null)
-                InfoMenuController._popupPrefab = popupPrefab;
+            if (ExpectedValuesMenuController._popupPrefab == null && popupPrefab != null)
+                ExpectedValuesMenuController._popupPrefab = popupPrefab;
 
             this.gameController = GameControllerWrapper.GetGameController();
             this.rootCanvas = (Canvas)GameObject.FindObjectOfType(typeof(Canvas));
 
-            this.texts = InfoMenuController.popupInstance.GetComponentsInChildren<Text>();
+            this.texts = ExpectedValuesMenuController.popupInstance.GetComponentsInChildren<Text>();
             this.textContent = this.texts[1];
 
             this.texts[0].text = "Expected Values";
@@ -94,10 +94,11 @@ namespace Assets.GameLogic
             this.UpdateMenu();
 
             // Move to position
-            RectTransform uiTransform = InfoMenuController.popupInstance.GetComponent<RectTransform>();
-            uiTransform.position = new Vector2((float)800, (float)900);
+            RectTransform uiTransform = ExpectedValuesMenuController.popupInstance.GetComponent<RectTransform>();
+            uiTransform.position = new Vector2((float)1625, (float)545);
+            uiTransform.rotation = Quaternion.Euler(0,0,90);
 
-            InfoMenuController.popupInstance.SetActive(true);
+            ExpectedValuesMenuController.popupInstance.SetActive(true);
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace Assets.GameLogic
         public void CloseMenu()
         {
             this.textContent.text = "";
-            InfoMenuController.popupInstance.SetActive(false);
+            ExpectedValuesMenuController.popupInstance.SetActive(false);
         }
     }
 }

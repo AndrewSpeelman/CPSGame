@@ -1,4 +1,6 @@
-﻿using Assets.GameLogic;
+﻿using Assets;
+using Assets.GameLogic;
+using Assets.Modules;
 using Assets.Modules.Scripts;
 using System;
 using System.Collections;
@@ -18,6 +20,9 @@ public class GameController : MonoBehaviour
     public Vector3 OracleSpawnPoint;
 
     public GameObject AttackerUI;
+    public GameObject DefenderUI;
+    private AttackerUI AttackerUIObject;
+    private DefenderUI DefenderUIObject;
 
     public Reservoir Reservoir;
 
@@ -25,9 +30,12 @@ public class GameController : MonoBehaviour
     public Text ReservoirCounter;
 
     public Image ScreenCover;
+    public Image AttackerUICover;
+    public Image DefenderUICover;
     public GameObject GameUI;
+    public ScoreController ScoreController;
     public GameObject GameBoard;
-    private Module[] GameBoardObjects;
+    private AttackableModule[] GameBoardObjects;
     public Text TurnText;
 
     public int NumberOfAttacksPerTurn = 1;
@@ -48,7 +56,7 @@ public class GameController : MonoBehaviour
     private bool ActiveTurn;
 
 
-    public GameState GameState = GameState.AttackerTurn;
+    public GameState GameState;
 
     private List<Oracle> oracles;
 
@@ -61,27 +69,37 @@ public class GameController : MonoBehaviour
 
     protected void Awake()
     {
-        this.GameBoardObjects = GameObject.FindObjectsOfType<Module>();
+        this.GameBoardObjects = GameObject.FindObjectsOfType<AttackableModule>();
         this.NumberOfAttacksPerTurn = Options.Attacks;
 		this.Round = Options.Round;
         this.RoundLimit = Options.RoundLimit;
         this.NumberOfOracles = Options.Oracles;
         Results.ReservoirLimit = ReservoirLimit;
         this.oracles = new List<Oracle>();
+        this.AttackerUIObject = GameObject.FindGameObjectWithTag("Attacker").GetComponent<AttackerUI>();
+        this.DefenderUIObject = GameObject.FindGameObjectWithTag("Defender").GetComponent<DefenderUI>();
+        this.ScoreController = GameObject.FindGameObjectWithTag("ScoreController").GetComponent<ScoreController>();
         TurnText.gameObject.SetActive(true);
         ScreenCover.gameObject.SetActive(false);
         ScreenCover.fillCenter = true;
 
         this.WaterLeavingSystemOnLastTurnChange = new List<WaterObject>();
+        AttackerUICover.gameObject.SetActive(false);
+        DefenderUICover.gameObject.SetActive(false);
     }
 
     protected void Start()
     {
         for (int i = 0; i < this.NumberOfOracles; i++)
         {
-            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x - (i * 2), this.OracleSpawnPoint.y, this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
+            var newOracle = Instantiate(this.OraclePrefab, new Vector3(this.OracleSpawnPoint.x, this.OracleSpawnPoint.y - (i * 2), this.OracleSpawnPoint.z), this.OraclePrefab.transform.rotation);
+            newOracle.transform.Rotate(0,0,90);
             oracles.Add(newOracle.GetComponent<Oracle>());
         }
+        AttackerUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+        AttackerUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
+        DefenderUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+        DefenderUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
 
         this.EndTurn();
         StartTurnTimer = DateTime.Now;
@@ -96,30 +114,53 @@ public class GameController : MonoBehaviour
         {
             this.GameState = GameState.DefenderTurn;
             this.AttackerUI.SetActive(false);
-            TurnText.text = "Defender's Turn";
+            this.DefenderUI.SetActive(true);
+            TurnText.text = "Defender's\nTurn";
             TurnText.color = new Color(0, .5F, 1F);
 
             this.WaterLeavingSystemOnLastTurnChange = this.WaterFlowController.TickModules();
+            TurnText.transform.Rotate(0,0,180);
+            AttackerUICover.gameObject.SetActive(true);
+            DefenderUICover.gameObject.SetActive(false);
         }
         else
         {
             this.GameState = GameState.AttackerTurn;
             this.NumAvailableAttacks = this.NumberOfAttacksPerTurn;
 
+            AttackerUICover.gameObject.SetActive(false);
+            DefenderUICover.gameObject.SetActive(true);
             this.AttackerUI.SetActive(true);
+            this.DefenderUI.SetActive(false);
             
-            foreach(Module m in this.GameBoardObjects)
+            // Reset modules attachments
+            foreach(AttackableModule m in this.GameBoardObjects)
             {
                 m.HasInspectorAttached = false;
                 m.HasFixerAttached = false;
                 m.ResetColor();
             }
-            
+
+            // Oracles Get their values and fixes done
             foreach (Oracle o in this.oracles)
             {
                 o.InputActive = false;
                 o.InspectModule();
                 o.FixModule();
+            }
+
+            // Score points for non-fixed modules
+            foreach(AttackableModule m in this.GameBoardObjects)
+            {
+                if(m.IsAttacked)
+                {
+                    m.SetAttackDuration(m.GetAttackDuration()+1);
+                    ScoreController.AddAttackerScore(m.GetAttackDuration() * Ints.Score.Defender.Fix);
+                }
+            }
+
+            for (int i = 0; i < 13; i++) {
+                this.WaterFlowController.TickModules();
             }
 
             if (++Turn > TurnLimit)
@@ -134,9 +175,13 @@ public class GameController : MonoBehaviour
                     this.SceneLoader.LoadGameScene();
                 }
             }
-            TurnCounter.text = "Round: " + Round + "/" + RoundLimit + " Turn: " + Turn + "/" + TurnLimit;
-            TurnText.text = "Attacker's Turn";
+            AttackerUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+            AttackerUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
+            DefenderUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
+            DefenderUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
+            TurnText.text = "Attacker's\n Turn";
             TurnText.color = new Color(1F, 0, 0);
+            TurnText.transform.Rotate(0,0,180);
         }
 
         ScreenCover.gameObject.GetComponentsInChildren<Text>()[0].text = TurnText.text;
@@ -153,20 +198,8 @@ public class GameController : MonoBehaviour
         {
             ActiveTurnTimer = DateTime.Now;
             int SecondsRemaining = (TurnDuration - (ActiveTurnTimer - StartTurnTimer).Seconds);
-            TurnTimer.text = "Time Left: " + SecondsRemaining.ToString();
-
-            if (SecondsRemaining > 5)
-            {
-                TurnTimer.color = new Color(.79f, .82f, .16f);
-            }
-            else if (SecondsRemaining % 2 == 0)
-            {
-                TurnTimer.color = new Color(1f, .3f, .15f);
-            }
-            else
-            {
-                TurnTimer.color = new Color(1f, .2f, 0);
-            }
+            AttackerUIObject.SetTurnTimer("Time: " + SecondsRemaining.ToString());
+            DefenderUIObject.SetTurnTimer("Time: " + SecondsRemaining.ToString());
 
             if (ActiveTurnTimer > StartTurnTimer.AddSeconds(TurnDuration))
             {

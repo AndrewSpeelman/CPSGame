@@ -13,7 +13,7 @@ namespace Assets.Modules.Scripts
         public bool IsStartingReservoir = false; 
         private bool DrainBroken;
         private bool SensorBroken;
-        private String AttackToFix;
+
         [SerializeField]
         [Range(1, 3)]
         private int _MaxCapacity; 
@@ -96,15 +96,6 @@ namespace Assets.Modules.Scripts
         }
 
         /// <summary>
-        /// Sets what problem to be fixed
-        /// </summary>
-        /// <returns></returns>
-        public override void SetAttackToFix(string FixMenuOption)
-        {
-            AttackToFix = FixMenuOption;
-        }
-
-        /// <summary>
         /// Fixes problems if broken
         /// </summary>
         /// <returns></returns>
@@ -160,6 +151,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder = base.GetAttackMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.AttackStrings.Reservoir.Drain);
             builder.AddOption(Strings.AttackStrings.Reservoir.Sensor);
             return builder.Build();
@@ -172,6 +165,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
+            builder = base.GetFixMenu(builder).GetBuilder(); 
+            
             builder.AddOption(Strings.FixStrings.Reservoir.Drain);
             builder.AddOption(Strings.FixStrings.Reservoir.Sensor);
             return builder.Build();

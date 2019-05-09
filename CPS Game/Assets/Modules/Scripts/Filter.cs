@@ -17,7 +17,7 @@ namespace Assets.Modules.Scripts
 
         private bool PurityBroken;
         private bool SensorBroken;
-        private String AttackToFix;
+
         public Filter()
         {
             this.PurityBroken = false;
@@ -69,14 +69,6 @@ namespace Assets.Modules.Scripts
             }
 
             return true;
-        }
-        /// <summary>
-        /// Sets what problem to be fixed
-        /// </summary>
-        /// <returns></returns>
-        public override void SetAttackToFix(string FixMenuOption)
-        {
-            AttackToFix = FixMenuOption;
         }
 
         /// <summary>
@@ -164,6 +156,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
+            builder = base.GetFixMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.FixStrings.Filter.Purity);
             builder.AddOption(Strings.FixStrings.Filter.Sensor);
             return builder.Build();

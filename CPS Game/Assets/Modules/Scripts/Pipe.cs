@@ -11,7 +11,6 @@ namespace Assets.Modules.Scripts
     public class Pipe : AttackableModule
     {
         private bool SensorBroken;
-        private String AttackToFix;
 
         public Pipe()
         {
@@ -31,16 +30,6 @@ namespace Assets.Modules.Scripts
             this.SensorBroken = true;
 
             return true;
-        }
-
-
-        /// <summary>
-        /// Sets what problem to be fixed
-        /// </summary>
-        /// <returns></returns>
-        public override void SetAttackToFix(string FixMenuOption)
-        {
-            AttackToFix = FixMenuOption;
         }
 
         /// <summary>
@@ -86,6 +75,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder = base.GetAttackMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.AttackStrings.Pipe.Sensor);
             return builder.Build();
         }
@@ -97,6 +88,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
+            builder = base.GetFixMenu(builder).GetBuilder(); 
+            
             builder.AddOption(Strings.FixStrings.Pipe.Sensor);
             return builder.Build();
         }
