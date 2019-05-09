@@ -28,12 +28,11 @@ namespace Assets.Modules.Scripts
 
         public Reservoir()
         {
-            if (this.IsStartingReservoir)
-            {
-                // Fill the reservoir
-                for (int i = 0; i <= _MaxCapacity; i++)
-                    Water.Enqueue(new WaterObject());
-            }
+ 
+            // Fill the reservoir
+            for (int i = 0; i < _MaxCapacity; i++)
+                Water.Enqueue(new WaterObject());
+            
             this.DrainBroken = false;
             this.SensorBroken = false;
             this.AttackToFix = null;
@@ -62,7 +61,13 @@ namespace Assets.Modules.Scripts
         // Fill the reservoir
         public override WaterObject OnFlow(WaterObject inflow)
         {
-            Water.Enqueue(inflow.Copy());
+            if (inflow != null)
+            {
+                Water.Enqueue(inflow.Copy());
+            }
+
+            if (Water.Count == 0 || this.DrainBroken)
+                return null; 
 
             return Water.Dequeue();
         }

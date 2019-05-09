@@ -60,6 +60,8 @@ public class GameController : MonoBehaviour
 
     private List<Oracle> oracles;
 
+    public List<WaterObject> WaterLeavingSystemOnLastTurnChange;
+
     /// <summary>
     /// Event listeners for when the turn changes
     /// </summary>
@@ -80,6 +82,8 @@ public class GameController : MonoBehaviour
         TurnText.gameObject.SetActive(true);
         ScreenCover.gameObject.SetActive(false);
         ScreenCover.fillCenter = true;
+
+        this.WaterLeavingSystemOnLastTurnChange = new List<WaterObject>();
         AttackerUICover.gameObject.SetActive(false);
         DefenderUICover.gameObject.SetActive(false);
     }
@@ -113,6 +117,8 @@ public class GameController : MonoBehaviour
             this.DefenderUI.SetActive(true);
             TurnText.text = "Defender's\nTurn";
             TurnText.color = new Color(0, .5F, 1F);
+
+            this.WaterLeavingSystemOnLastTurnChange = this.WaterFlowController.TickModules();
             TurnText.transform.Rotate(0,0,180);
             AttackerUICover.gameObject.SetActive(true);
             DefenderUICover.gameObject.SetActive(false);
@@ -134,7 +140,7 @@ public class GameController : MonoBehaviour
                 m.HasFixerAttached = false;
                 m.ResetColor();
             }
-            
+
             // Oracles Get their values and fixes done
             foreach (Oracle o in this.oracles)
             {

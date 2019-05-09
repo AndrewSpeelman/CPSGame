@@ -59,7 +59,7 @@ namespace Assets.Modules.Scripts
             switch (AttackMenuOption)
             {
                 case Strings.AttackStrings.Pump.Flow:
-                    this.IsPumping = true; 
+                    this.IsPumping = false; 
                     break;
 
                 case Strings.AttackStrings.Pump.Sensor:
