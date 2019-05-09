@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets;
@@ -60,11 +61,10 @@ public class WaterObject
         double purityMultiplier = Ints.Score.Defender.WaterPurityMultiplier;
         if(this.Purity1)
             purityMultiplier += Ints.Score.Defender.WaterPurity1;
-        if(this.Purity1)
+        if(this.Purity2)
             purityMultiplier += Ints.Score.Defender.WaterPurity2;
-        if(this.Purity1)
+        if(this.Purity3)
             purityMultiplier += Ints.Score.Defender.WaterPurity3;
-
-        return ((int)(purityMultiplier * Ints.Score.Defender.WaterBaseValue));
+        return (Convert.ToInt32(purityMultiplier * Ints.Score.Defender.WaterBaseValue));
     }
 }

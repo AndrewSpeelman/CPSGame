@@ -1184,9 +1184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c213809bf913f4f9626c85bfb27deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VictorTextbox: {fileID: 0}
-  ReservoirFillTextbox: {fileID: 0}
-  Reservoir: {fileID: 0}
+  VictorTextbox: {fileID: 1221348001}
+  RestartButton: {fileID: 1045180835}
+  ExitButton: {fileID: 960511467}
 --- !u!1 &1956078390
 GameObject:
   m_ObjectHideFlags: 0
