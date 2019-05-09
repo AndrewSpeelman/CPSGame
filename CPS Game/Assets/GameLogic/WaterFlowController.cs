@@ -22,10 +22,9 @@ public class WaterFlowController : MonoBehaviour
     /// Makes time move (tick) forward for the modules.  Ticking time forward allows for the water to flow through
     /// the system.
     /// </summary>
-    public void TickModules()
+    public List<WaterObject> TickModules()
     {
-        // TODO: Flow enough water through between rounds so it will clear the system 
-        // and add entirely new water 
+        List<WaterObject> waterLeaving = new List<WaterObject>(); 
 
         // Flow water through the reservoir, to start flow through everything else
         try
@@ -43,12 +42,17 @@ public class WaterFlowController : MonoBehaviour
 
                     currentModule = currentModule.NextModule;
                 }
+
+                if (water != null)
+                    waterLeaving.Add(water.Copy()); // Add the water that came from the last module
             }
         }
         catch (Exception e)
         {
 
         }
+
+        return waterLeaving;
     }
 
     /// <summary>

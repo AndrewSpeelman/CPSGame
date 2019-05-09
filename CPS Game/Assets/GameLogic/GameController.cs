@@ -52,6 +52,8 @@ public class GameController : MonoBehaviour
 
     private List<Oracle> oracles;
 
+    public List<WaterObject> WaterLeavingSystemOnLastTurnChange;
+
     /// <summary>
     /// Event listeners for when the turn changes
     /// </summary>
@@ -69,6 +71,8 @@ public class GameController : MonoBehaviour
         TurnText.gameObject.SetActive(true);
         ScreenCover.gameObject.SetActive(false);
         ScreenCover.fillCenter = true;
+
+        this.WaterLeavingSystemOnLastTurnChange = new List<WaterObject>();
     }
 
     protected void Start()
@@ -95,7 +99,7 @@ public class GameController : MonoBehaviour
             TurnText.text = "Defender's Turn";
             TurnText.color = new Color(0, .5F, 1F);
 
-            this.WaterFlowController.TickModules();
+            this.WaterLeavingSystemOnLastTurnChange = this.WaterFlowController.TickModules();
         }
         else
         {
