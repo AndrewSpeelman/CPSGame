@@ -28,14 +28,18 @@ namespace Assets.Modules.Scripts
 
         public Reservoir()
         {
- 
-            // Fill the reservoir
-            for (int i = 0; i < _MaxCapacity; i++)
-                Water.Enqueue(new WaterObject());
-            
             this.DrainBroken = false;
             this.SensorBroken = false;
             this.AttackToFix = null;
+        }
+
+        public override void OnAwake()
+        {
+            base.OnAwake();
+
+            // Fill the reservoir
+            for (int i = 0; i < _MaxCapacity; i++)
+                Water.Enqueue(new WaterObject());
         }
 
 

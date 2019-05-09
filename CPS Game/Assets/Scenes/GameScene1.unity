@@ -1816,6 +1816,11 @@ PrefabInstance:
       propertyPath: NextModule
       value: 
       objectReference: {fileID: 641377267}
+    - target: {fileID: 114535725795618874, guid: 6f722e7165305454eb124ba82c0ef200,
+        type: 3}
+      propertyPath: _MaxCapacity
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 212126856792240688, guid: 6f722e7165305454eb124ba82c0ef200,
         type: 3}
       propertyPath: m_Color.g
@@ -3181,6 +3186,16 @@ PrefabInstance:
       propertyPath: NextModule
       value: 
       objectReference: {fileID: 1098279838}
+    - target: {fileID: 114482524715397362, guid: e5f38c439bbf69b4586c048a785dfefd,
+        type: 3}
+      propertyPath: _MaxCapacity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114482524715397362, guid: e5f38c439bbf69b4586c048a785dfefd,
+        type: 3}
+      propertyPath: IsStartingReservoir
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114120365281760552, guid: 2a56dd1b1d2660542b025535d7521e6c,
         type: 3}
       propertyPath: _PurityControl
