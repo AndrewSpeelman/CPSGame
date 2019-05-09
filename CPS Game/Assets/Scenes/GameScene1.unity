@@ -1816,6 +1816,16 @@ PrefabInstance:
       propertyPath: NextModule
       value: 
       objectReference: {fileID: 641377267}
+    - target: {fileID: 212126856792240688, guid: 6f722e7165305454eb124ba82c0ef200,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.85098046
+      objectReference: {fileID: 0}
+    - target: {fileID: 212126856792240688, guid: 6f722e7165305454eb124ba82c0ef200,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.3921569
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f722e7165305454eb124ba82c0ef200, type: 3}
 --- !u!114 &827794698 stripped

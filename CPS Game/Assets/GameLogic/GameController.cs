@@ -120,6 +120,7 @@ public class GameController : MonoBehaviour
                 ScoreController.AddDefenderScore(w.GetWaterScore());
             }
             TurnText.transform.Rotate(0,0,180);
+            ScoreController.RotateScoreText(180);
             AttackerUICover.gameObject.SetActive(true);
             DefenderUICover.gameObject.SetActive(false);
         }
@@ -130,6 +131,7 @@ public class GameController : MonoBehaviour
 
             AttackerUICover.gameObject.SetActive(false);
             DefenderUICover.gameObject.SetActive(true);
+            ScoreController.RotateScoreText(180);
             this.AttackerUI.SetActive(true);
             this.DefenderUI.SetActive(false);
             
