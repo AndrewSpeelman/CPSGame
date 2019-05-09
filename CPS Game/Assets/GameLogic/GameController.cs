@@ -43,8 +43,8 @@ public class GameController : MonoBehaviour
     public int NumAvailableAttacks { get; set; }
 
     private int Turn = 0;
-    private int Round = 1;
-    private int RoundLimit = 1;
+    private int Round = Options.Round;
+    private int RoundLimit = Options.RoundLimit;
 
     public int ReservoirLimit = 10;
     public int TurnLimit = 5;
@@ -71,10 +71,7 @@ public class GameController : MonoBehaviour
     {
         this.GameBoardObjects = GameObject.FindObjectsOfType<AttackableModule>();
         this.NumberOfAttacksPerTurn = Options.Attacks;
-		this.Round = Options.Round;
-        this.RoundLimit = Options.RoundLimit;
         this.NumberOfOracles = Options.Oracles;
-        Results.ReservoirLimit = ReservoirLimit;
         this.oracles = new List<Oracle>();
         this.AttackerUIObject = GameObject.FindGameObjectWithTag("Attacker").GetComponent<AttackerUI>();
         this.DefenderUIObject = GameObject.FindGameObjectWithTag("Defender").GetComponent<DefenderUI>();
@@ -82,7 +79,8 @@ public class GameController : MonoBehaviour
         TurnText.gameObject.SetActive(true);
         ScreenCover.gameObject.SetActive(false);
         ScreenCover.fillCenter = true;
-
+        AttackerUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
+        DefenderUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
         this.WaterLeavingSystemOnLastTurnChange = new List<WaterObject>();
         AttackerUICover.gameObject.SetActive(false);
         DefenderUICover.gameObject.SetActive(false);
@@ -97,9 +95,7 @@ public class GameController : MonoBehaviour
             oracles.Add(newOracle.GetComponent<Oracle>());
         }
         AttackerUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
-        AttackerUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
         DefenderUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
-        DefenderUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
 
         this.EndTurn();
         StartTurnTimer = DateTime.Now;
@@ -170,19 +166,11 @@ public class GameController : MonoBehaviour
             if (++Turn > TurnLimit)
             {
                 Options.Round = ++Options.Round;
-                if(Round >= RoundLimit)
-                {
-                    this.SceneLoader.LoadVictoryScene();
-                }
-                else
-                {
-                    this.SceneLoader.LoadGameScene();
-                }
+                Results.AttackerVictory = ScoreController.GetWinner();
+                this.SceneLoader.LoadVictoryScene();
             }
             AttackerUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
-            AttackerUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
             DefenderUIObject.SetTurnText(" Turn: " + Turn + "/" + TurnLimit);
-            DefenderUIObject.SetRoundText("Round: " + Round + "/" + RoundLimit);
             TurnText.text = "Attacker's\n Turn";
             TurnText.color = new Color(1F, 0, 0);
             TurnText.transform.Rotate(0,0,180);

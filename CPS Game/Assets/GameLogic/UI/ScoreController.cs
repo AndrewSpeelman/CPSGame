@@ -39,4 +39,9 @@ public class ScoreController : MonoBehaviour
         attackerScoreText.transform.Rotate(0,0,degrees);
         defenderScoreText.transform.Rotate(0,0,degrees);
     }
+
+    public bool GetWinner()
+    {
+        return attackerScore > defenderScore;
+    }
 }

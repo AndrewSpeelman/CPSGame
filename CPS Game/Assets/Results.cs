@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class Results 
 {
-    public static int ReservoirFill, ReservoirLimit;
+    public static bool AttackerVictory = false;
 }
