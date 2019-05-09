@@ -75,6 +75,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder = base.GetAttackMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.AttackStrings.Pipe.Sensor);
             return builder.Build();
         }
@@ -86,6 +88,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
+            builder = base.GetFixMenu(builder).GetBuilder(); 
+            
             builder.AddOption(Strings.FixStrings.Pipe.Sensor);
             return builder.Build();
         }

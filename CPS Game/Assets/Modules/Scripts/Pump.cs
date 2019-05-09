@@ -126,6 +126,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetAttackMenu(MenuBuilder builder)
         {
+            builder = base.GetAttackMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.AttackStrings.Pump.Flow);
             builder.AddOption(Strings.AttackStrings.Pump.Sensor);
             return builder.Build();
@@ -138,6 +140,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
+            builder = base.GetFixMenu(builder).GetBuilder(); 
+            
             builder.AddOption(Strings.FixStrings.Pump.Flow);
             builder.AddOption(Strings.FixStrings.Pump.Sensor);
             return builder.Build();

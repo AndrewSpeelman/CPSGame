@@ -80,6 +80,8 @@ namespace Assets.Modules
         /// <returns></returns>
         public virtual MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
+            builder.SetTitle(this.GetType().Name.ToString() + " Fixes");
+
             return builder.Build();
         }
 

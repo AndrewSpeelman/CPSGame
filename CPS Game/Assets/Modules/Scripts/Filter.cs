@@ -156,6 +156,8 @@ namespace Assets.Modules.Scripts
         /// <returns></returns>
         public override MenuToDisplay GetFixMenu(MenuBuilder builder)
         {
+            builder = base.GetFixMenu(builder).GetBuilder(); 
+
             builder.AddOption(Strings.FixStrings.Filter.Purity);
             builder.AddOption(Strings.FixStrings.Filter.Sensor);
             return builder.Build();

@@ -69,18 +69,11 @@ namespace Assets.GameLogic
         /// </summary>
         public void UpdateMenu()
         {
- 
-        }
-
-        /// <summary>
-        /// Shows the menu
-        /// </summary>
-        /// <param name="position"></param>
-        public void OpenMenu()
-        {
-            this.CloseMenu();
             MenuToDisplay menu = this.module.GetFixMenu(new MenuBuilder());
-            
+
+            if (!String.IsNullOrEmpty(menu.Title))
+                textContent.text = menu.Title; 
+
             int start = 0;
             int end = menu.MenuChoices.Count;
 
@@ -96,6 +89,16 @@ namespace Assets.GameLogic
 
                 buttons[i].gameObject.SetActive(true);
             }
+        }
+
+        /// <summary>
+        /// Shows the menu
+        /// </summary>
+        /// <param name="position"></param>
+        public void OpenMenu()
+        {
+            this.CloseMenu();
+            this.UpdateMenu();
 
             // Move to position
             RectTransform uiTransform = FixMenuController.popupInstance.GetComponent<RectTransform>();
