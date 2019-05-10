@@ -161,10 +161,6 @@ public class GameController : MonoBehaviour
                 }
             }
 
-            for (int i = 0; i < 13; i++) {
-                this.WaterFlowController.TickModules();
-            }
-
             if (++Turn > TurnLimit)
             {
                 Options.Round = ++Options.Round;
