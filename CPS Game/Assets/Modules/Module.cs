@@ -178,14 +178,6 @@ public abstract class Module : MonoBehaviour, IModule, IHaveFlow, IHoldWater, ID
         return false;
     }
 
-    /*
-     * Returns the water in the module 
-     */
-    public virtual WaterObject getWater()
-    {
-        return this.Water;
-    }
-
 
     /*
      * Shift the water

@@ -33,15 +33,17 @@ namespace Assets.Modules.Scripts
             this.AttackToFix = null;
         }
 
-        public override void OnAwake()
+        /// <summary>
+        /// When everything is starting fill to capacity
+        /// </summary>
+        public override void OnStart()
         {
-            base.OnAwake();
+            base.OnStart();
 
             // Fill the reservoir
             for (int i = 0; i < _MaxCapacity; i++)
                 Water.Enqueue(new WaterObject());
         }
-
 
         public void OnOverfill()
         {
@@ -53,14 +55,6 @@ namespace Assets.Modules.Scripts
 
         }
 
-        // Get water from reservoir
-        public override WaterObject getWater()
-        {
-            if (IsEmpty)
-                return null;
-
-            return Water.Dequeue();
-        }
 
         // Fill the reservoir
         public override WaterObject OnFlow(WaterObject inflow)
@@ -70,7 +64,7 @@ namespace Assets.Modules.Scripts
                 Water.Enqueue(inflow.Copy());
             }
 
-            if (Water.Count == 0 || this.DrainBroken)
+            if (this.IsEmpty || this.DrainBroken)
                 return null; 
 
             return Water.Dequeue();

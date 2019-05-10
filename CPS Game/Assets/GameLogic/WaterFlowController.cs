@@ -1,4 +1,5 @@
-﻿using Assets.Modules.Scripts;
+﻿using Assets.Interfaces.Modules;
+using Assets.Modules.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,12 +11,24 @@ using UnityEngine;
 public class WaterFlowController : MonoBehaviour
 {
     public Reservoir Reservoir;
+    public int MapCapacity = 0;
 
     private Module firstModule;
 
     private void Start()
     {
         Module currMod = Reservoir;
+
+        // Count the map capacity
+        while (currMod != null)
+        {
+            if (currMod is IHaveCapacity)
+                MapCapacity += (currMod as IHaveCapacity).MaxCapacity;
+            else
+                MapCapacity += 1;
+
+            currMod = currMod.NextModule;
+        }
     }
 
     /// <summary>
@@ -24,12 +37,12 @@ public class WaterFlowController : MonoBehaviour
     /// </summary>
     public List<WaterObject> TickModules()
     {
-        List<WaterObject> waterLeaving = new List<WaterObject>(); 
+        List<WaterObject> waterLeaving = new List<WaterObject>();
 
         // Flow water through the reservoir, to start flow through everything else
         try
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < MapCapacity; i++)
             {
                 this.Reservoir.Tick();
                 WaterObject water = this.Reservoir.OnFlow(new WaterObject());
